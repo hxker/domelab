@@ -1,0 +1,13 @@
+defaults: &defaults
+  site_name: 'Domelab'
+
+development:
+  <<: *defaults
+  domain: 'http://localhost:3000'
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  domain: 'http://robodou.cn'
