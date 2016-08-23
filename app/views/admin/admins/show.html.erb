@@ -1,0 +1,91 @@
+<h1 class="page-header">
+  显示 <%= t('activerecord.models.admin') %>
+  <small class="pull-right">
+    <a href="<%= edit_admin_admin_path(@admin) %>" title="编辑" class="btn btn-default">
+      <i class="icon-edit icon-only"></i></a>
+    <a href="<%= admin_admins_path %>" title="列表" class="btn btn-default">
+      <i class="icon-list icon-only"></i></a>
+  </small>
+</h1>
+
+<% if notice %>
+    <div class="alert alert-success"><%= notice %>
+      <button class="close" data-dismiss="alert">
+        <i class="icon-remove"></i>
+      </button>
+    </div>
+<% end %>
+
+
+
+<div class="profile-user-info profile-user-info-striped">
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.job_number') %></div>
+
+    <div class="profile-info-value">
+      <span class="editable" id="username"><%= @admin.job_number %></span>
+    </div>
+  </div>
+
+
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.name') %> </div>
+
+    <div class="profile-info-value">
+      <span><%= @admin.name %></span>
+    </div>
+  </div>
+
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.permissions') %> </div>
+
+    <div class="profile-info-value">
+      <span><%= show_permissions(@admin) %></span>
+    </div>
+  </div>
+
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.position') %> </div>
+
+    <div class="profile-info-value">
+      <span><%= @admin.position %></span>
+    </div>
+  </div>
+
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.age') %> </div>
+
+    <div class="profile-info-value">
+      <span><%= @admin.age %></span>
+    </div>
+  </div>
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.gender') %> </div>
+
+    <div class="profile-info-value">
+      <span><%= @admin.gender %></span>
+    </div>
+  </div>
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.email') %> </div>
+
+    <div class="profile-info-value">
+      <span><%= @admin.email %></span>
+    </div>
+  </div>
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.phone') %> </div>
+
+    <div class="profile-info-value">
+      <span><%= @admin.phone %></span>
+    </div>
+  </div>
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.address') %> </div>
+
+    <div class="profile-info-value">
+      <span><%= @admin.address %></span>
+    </div>
+  </div>
+
+</div>

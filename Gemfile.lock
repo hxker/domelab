@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/amatsuda/kaminari.git
+  revision: be3a2c9a2182fae145e7ff88223feb4d55ed539d
+  specs:
+    kaminari (1.0.0.alpha)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
+GIT
   remote: git://github.com/nbudin/devise_cas_authenticatable.git
   revision: ed6d570cd0030f2c75a089f19ea09ec8565cf593
   specs:
@@ -207,6 +215,7 @@ DEPENDENCIES
   devise_cas_authenticatable!
   jbuilder (~> 2.5)
   jquery-rails
+  kaminari!
   listen (~> 3.0.5)
   mysql2
   puma (~> 3.0)
