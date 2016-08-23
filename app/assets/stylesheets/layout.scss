@@ -1,0 +1,146 @@
+#top {
+  height: 30px;
+  font-size: 12px;
+  background: #e95e21;
+  border-bottom: #ccc;
+  line-height: 30px;
+  color: #fff;
+  min-width: 1200px;
+  a {
+    color: inherit;
+  }
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+  .left-menu {
+    float: left;
+    margin-left: 10px;
+    cursor: pointer;
+    position: relative;
+    .caret {
+      transition: all .3s;
+    }
+    .hover-menu {
+      position: absolute;
+      z-index: 1;
+      top: 35px;
+      opacity: 0;
+      transition: all .3s;
+      visibility: hidden;
+      border: 1px solid #fff;
+      background: #e95e21;
+      color: #fff;
+      border-radius: 4px;
+      box-shadow: 0 2px 2px 0 #444;
+      li {
+        padding: 0 10px;
+        &:hover {
+          background: #fff;
+          color: #777;
+        }
+      }
+    }
+    &:hover {
+      .caret {
+        transform: rotateZ(180deg);
+      }
+      .hover-menu {
+        top: 29px;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+    &:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+  }
+  .right-menu {
+    float: right;
+    margin-right: 10px;
+    ul {
+      li {
+        margin: 0 0 0 20px;
+      }
+    }
+  }
+}
+
+#nav {
+  padding: 40px 0 50px;
+  .logo {
+    float: left;
+  }
+  .nav-menu {
+    float: right;
+    font-size: 24px;
+    color: #e95e21;
+    padding-top: 22px;
+    ul {
+      li {
+        margin: 0 0 0 30px;
+        a {
+          color: inherit;
+          &:hover {
+            color: #6495ed;
+          }
+        }
+      }
+    }
+  }
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+#footer {
+  background: #e95e21;
+  height: 180px;
+  font-size: 14px;
+  color: #fff;
+  line-height: 20px;
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+  .title {
+    font-size: 18px;
+    padding-top: 25px;
+    margin-bottom: 10px;
+  }
+  .left {
+    float: left;
+    width: 380px;
+    margin-right: 80px;
+    .con {
+
+    }
+    .link {
+      text-align: right;
+      a {
+        color: inherit;
+      }
+    }
+  }
+  .middle {
+    float: left;
+    width: 300px;
+    margin-right: 80px;
+  }
+
+  .right {
+    float: left;
+    width: 300px;
+    height: 80px;
+    .QR {
+      float: left;
+      margin: 0 20px;
+    }
+  }
+}
