@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/nbudin/devise_cas_authenticatable.git
+  revision: ed6d570cd0030f2c75a089f19ea09ec8565cf593
+  specs:
+    devise_cas_authenticatable (1.9.2)
+      devise (>= 1.2.0)
+      rubycas-client (>= 2.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -122,8 +130,27 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    redis (3.3.1)
+    redis-actionpack (5.0.0)
+      actionpack (>= 4.0.0, < 6)
+      redis-rack (~> 2.0.0.pre)
+      redis-store (~> 1.2.0.pre)
+    redis-activesupport (5.0.1)
+      activesupport (>= 3, < 6)
+      redis-store (~> 1.2.0)
+    redis-rack (2.0.0.pre)
+      rack (> 1.5, < 3)
+      redis-store (~> 1.2.0.pre)
+    redis-rails (5.0.1)
+      redis-actionpack (~> 5.0.0)
+      redis-activesupport (~> 5.0.0)
+      redis-store (~> 1.2.0)
+    redis-store (1.2.0)
+      redis (>= 2.2)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
+    rubycas-client (2.3.9)
+      activesupport
     rucaptcha (0.5.1)
       railties (>= 3.2)
     sass (3.4.22)
@@ -177,12 +204,14 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   devise
+  devise_cas_authenticatable!
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
   mysql2
   puma (~> 3.0)
   rails (~> 5.0.0)
+  redis-rails
   rucaptcha
   sass-rails (~> 5.0)
   settingslogic

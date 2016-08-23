@@ -11,7 +11,25 @@
 <body>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
-
+<div class="user-info pull-right">
+  <% if current_user %>
+      <div class="login-info">
+        <div class="dropdown">
+          <button class="btn-robodou" data-toggle="dropdown">
+            <%= current_user.nickname %> <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-robodou">
+            <li><%= link_to '退出登录', sign_out_path, method: :delete, data: {confirm: '确认退出登录吗?'} %></li>
+          </ul>
+        </div>
+      </div>
+  <% else %>
+      <div class="un-login">
+        <%= link_to '登录', sign_in_path, class: 'btn-robodou btn-login-link' %>
+        <%= link_to '注册', sign_in_path, class: 'btn-robodou btn-register-link' %>
+      </div>
+  <% end %>
+</div>
 <%= yield %>
 </body>
 </html>

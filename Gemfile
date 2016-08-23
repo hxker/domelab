@@ -51,3 +51,6 @@ gem 'mysql2'
 gem 'devise'
 gem 'rucaptcha'
 gem 'simple_form'
+
+gem 'devise_cas_authenticatable',github: 'nbudin/devise_cas_authenticatable'
+gem "redis-rails"

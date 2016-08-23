@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  # before_action :redirect_to_sign_in, unless: :user_signed_in?
+
   rescue_from ActiveRecord::RecordNotFound do |exception|
     render_optional_error(404)
   end
@@ -20,4 +22,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:nickname, :email, :password, :password_confirmation, :remember_me) }
     devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(:login, :password, :remember_me, :return_to) }
   end
+
+  # def redirect_to_sign_in
+  #   redirect_to new_user_session_path
+  # end
 end

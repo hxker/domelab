@@ -17,5 +17,6 @@ module Domelab
     config.active_record.default_timezone = :local
     config.i18n.default_locale = 'zh-CN'
     config.encoding = 'utf-8'
+    config.cache_store = :redis_store, "redis://localhost:6379/0/cache"
   end
 end
