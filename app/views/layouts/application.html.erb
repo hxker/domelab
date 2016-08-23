@@ -1,14 +1,113 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Domelab</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>Domelab</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
+</head>
+<body>
+<div id="top" class="top container-fluid">
+  <div class="container">
+    <div class="left-menu">
+      主站
+      <span class="caret"></span>
+      <ul class="hover-menu">
+        <li>
+          <a href="#">Domelab</a>
+        </li>
+        <li>
+          <a href="#">Robodou</a>
+        </li>
+      </ul>
+    </div>
+    <div class="right-menu">
+      <ul class="horizontal-ul">
+        <li>
+          <a href="">关于我们</a>
+        </li>
+        <li>
+          <a href="">CN</a>
+        </li>
+        <li>
+          <a href="">登录</a>
+        </li>
+        <li>
+          <a href="">注册</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div id="nav" class="nav container-fluid">
+  <div class="container">
+    <div class="logo">
+      <a href="/">
+        <img src="<%= image_path('layout/logo-orange.png') %>" alt="DOME"/>
+      </a>
+    </div>
+    <div class="nav-menu">
+      <ul class="horizontal-ul">
+        <li>
+          <a href="">科普知识</a>
+        </li>
+        <li>
+          <a href="">机器人新闻</a>
+        </li>
+        <li>
+          <a href="">豆姆教室</a>
+        </li>
+        <li>
+          <a href="">比赛分享</a>
+        </li>
+        <li>
+          <a href="">专栏</a>
+        </li>
+        <li>
+          <a href="">豆姆直播</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div id="yield">
+  <%= yield %>
+</div>
+<div id="footer">
+  <div class="container">
+    <div class="title">
+      我们是谁？
+    </div>
+    <div class="left">
+      <div class="con">
+        dome机器人学习器材是一个包含金属积木、子模块、软件工具等几百种零件的工程积木平台。dome机器人学习器材是一个包含金属....................................
+      </div>
+      <div class="link">
+        <a href="">（查看详情）</a>
+      </div>
+    </div>
+    <div class="middle">
+      <p>联系方式</p>
 
-  <body>
-    <%= yield %>
-  </body>
+      <p>电话：021-31653316</p>
+
+      <p>邮箱：service@robodou.cn</p>
+
+      <p>地址：上海市钦州北路68号B3栋101室</p>
+    </div>
+    <div class="right">
+      <div class="QR">
+        <img src="<%= image_path('layout/QRcode.png') %>" alt=""/>
+      </div>
+      <div class="QR    ">
+        <img src="<%= image_path('layout/QRcode.png') %>" alt=""/>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
 </html>
