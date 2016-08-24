@@ -27,4 +27,6 @@ Rails.application.routes.draw do
     resources :admins
   end
 
+  get 'user' => redirect('/user/preview')
+
 end
