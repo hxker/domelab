@@ -1,0 +1,10 @@
+<ul class="nav nav-tabs" role="tablist">
+  <li <%= 'class=active' if action_name == 'preview' %>>
+    <a href="<%= user_preview_path %>"><span class="hidden-xs">信息</span>概览</a>
+  </li>
+  <li <%= 'class=active' if action_name == 'profile' %>>
+    <a href="<%= user_profile_path %>">信息<span class="hidden-xs">编辑</span></a>
+  </li>
+
+</ul>
+<br>

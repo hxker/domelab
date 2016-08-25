@@ -1,0 +1,11 @@
+<div class="list-group" style="margin-top: 40px;">
+
+  <a class="list-group-item" href="<%= user_preview_path %>">我的账户<span class="visible-xs pull-right"> <%= current_user.nickname %>
+    </span></a>
+
+
+  <%= link_to sign_out_path, method: :delete, data: {confirm: '确认退出登录吗?'}, title: '退出登录', class: 'list-group-item' do %>
+      退出登录
+  <% end %>
+
+</div>
