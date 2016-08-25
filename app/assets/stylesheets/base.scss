@@ -23,7 +23,11 @@ a {
 }
 
 a:active {
+  text-decoration: none;
+}
 
+a:hover {
+  text-decoration: none;
 }
 
 ul {
@@ -41,6 +45,8 @@ ul {
 .container {
   width: 1200px;
   margin: 0 auto;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .horizontal-ul {
