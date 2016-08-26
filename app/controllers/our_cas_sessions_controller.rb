@@ -1,4 +1,4 @@
-class OurCasSessionsController < Devise::CasSessionsController
+class OurCasSessionsController < Auth::CasSessionsController
   #  skip_before_action :redirect_to_sign_in,
   #  only: [:new, :destroy, :single_sign_out,
   #         :service, :unregistered]
