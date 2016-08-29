@@ -1,7 +1,7 @@
 class Auth::CasSessionsController < Devise::SessionsController
   include DeviseCasAuthenticatable::SingleSignOut::DestroySession
 
-  skip_before_filter :verify_authenticity_token, :only => [:single_sign_out]
+  skip_before_action :verify_authenticity_token, :only => [:single_sign_out]
 
   def new
     if memcache_checker.session_store_memcache? && !memcache_checker.alive?
