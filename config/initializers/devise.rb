@@ -2,9 +2,9 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   config.cas_base_url = Settings.auth_url
-  config.cas_logout_url_param = "destination"
+  config.cas_logout_url_param = "service"
   config.cas_destination_url = "#{Settings.auth_url}/logout"
-  config.cas_destination_logout_param_name = "service"
+  config.cas_destination_logout_param_name = "destination"
   config.cas_enable_single_sign_out = true
   config.cas_user_identifier = Settings.cas_user_identifier
   # The secret key used by Devise. Devise uses this key to generate

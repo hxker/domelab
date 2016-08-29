@@ -11,6 +11,12 @@ class Auth::CasSessionsController < Devise::SessionsController
     redirect_to(cas_login_url)
   end
 
+  def sign_up
+    redirect_to "#{Settings.auth_url}/users/new?service=#{("#{Settings.domain}/users/service").b.gsub(/[^a-zA-Z0-9_\-.]/n) { |m|
+      sprintf('%%%02X', m.unpack('C')[0])
+    }}"
+  end
+
   def service
     redirect_to after_sign_in_path_for(warden.authenticate!(:scope => resource_name))
   end
@@ -73,6 +79,7 @@ class Auth::CasSessionsController < Devise::SessionsController
   def cas_login_url
     ::Devise.cas_client.add_service_to_login_url(::Devise.cas_service_url(request.url, devise_mapping))
   end
+
   helper_method :cas_login_url
 
   def request_url

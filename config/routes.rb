@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   devise_for :users, skip: [:sessions], controllers: {cas_sessions: 'our_cas_sessions'}
   devise_scope :user do
     get "sign_in", to: "auth/cas_sessions#new"
+    get "sign_up", to: "auth/cas_sessions#sign_up"
     delete "sign_out", to: "auth/cas_sessions#destroy"
   end
 
