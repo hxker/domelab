@@ -8,9 +8,104 @@
       <div class="user-main">
         <%= render 'user/tab' %>
         <div class="sub-content">
-          <div class="sub-header">基本信息</div>
 
+          <%= simple_form_for(current_user, html: {id: 'form_change_profile', multipart: true}, url: user_profile_path, method: :post) do |f| %>
+              <div class="form-inputs">
+                <%= f.input :fullname %>
+                <div class="form-group">
+                  <label for="user[gender]">性别</label>
 
+                  <div class="input-group">
+                    <label class="gender-label"><input type="radio" name="user[gender]" value="1" <%= 'checked="checked"' if @user_info.gender.to_i == 1 %>/>男</label>
+                    <label class="gender-label"><input type="radio" name="user[gender]" value="2" <%= 'checked="checked"' if @user_info.gender.to_i == 2 %>/>女</label>
+                  </div>
+                </div>
+
+                <div class="form-group string optional user_profile_roles">
+                  <label class="string optional control-label" for="user_profile_roles">身份</label>
+
+                  <div class="">
+                    <% Role.all.each do |r| %>
+                        <% @status = false %>
+                        <% @has_roles.each do |h| %>
+                            <% if r.id==h[0] %>
+                                <% @status = true %>
+                                <%= label_tag r.name %> <%= "(待审核)" if h[1]==0 %>
+                            <% end %>
+                        <% end %>
+                        <% unless @status %>
+                            <label class="fieldset-label">
+                              <%= check_box_tag 'user[roles][]', r.name %>
+                              <%= r.name %>
+                            </label>
+                        <% end %>
+                    <% end %>
+                  </div>
+                </div>
+                <fieldset class="teacher-part">
+                  <legend>教师认证信息</legend>
+                  <div class="form-group">
+                    <%= f.input :desc_certificate, label: '教师编号' %>
+                  </div>
+                  <div class="form-group">
+                    <label for="user_avatar">上传教师证</label>
+                    <%= f.file_field :cover %>
+                  </div>
+                </fieldset>
+                <fieldset class="ck-part">
+                  <legend>家庭创客认证信息</legend>
+                  <div class="form-group">
+                    <label for="user_avatar">上传图片</label>
+                    <%= f.file_field :cover %>
+                  </div>
+                  <%= f.input :desc_family, as: :text, label: '简要介绍' %>
+                </fieldset>
+
+                <div class="form-group">
+                  <label class="control-label" for="user_profile_school_id">学校</label>
+
+                  <div class="school-field">
+                    <% if @user_info.school_id.present? && @user_info.school_id!=0 %>
+                        <span class="change-school school-tag"><%= @user_info.school_name %> </span>
+                    <% else %>
+                        选择学校
+                    <% end %>
+
+                  </div>
+                  <input id="school-id" class="school-hidden-input" type="text" placeholder="学校ID" name="user[school_id]" value="<%= @user_info.school_id %>"/>
+                  <input id="district-id" type="text" placeholder="区县ID" name="user[district_id]" value="<%= @user_info.district_id %>"/>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="user_profile_grade">年级</label>
+                  <select name="user[grade]" id="user_profile_grade" class="string optional form-control">
+                    <option value="0">请选择年级</option>
+                    <option value="1" <%= 'selected="selected"' if @user_info.grade.to_i == 1 %>>一年级</option>
+                    <option value="2" <%= 'selected="selected"' if @user_info.grade.to_i == 2 %>>二年级</option>
+                    <option value="3" <%= 'selected="selected"' if @user_info.grade.to_i == 3 %>>三年级</option>
+                    <option value="4" <%= 'selected="selected"' if @user_info.grade.to_i == 4 %>>四年级</option>
+                    <option value="5" <%= 'selected="selected"' if @user_info.grade.to_i == 5 %>>五年级</option>
+                    <option value="6" <%= 'selected="selected"' if @user_info.grade.to_i == 6 %>>六年级（初中预备）</option>
+                    <option value="7" <%= 'selected="selected"' if @user_info.grade.to_i == 7 %>>七年级（初中一年级）</option>
+                    <option value="8" <%= 'selected="selected"' if @user_info.grade.to_i == 8 %>>八年级（初中二年级）</option>
+                    <option value="9" <%= 'selected="selected"' if @user_info.grade.to_i == 9 %>>九年级（初中三年级）</option>
+                    <option value="10" <%= 'selected="selected"' if @user_info.grade.to_i == 10 %>>高中一年级</option>
+                    <option value="11" <%= 'selected="selected"' if @user_info.grade.to_i == 11 %>>高中二年级</option>
+                    <option value="12" <%= 'selected="selected"' if @user_info.grade.to_i == 12 %>>高中三年级</option>
+                  </select>
+                </div>
+                <%= f.input :bj %>
+                <div class="form-group">
+                  <label class="control-label" for="user_profile_birthday">生日</label>
+                  <input name="user[birthday]" class="form-control" id="user_profile_birthday" type="text" value="<%= @user_info.birthday %>"/>
+                </div>
+
+                <%= f.input :student_code %>
+                <%= f.input :identity_card, class: 'idc-input' %>
+              </div>
+              <div class="form-actions">
+                <%= f.submit class: 'btn-robodou', value: '更新信息', 'data-disable-with' => '更新信息' %>
+              </div>
+          <% end %>
         </div>
       </div>
     </div>

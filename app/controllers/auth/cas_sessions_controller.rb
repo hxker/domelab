@@ -12,9 +12,7 @@ class Auth::CasSessionsController < Devise::SessionsController
   end
 
   def sign_up
-    redirect_to "#{Settings.auth_url}/users/new?service=#{("#{Settings.domain}/users/service").b.gsub(/[^a-zA-Z0-9_\-.]/n) { |m|
-      sprintf('%%%02X', m.unpack('C')[0])
-    }}"
+    redirect_to user_signed_in? ? root_path : "#{Settings.auth_url}/users/new?service=#{("#{Settings.domain}/users/service").b.gsub(/[^a-zA-Z0-9_\-.]/n) { |m| sprintf('%%%02X', m.unpack('C')[0]) }}"
   end
 
   def service

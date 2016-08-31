@@ -26,13 +26,15 @@ Rails.application.routes.draw do
       end
     end
     resources :admins
+    resources :districts
+    resources :roles
   end
 
   # -----------------------------------------------------------
   # User
   # -----------------------------------------------------------
 
-  get 'user' => redirect('/user/index')
+  get 'user' => redirect('/user/preview')
   get 'user/preview' => 'user#preview', as: 'user_preview'
   match 'user/profile' => 'user#profile', as: 'user_profile', via: [:get, :post]
   match 'user/passwd' => 'user#passwd', as: 'user_passwd', via: [:get, :post]
@@ -40,6 +42,8 @@ Rails.application.routes.draw do
   match 'user/email' => 'user#email', as: 'user_email', via: [:get, :post]
   match 'user/reset_mobile' => 'user#reset_mobile', as: 'user_reset_mobile', via: [:get, :post]
   match 'user/reset_email' => 'user#reset_email', as: 'user_reset_email', via: [:get, :post]
+  get '/user/get_schools' => 'user#get_schools', as: 'user_get_schools'
+  get '/user/get_districts' => 'user#get_districts', as: 'user_get_districts'
 
   match '*path', via: :all, to: 'home#error_404'
 

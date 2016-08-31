@@ -6,6 +6,7 @@
 //= require admin/ace-extra.min
 //= require admin/jquery.cookie
 //= require admin/admin
+//= require admin/frame
 //= require admin/bootstrap-datepicker.min
 //= require admin/bootstrap-timepicker.min
 //= require admin/bootbox.min

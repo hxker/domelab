@@ -1,12 +1,22 @@
 class User < ApplicationRecord
+  belongs_to :district, optional: true
+  belongs_to :school, optional: true
+  belongs_to :user_role, optional: true
+  has_many :roles, through: :user_roles
   alias_attribute :username, :guid
+  attr_accessor :desc_family, :desc_certificate, :cover
   devise :cas_authenticatable
+
+  validates :gender, inclusion: [1, 2], allow_blank: true
+  validates :school_id, numericality: {only_integer: true}, allow_blank: true
+  validates :grade, numericality: {only_integer: true}, allow_blank: true
+  validates :district_id, numericality: {only_integer: true}, allow_blank: true
 
   def cas_extra_attributes=(extra_attributes)
     extra_attributes.each do |name, value|
       case name.to_sym
-      when :nickname
-        self.nickname = value
+        when :nickname
+          self.nickname = value
       end
     end
   end

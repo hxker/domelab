@@ -6,7 +6,6 @@ zh-CN:
         mobile: '手机号'
         mobile_code: '验证码'
         email_code: '邮箱验证码'
-        username: '姓名'
         login: '账号'
         old_password: '原密码'
         new_password: '新密码'
@@ -42,6 +41,10 @@ zh-CN:
         address: '地址'
         tel: '联系电话'
         status: '状态'
+        student_code: '学籍号'
+        identity_card: '身份证号'
+        fullname: '姓名'
+        city: '城市'
 
 
     "yes": '是'

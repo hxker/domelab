@@ -163,6 +163,18 @@
                 <span class="menu-text"> 管理员 </span>
               </a>
             </li>
+            <li class="<%= params[:controller] == 'admin/roles' ? 'active' : '' %>">
+              <a href="<%= admin_roles_path %>">
+                <i class="icon-leaf"></i>
+                <span class="menu-text"> 角色 </span>
+              </a>
+            </li>
+            <li class="<%= params[:controller] == 'admin/districts' ? 'active' : '' %>">
+              <a href="<%= admin_districts_path %>">
+                <i class="icon-globe"></i>
+                <span class="menu-text"> 区县 </span>
+              </a>
+            </li>
         <% end %>
       </ul>
       <!-- /.nav-list -->
