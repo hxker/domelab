@@ -23,6 +23,35 @@ $(function () {
             time: '5000'
         });
     }
+
+    // ace-thumbnails photo view
+    if ($('.ace-thumbnails [data-rel="colorbox"]').length > 0) {
+        jQuery(function ($) {
+            var color_box_params = {
+                reposition: true,
+                scalePhotos: true,
+                scrolling: false,
+                previous: '<i class="icon-arrow-left"></i>',
+                next: '<i class="icon-arrow-right"></i>',
+                close: '&times;',
+                current: '{current} / {total}',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                onOpen: function () {
+                    document.body.style.overflow = 'hidden';
+                },
+                onClosed: function () {
+                    document.body.style.overflow = 'auto';
+                },
+                onComplete: function () {
+                    $.colorbox.resize();
+                }
+            };
+            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(color_box_params);
+            $("#cboxLoadingGraphic").append("<i class='icon-spinner orange'></i>");//loading icon
+        })
+    }
+
     if ($.cookie('menu-min') == 1) {
         $('.sidebar').addClass('menu-min');
     } else {

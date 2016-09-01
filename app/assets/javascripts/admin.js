@@ -9,6 +9,10 @@
 //= require admin/frame
 //= require admin/bootstrap-datepicker.min
 //= require admin/bootstrap-timepicker.min
+//= require admin/jquery.gritter.min
+//= require admin/jquery.slimscroll.min
+//= require admin/jquery.nestable.min
+//= require admin/jquery.colorbox-min
 //= require admin/bootbox.min
 //= require bootstrap-dialog
 

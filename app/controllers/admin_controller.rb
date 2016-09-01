@@ -2,7 +2,9 @@ class AdminController < ActionController::Base
   before_action :set_current_admin, :authenticate
 
   def index
-
+    user_role = UserRole.where(status: 0)
+    @review_th_num = user_role.where(role_id: 1).count
+    @review_fh_num = user_role.where(role_id: 2).count
   end
 
   rescue_from ActiveRecord::RecordNotFound do |exception|

@@ -25,6 +25,12 @@ Rails.application.routes.draw do
         post :change_password_post
       end
     end
+    get '/checks/teachers' => 'checks#teachers'
+    get '/checks/teacher_list' => 'checks#teacher_list'
+    get '/checks/hackers' => 'checks#hackers'
+    get '/checks/hacker_list' => 'checks#hacker_list'
+    post '/checks/review_teacher' => 'checks#review_teacher'
+    post '/checks/review_hacker' => 'checks#review_hacker'
     resources :admins
     resources :districts
     resources :roles
