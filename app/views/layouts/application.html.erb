@@ -35,12 +35,31 @@
           <a href="">CN</a>
         </li>
         <% if user_signed_in? %>
-            <li>
+            <li class="has-menu">
               <a href="<%= user_preview_path %>"><%= current_user.nickname %></a>
+              <span class="caret"></span>
+              <ul class="hover-menu">
+                <li>
+                  <a href="<%= user_preview_path %>">个人中心</a>
+                </li>
+                <li>
+                  <a href="<%= user_preview_path %>">个人中心</a>
+                </li>
+                <li>
+                  <a href="<%= user_preview_path %>">个人中心</a>
+                </li>
+                <li>
+                  <a href="<%= user_preview_path %>">个人中心</a>
+                </li>
+                <li>
+                  <a href="<%= user_preview_path %>">个人中心</a>
+                </li>
+              </ul>
             </li>
             <li>
               <%= link_to '退出', sign_out_path, method: :delete, data: {confirm: '确认退出登录吗?'} %>
             </li>
+
         <% else %>
             <li>
               <a href="<%= sign_in_path %>">登录</a>

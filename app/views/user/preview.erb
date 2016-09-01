@@ -1,17 +1,13 @@
 <div class="container">
-  <div class="row">
-    <div class="user-center">
-      <div class="main-title">
-        个人中心
-      </div>
-      <%= render 'user/menu' %>
-      <div class="user-main">
-        <%= render 'user/tab' %>
-        <p>昵称：<%= @user_info.nickname %></p>
-      </div>
+  <div class="user-center">
+    <div class="main-title">
+      个人中心
+    </div>
+    <%= render 'user/avatar' %>
+    <%= render 'user/menu' %>
+    <div class="user-main">
+      <%= render 'user/tab' %>
+      <p>昵称：<%= @user_info.nickname %></p>
     </div>
   </div>
 </div>
-
-
-

@@ -64,6 +64,44 @@
     ul {
       li {
         margin: 0 0 0 20px;
+        &.has-menu {
+          .caret {
+            transition: all .3s;
+          }
+          .hover-menu {
+            position: absolute;
+            z-index: 10;
+            top: 35px;
+            opacity: 0;
+            transition: all .3s;
+            visibility: hidden;
+            border: 1px solid #fff;
+            background: #e95e21;
+            color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 2px 0 #444;
+            li {
+              margin: 0;
+              text-align: center;
+              padding: 0 10px;
+              cursor: pointer;
+              &:hover {
+                background: #fff;
+                color: #777;
+              }
+            }
+          }
+          &:hover {
+            .caret {
+              transform: rotateZ(180deg);
+            }
+            .hover-menu {
+              top: 29px;
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+        }
       }
     }
   }
@@ -143,4 +181,10 @@
       margin: 0 20px;
     }
   }
+}
+
+#yield{
+  overflow: hidden;
+  min-height: 800px;
+  position: relative;
 }

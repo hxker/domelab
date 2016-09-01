@@ -1,0 +1,54 @@
+.user-center {
+  overflow: hidden;
+  padding: 10px;
+  .main-title {
+    padding: 10px 0;
+    font-size: 18px;
+    color: #e95e21;
+    border-bottom: 1px solid #d8d8d8;
+  }
+  .uc-avatar {
+    padding: 20px 0;
+    overflow: hidden;
+    .avatar-box {
+      width: 150px;
+      height: 150px;
+      float: left;
+      background-color: #d8d8d8;
+      border: 1px solid #333;
+      border-radius: 5px;
+      margin-right: 20px;
+    }
+    .username-box {
+      float: left;
+      font-size: 22px;
+      color: #444;
+    }
+  }
+  .ucm {
+    padding:0 0 20px;
+    width: 100%;
+    min-width: 1180px;
+    font-size: 12px;
+    line-height: 36px;
+    .ucm-list {
+      overflow: hidden;
+      background: #e95e21;
+      .ucm-item {
+        padding: 0 20px;
+        cursor: pointer;
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
+  .uct {
+    padding:0 0 20px;
+  }
+  .user-main {
+    .sub-content {
+
+    }
+  }
+}

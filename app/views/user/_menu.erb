@@ -1,11 +1,22 @@
-<div class="list-group" style="margin-top: 40px;">
-
-  <a class="list-group-item" href="<%= user_preview_path %>">我的账户<span class="visible-xs pull-right"> <%= current_user.nickname %>
-    </span></a>
-
-
-  <%= link_to sign_out_path, method: :delete, data: {confirm: '确认退出登录吗?'}, title: '退出登录', class: 'list-group-item' do %>
-      退出登录
-  <% end %>
-
+<div class="user-center-menu ucm">
+  <ul class="horizontal-ul ucm-list">
+    <li class="ucm-item">
+      <a href="">个人信息</a>
+    </li>
+    <li class="ucm-item">
+      <a href="">报名信息</a>
+    </li>
+    <li class="ucm-item">
+      <a href="">个人管理</a>
+    </li>
+    <li class="ucm-item">
+      <a href="">消息通知</a>
+    </li>
+    <li class="ucm-item">
+      <a href="">我的积分</a>
+    </li>
+    <li class="ucm-item">
+      <a href="">调戏小豆</a>
+    </li>
+  </ul>
 </div>
