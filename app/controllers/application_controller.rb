@@ -4,6 +4,14 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   # before_action :redirect_to_sign_in, unless: :user_signed_in?
+  before_action do
+    cookies.signed[:user_id] ||= current_user.try(:id)
+  end
+
+  def current_user
+    return @current_user if defined? @current_user
+    @current_user ||= warden.authenticate(scope: :user)
+  end
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
     render_optional_error(404)

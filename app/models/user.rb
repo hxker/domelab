@@ -3,6 +3,7 @@ class User < ApplicationRecord
   belongs_to :school, optional: true
   belongs_to :user_role, optional: true
   has_many :roles, through: :user_roles
+  has_many :notifications, primary_key: :guid
   alias_attribute :username, :guid
   attr_accessor :desc_family, :desc_certificate, :cover
   devise :cas_authenticatable

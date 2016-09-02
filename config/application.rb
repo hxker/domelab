@@ -23,6 +23,8 @@ module Domelab
     config.active_record.default_timezone = :local
     config.i18n.default_locale = 'zh-CN'
     config.encoding = 'utf-8'
+    config.active_job.queue_adapter = :sidekiq
+    config.action_cable.disable_request_forgery_protection = true
     config.cache_store = :redis_store, "redis://localhost:6379/0/cache"
   end
 end
