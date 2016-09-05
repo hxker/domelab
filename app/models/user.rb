@@ -1,10 +1,10 @@
 class User < ApplicationRecord
   belongs_to :district, optional: true
   belongs_to :school, optional: true
-  belongs_to :user_role, optional: true
+  has_many :user_roles
   has_many :roles, through: :user_roles
-  has_many :notifications, primary_key: :guid
-  alias_attribute :username, :guid
+  has_many :notifications
+  alias_attribute :username, :id
   attr_accessor :desc_family, :desc_certificate, :cover
   devise :cas_authenticatable
 
