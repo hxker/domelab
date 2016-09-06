@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get "sign_up", to: "auth/cas_sessions#sign_up"
     delete "sign_out", to: "auth/cas_sessions#destroy"
   end
+  get '/commonweal', to: 'commonweal#index'
 
   mount RuCaptcha::Engine => '/rucaptcha'
 
