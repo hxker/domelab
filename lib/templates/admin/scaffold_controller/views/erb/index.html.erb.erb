@@ -1,0 +1,45 @@
+<h1 class="page-header">
+<%%= t('activerecord.models.<%= class_name.downcase %>') %> 列表
+<small class="pull-right">
+
+    <a href="<%%= new_<%= prefixed_plain_model_url %>_path %>" title="新建t('activerecord.models.<%= class_name.downcase %>')" class="btn btn-default">
+      <i class="icon-plus icon-only"></i> </a>
+    <a href="#" class="btn btn-default btn-search-toggle" title="搜索">
+      <i class="icon-search icon-only"></i>
+    </a>
+</small>
+</h1>
+
+
+
+<table class="table table-bordered table-hover table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <% attributes.reject(&:password_digest?).each do |attribute| -%>
+      <th><%%= t('simple_form.labels.defaults.<%= attribute.name %>') %></th>
+      <% end -%>
+      <th>操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+      <tr>
+        <td><%%= <%= singular_table_name %>.id %></td>
+        <% attributes.reject(&:password_digest?).each do |attribute| -%>
+        <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+        <% end -%>
+        <td>
+          <%%= link_to <%= "[:#{prefix}, #{singular_table_name}]" %>, title:'查看', class: 'btn btn-xs btn-default' do %><i class="icon-eye-open bigger-120"></i><%% end %>
+          <%%= link_to edit_<%= prefixed_plain_model_url %>_path(<%= singular_table_name %>), title:'编辑', class: 'btn btn-xs btn-info' do %><i class="icon-edit bigger-120"></i><%% end %>
+          <%%= link_to <%= "[:#{prefix}, #{singular_table_name}]" %>, method: :delete, data: { confirm: '确认删除吗?' }, title:'删除', class: 'btn btn-xs btn-danger' do %><i class="icon-trash bigger-120"></i><%% end %>
+        </td>
+      </tr>
+    <%% end %>
+  </tbody>
+</table>
+
+<nav>
+  <%%= paginate @<%= plural_table_name %> %>
+</nav>

@@ -45,6 +45,10 @@ zh-CN:
         identity_card: '身份证号'
         fullname: '姓名'
         city: '城市'
+        class_address: '上课地点'
+        course_type: '课程类型'
+        course_id: '所属课程'
+        teacher_id: '主讲教师'
 
 
     "yes": '是'

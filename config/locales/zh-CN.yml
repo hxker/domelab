@@ -244,6 +244,8 @@ zh-CN:
       course: '课程'
       course_score_attribute: '评分标准'
       school: '学校'
+      group: '班级'
+
   views:
     pagination:
         first: "首页"
@@ -263,14 +265,8 @@ zh-CN:
   status:
      status0: '待显示'
      status1: '显示'
-     status2: '比赛结束'
-  team:
-     status0: '报名中'
-     status1: '报名成功'
-     status2: '待学校审核'
-     status-2: '学校审核未通过'
-     status3: '学校审核通过,待区县审核'
-     status-3: '区县审核未通过'
+     status2: '结束'
+
   attributes:
      username: '姓名'
      teacher: '教师姓名'

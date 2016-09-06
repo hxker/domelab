@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     resources :admins
     resources :districts
     resources :roles
+    resources :courses
+    resources :groups
   end
 
   # -----------------------------------------------------------

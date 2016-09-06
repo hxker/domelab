@@ -1,0 +1,47 @@
+<h1 class="page-header">
+  显示<%= t('activerecord.models.course') %>
+  <small class="pull-right">
+    <a href="<%= new_admin_course_path %>" title="新建<%= t('activerecord.models.course') %>" class="btn btn-default">
+      <i class="icon-plus icon-only"></i></a>
+    <a href="<%= edit_admin_course_path(@course) %>" title="编辑<%= t('activerecord.models.course') %>" class="btn btn-default">
+      <i class="icon-edit icon-only"></i></a>
+    <a href="<%= admin_courses_path %>" title="列表" class="btn btn-default">
+      <i class="icon-list icon-only"></i></a>
+  </small>
+</h1>
+
+<% if notice %>
+    <div class="alert alert-success"><%= notice %>
+      <button class="close" data-dismiss="alert">
+        <i class="icon-remove"></i>
+      </button>
+    </div>
+<% end %>
+
+
+
+<div class="profile-user-info profile-user-info-striped">
+
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.name') %> </div>
+
+    <div class="profile-info-value">
+      <span><%= @course.name %></span>
+    </div>
+  </div>
+  <div class="profile-info-row">
+    <div class="profile-info-name">类型</div>
+
+    <div class="profile-info-value">
+      <span><%= @course.course_type == 0 ? '豆姆' : '专家' %></span>
+    </div>
+  </div>
+  <div class="profile-info-row">
+    <div class="profile-info-name">状态</div>
+
+    <div class="profile-info-value">
+      <span><%= t('status.status'+@course.status.to_s) %></span>
+    </div>
+  </div>
+
+</div>

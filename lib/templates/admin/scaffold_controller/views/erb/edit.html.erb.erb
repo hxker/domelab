@@ -1,0 +1,11 @@
+<h1 class="page-header">
+    编辑 <%%= t('activerecord.models.<%= class_name.downcase %>') %>
+    <small class="pull-right">
+     <a href="<%= "[:#{prefix}, @#{singular_table_name}]" %>" title="显示该t('activerecord.models.<%= class_name.downcase %>')" class="btn btn-default">
+      <i class="icon-eye-open icon-only"></i></a>
+     <a href="<%= prefixed_index_helper %>_path %>" title="t('activerecord.models.<%= class_name.downcase %>')列表" class="btn btn-default">
+      <i class="icon-list icon-only"></i></a>
+    </small>
+</h1>
+
+<%%= render 'form' %>

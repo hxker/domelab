@@ -1,0 +1,29 @@
+<h1 class="page-header">
+    显示 <%%= t('activerecord.models.<%= class_name.downcase %>') %>
+    <small class="pull-right">
+        <%%= link_to '编辑', edit_<%= prefixed_plain_model_url %>_path(@<%= singular_table_name %>) %> |
+        <%%= link_to '列表', <%= prefixed_index_helper %>_path %>
+    </small>
+</h1>
+
+<%% if notice %>
+<div class="alert alert-success"><%= notice %>
+      <button class="close" data-dismiss="alert">
+        <i class="icon-remove"></i>
+      </button>
+    </div>
+<%% end %>
+
+<div class="profile-user-info profile-user-info-striped">
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+<div class="profile-info-row">
+    <div class="profile-info-name"> <%%= t('simple_form.labels.defaults.<%= attribute.name %>') %></div>
+
+    <div class="profile-info-value">
+      <span class="editable"><%%= @<%= singular_table_name %>.<%= attribute.name %> %></span>
+    </div>
+  </div>
+<% end -%>
+</div>
+
+

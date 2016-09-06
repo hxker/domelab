@@ -175,6 +175,18 @@
                 <span class="menu-text"> 区县 </span>
               </a>
             </li>
+            <li class="<%= params[:controller] == 'admin/courses' ? 'active' : '' %>">
+              <a href="<%= admin_courses_path %>">
+                <i class="icon-book"></i>
+                <span class="menu-text"> 课程 </span>
+              </a>
+            </li>
+            <li class="<%= params[:controller] == 'admin/groups' ? 'active' : '' %>">
+              <a href="<%= admin_groups_path %>">
+                <i class="icon-group"></i>
+                <span class="menu-text"> 班级 </span>
+              </a>
+            </li>
         <% end %>
       </ul>
       <!-- /.nav-list -->

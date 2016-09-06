@@ -51,7 +51,7 @@ class Auth::CasSessionsController < Devise::SessionsController
       logger.warn "Ignoring CAS single-sign-out request as feature is not currently enabled."
     end
 
-    render :nothing => true
+    head :ok
   end
 
   private

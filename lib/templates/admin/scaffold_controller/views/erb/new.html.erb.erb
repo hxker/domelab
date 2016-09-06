@@ -1,0 +1,8 @@
+<h1 class="page-header">
+    新增 <%%= t('activerecord.models.<%= class_name.downcase %>') %>
+    <small class="pull-right">
+        <%%= link_to '列表',title:'查看<%%= t('activerecord.models.<%= class_name.downcase %>') %>', <%= prefixed_index_helper %>_path %>
+    </small>
+</h1>
+
+<%%= render 'form' %>

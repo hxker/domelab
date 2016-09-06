@@ -3,6 +3,25 @@ $(function () {
     $('.btn-search-toggle').on('click', function () {
         $('.form-search-toggle').toggleClass('hide show');
     });
+    // 搜索属性选择 
+    var searchControl = $('[data-search]');
+    if (searchControl.length > 0) {
+        $.each(searchControl, function () {
+            var self = $(this);
+            var target = self.attr('data-search');
+            var targetInput = self.find('[name="' + target + '"]');
+            var option = self.find('[data-search-option]');
+            option.on('click', function () {
+                var val = $(this).attr('data-search-option');
+                targetInput.val(val);
+                self.find('[data-search-text]').text($(this).text());
+            });
+            var initVal = targetInput.val();
+            if (initVal.length > 0) {
+                self.find('[data-search-text]').text(self.find('[data-search-option="' + initVal + '"]').text());
+            }
+        })
+    }
 
     // 教师审核
     $(".teacher-apply-status [name='teacher-apply']").on('click', function () {
