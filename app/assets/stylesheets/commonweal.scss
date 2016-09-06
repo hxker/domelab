@@ -1,0 +1,129 @@
+#commonweal {
+  .title {
+    padding-bottom: 30px;
+    border-bottom: 1px dashed #aaa;
+    .text {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .img {
+      text-align: center;
+    }
+  }
+  .content {
+    padding-top: 30px;
+    .part {
+      height: 500px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      &:nth-child(2n) {
+        .sub-t {
+          .sub-t-t {
+            float: right;
+          }
+          .sub-t-m {
+            clear: both;
+          }
+          .sub-t-b {
+            left: -30px;
+          }
+        }
+      }
+      &.first {
+        .sub-t-t {
+          color: #719075;
+        }
+        .sub-t-b {
+          background-color: rgba(162, 215, 109, .76);
+        }
+      }
+      &.second {
+        .sub-t-t {
+          color: #A6C2BE;
+        }
+        .sub-t-b {
+          background-color: rgba(152, 197, 205, .61);
+        }
+      }
+      &.third {
+        .sub-t-t {
+          color: #F1A380;
+        }
+        .sub-t-b {
+          background-color: rgba(255, 161, 120, .71);
+        }
+      }
+      &.fourth {
+        .sub-t-t {
+          color: #E8B664;
+        }
+        .sub-t-b {
+          background-color: rgba(245, 166, 35, .77);
+        }
+      }
+      &.fifth {
+        .sub-t-t {
+          color: #8E755F;
+        }
+        .sub-t-b {
+          background-color: rgba(168, 118, 74, .52);
+        }
+      }
+
+      .part-sub {
+        float: left;
+      }
+      .sub-t {
+        position: relative;
+        height: 484px;
+        width: 510px;
+        .sub-t-t {
+          font-size: 44px;
+          .ident {
+            text-indent: 2em;
+          }
+        }
+        .sub-t-m {
+          height: 210px;
+          background: image-url('cw-bk.png') center center no-repeat;
+          text-align: center;
+        }
+        .sub-t-b {
+          width: 540px;
+          height: 136px;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          text-align: center;
+          color: #fff;
+          font-size: 14px;
+          line-height: 20px;
+          .stb-box {
+            width: 540px;
+            height: 136px;
+            display: table-cell;
+            vertical-align: middle;
+            p {
+              padding-bottom: 5px;
+              vertical-align: middle;
+            }
+          }
+
+        }
+      }
+      .sub-i {
+        width: 653px;
+        height: 500px;
+        img {
+          height: 484px;
+        }
+      }
+    }
+  }
+  .bottom {
+    padding: 40px;
+    text-align: center;
+    color: #9b9b9b;
+    font-size: 26px;
+  }
+}

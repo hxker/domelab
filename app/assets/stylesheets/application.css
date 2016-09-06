@@ -16,6 +16,7 @@
  *= require layout
  *= require home
  *= require uc
+ *= require commonweal
  *= //require_tree .
  *= require_self
  */
