@@ -1,7 +1,6 @@
 class CreateUsers < ActiveRecord::Migration[5.0]
   def change
     create_table :users do |t|
-      t.integer :guid, null: false, unique: true
       t.string :nickname, null: false, unique: true
       t.string :mobile
       t.string :email
@@ -23,7 +22,6 @@ class CreateUsers < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_index :users, :guid, unique: true
     add_index :users, :nickname, unique: true
     add_index :users, :mobile
     add_index :users, :email
