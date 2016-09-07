@@ -10,6 +10,12 @@
     height: 18px
 }
 
+.show-row-margin {
+    min-height: 30px;
+    padding-top: 6px;
+    margin-left: 135px
+}
+
 #score-attribute > label, #two-level-sa > label {
     float: left;
     margin: 3px 5px;

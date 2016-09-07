@@ -40,6 +40,7 @@
     <th>ID</th>
     <th><%= t('simple_form.labels.defaults.name') %></th>
     <th>类型</th>
+    <th>显示</th>
     <th>操作</th>
   </tr>
   </thead>
@@ -50,6 +51,7 @@
         <td><%= c.id %></td>
         <td><%= c.name %></td>
         <td><%= c.course_type == 0 ? '豆姆' : '专家' %></td>
+        <td><%= c.status == 0 ? '否' : ('<label class="label label-success">是</label>').html_safe %></td>
         <td><%= link_to [:admin, c], title: '查看', class: 'btn btn-xs btn-warn' do %>
               <i class="icon-eye-open bigger-120"></i>
           <% end %>

@@ -15,4 +15,5 @@
 //= require admin/jquery.colorbox-min
 //= require admin/bootbox.min
 //= require bootstrap-dialog
+//= require kindeditor
 

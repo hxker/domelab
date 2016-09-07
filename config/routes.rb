@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   get '/commonweal', to: 'commonweal#index'
 
   mount RuCaptcha::Engine => '/rucaptcha'
+  namespace :kindeditor do
+    post '/upload' => 'assets#create'
+    get '/filemanager' => 'assets#list'
+  end
 
   # -----------------------------------------------------------
   # Admin

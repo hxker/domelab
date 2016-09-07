@@ -43,5 +43,22 @@
       <span><%= t('status.status'+@course.status.to_s) %></span>
     </div>
   </div>
+  <% if @course.cover.present? %>
+      <div class="profile-info-row">
+        <div class="profile-info-name">封面</div>
+        <div class="show-row-margin">
+          <span><%= image_tag(@course.cover_url(:large)) %></span>
+        </div>
+      </div>
+  <% end %>
+
+  <% if @course.course_info.present? %>
+      <div class="profile-info-row">
+        <div class="profile-info-name">介绍:</div>
+        <div class="show-row-margin" style="">
+          <div><%= @course.course_info.html_safe %></div>
+        </div>
+      </div>
+  <% end %>
 
 </div>

@@ -3,6 +3,13 @@
   <div class="panel-body">
     <%= simple_form_for([:admin, @course]) do |f| %>
         <%= f.error_notification %>
+        <% if @course.errors.any? %>
+            <div class="alert alert-danger">
+              <% if @course.errors[:cover].present? %>
+                  <p>封面:<%= @course.errors[:cover].first %></p>
+              <% end %>
+            </div>
+        <% end %>
 
         <div class="form-inputs">
           <% if action_name == 'new' %>
@@ -12,6 +19,22 @@
           <% end %>
           <%= f.input :course_type, collection: Course::TYPE, prompt: 1 %>
           <%= f.input :status, collection: Course::STATUS, prompt: 1 %>
+          <% if @course.cover.present? %>
+              <%= image_tag(@course.cover_url(:middle)) %>
+          <% end %>
+
+          <div class="form-group">
+            <label class="text required control-label" for="courses_cover">
+              <abbr title="必填字段">*</abbr>
+              封面
+            </label>
+            <%= f.file_field :cover %>
+            <p class="help-block">格式：jpg jpeg gif png</p>
+          </div>
+
+          <label class="select required control-label" for="courses_course_info"><abbr title="必填字段">*</abbr>介绍/目的/要求:</label>
+          <%= f.kindeditor :course_info, :window_onload => true, :owner_id => @course.id, :items => ['formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'emoticons', 'image', 'baidumap', 'link', 'unlink', 'quickformat', 'preview', 'fullscreen'] %>
+
 
         </div>
 

@@ -7,6 +7,14 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
+  remote: git://github.com/javyliu/rails_kindeditor.git
+  revision: 611d26652a734e290bf8fe71be4ebd7d61246a2d
+  specs:
+    rails_kindeditor (0.4.6)
+      carrierwave
+      mini_magick
+
+GIT
   remote: git://github.com/nbudin/devise_cas_authenticatable.git
   revision: ed6d570cd0030f2c75a089f19ea09ec8565cf593
   specs:
@@ -231,6 +239,7 @@ DEPENDENCIES
   mysql2
   puma (~> 3.0)
   rails (~> 5.0.0)
+  rails_kindeditor!
   redis-rails
   rucaptcha
   sass-rails (~> 5.0)

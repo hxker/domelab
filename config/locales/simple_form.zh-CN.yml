@@ -49,6 +49,8 @@ zh-CN:
         course_type: '课程类型'
         course_id: '所属课程'
         teacher_id: '主讲教师'
+        start_date: '开始日期'
+        end_date: '结束日期'
 
 
     "yes": '是'
