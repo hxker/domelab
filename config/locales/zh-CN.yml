@@ -245,6 +245,7 @@ zh-CN:
       course_score_attribute: '评分标准'
       school: '学校'
       group: '班级'
+      lesson: '课时'
 
   views:
     pagination:

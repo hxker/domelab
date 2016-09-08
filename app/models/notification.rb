@@ -1,8 +1,6 @@
 class Notification < ApplicationRecord
   belongs_to :user, foreign_key: :guid
-  validates :user_id, presence: true
-  validates :message_type, presence: true
-  validates :content, presence: true
+  validates :user_id, :message_type, :content, presence: true
 
   scope :unread, -> { where(read: false) }
   after_create :realtime_push_to_client

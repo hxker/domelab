@@ -23,6 +23,10 @@ $(function () {
             time: '5000'
         });
     }
+    // date_picker date init 
+    $('input[data-control="dateForm"]').datepicker({
+        autoclose: true
+    });
 
     // ace-thumbnails photo view
     if ($('.ace-thumbnails [data-rel="colorbox"]').length > 0) {

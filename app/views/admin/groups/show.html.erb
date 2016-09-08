@@ -1,0 +1,80 @@
+<h1 class="page-header">
+  显示<%= t('activerecord.models.group') %>
+  <small class="pull-right">
+    <a href="<%= new_admin_group_path %>" title="新建<%= t('activerecord.models.group') %>" class="btn btn-default">
+      <i class="icon-plus icon-only"></i></a>
+    <a href="<%= edit_admin_group_path(@group) %>" title="编辑<%= t('activerecord.models.group') %>" class="btn btn-default">
+      <i class="icon-edit icon-only"></i></a>
+    <a href="<%= admin_groups_path %>" title="列表" class="btn btn-default">
+      <i class="icon-list icon-only"></i></a>
+  </small>
+</h1>
+
+<% if notice %>
+    <div class="alert alert-success"><%= notice %>
+      <button class="close" data-dismiss="alert">
+        <i class="icon-remove"></i>
+      </button>
+    </div>
+<% end %>
+
+
+<div class="profile-user-info profile-user-info-striped">
+
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.name') %> </div>
+
+    <div class="profile-info-value">
+      <span><%= @group.name %></span>
+    </div>
+  </div>
+  <div class="profile-info-row">
+    <div class="profile-info-name">课程:</div>
+
+    <div class="profile-info-value">
+      <span class="action-buttons"><a class="red" href="#"><i class="icon-plus"></i></a></span>
+    </div>
+  </div>
+
+  <div class="profile-info-row">
+    <div class="profile-info-name">状态</div>
+
+    <div class="profile-info-value">
+      <span><%= t('status.status'+@group.status.to_s) %></span>
+    </div>
+  </div>
+
+  <div class="profile-info-row">
+    <div class="profile-info-name">教师</div>
+
+    <div class="profile-info-value">
+      <span><%= @group.teacher.nickname %></span>
+    </div>
+  </div>
+  <div class="profile-info-row">
+    <div class="profile-info-name">上课地点</div>
+
+    <div class="profile-info-value">
+      <span><%= @group.class_address %></span>
+    </div>
+  </div>
+  <div class="profile-info-row">
+    <div class="profile-info-name">上课时间</div>
+
+    <div class="profile-info-value">
+      <span><%= @group.start_date %><%= "---#{@group.end_date}" if @group.end_date != @group.start_date %></span>
+    </div>
+  </div>
+
+  <% if @group.wx_code.present? %>
+      <div class="profile-info-row">
+        <div class="profile-info-name">微信班级群</div>
+        <div class="show-row-margin">
+          <span><%= image_tag(@group.wx_code_url(:middle)) %></span>
+        </div>
+      </div>
+  <% end %>
+
+</div>
+
+

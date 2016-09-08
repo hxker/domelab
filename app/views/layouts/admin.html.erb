@@ -181,6 +181,12 @@
                 <span class="menu-text"> 课程 </span>
               </a>
             </li>
+            <li class="<%= params[:controller] == 'admin/lessons' ? 'active' : '' %>">
+              <a href="<%= admin_lessons_path %>">
+                <i class="icon-bookmark"></i>
+                <span class="menu-text"> 课时 </span>
+              </a>
+            </li>
             <li class="<%= params[:controller] == 'admin/groups' ? 'active' : '' %>">
               <a href="<%= admin_groups_path %>">
                 <i class="icon-group"></i>

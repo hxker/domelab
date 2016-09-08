@@ -1,0 +1,72 @@
+<div class="panel panel-info">
+  <div class="panel-heading"><%= t('activerecord.models.group') %></div>
+  <div class="panel-body">
+    <%= simple_form_for([:admin, @group]) do |f| %>
+        <%= f.error_notification %>
+        <% if @group.errors.any? %>
+            <% if @group.errors[:wx_code].present? %>
+                <div class="alert alert-danger">
+                  <p>微信群二维码:<%= @group.errors[:wx_code].first %></p>
+                </div>
+            <% end %>
+            <% if @group.errors[:start_date].present? %>
+                <div class="alert alert-danger">
+                  <p>开始时间:<%= @group.errors[:start_date].first %></p>
+                </div>
+            <% end %>
+        <% end %>
+
+        <div class="form-inputs">
+          <% if action_name == 'new' %>
+              <%= f.input :name, autofocus: true %>
+          <% else %>
+              <%= f.input :name %>
+          <% end %>
+          <%= f.input :teacher_id, collection: UserRole.joins(:user).where(role_id: 1, role_type: 6).select('users.id', 'users.nickname as name') %>
+          <%= f.input :class_address %>
+          <%= f.input :status, collection: Course::STATUS, prompt: 1 %>
+
+
+          <div class="row">
+            <div class="form-group datetime require col-md-3 required">
+              <label class="datetime require control-label"><abbr title="必填字段">*</abbr> 开始时间</label>
+              <div class="row">
+                <div class="col-md-12">
+                  <input value="<%= @group.start_date %>" name="group[start_date]" data-control="dateForm" class="datetime form-control" data-date-format="yyyy-mm-dd">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group datetime require col-md-3 required">
+              <label class="datetime require control-label"><abbr title="必填字段">*</abbr> 结束时间</label>
+              <div class="row">
+                <div class="col-md-12">
+                  <input value="<%= @group.end_date %>" name="group[end_date]" data-control="dateForm" class="datetime form-control" data-date-format="yyyy-mm-dd">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+          <% if @group.wx_code.present? %>
+              <%= image_tag(@group.wx_code_url(:middle)) %>
+          <% end %>
+          <div class="form-group">
+            <label class="text required control-label" for="courses_wx_code">
+              <abbr title="必填字段">*</abbr>
+              微信群二维码
+            </label>
+            <%= f.file_field :wx_code %>
+            <%= f.hidden_field :wx_code_cache %>
+            <p class="help-block">格式：jpg jpeg gif png (图片大小在 1M 以内)</p>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, class: 'btn btn-primary' %>
+        </div>
+    <% end %>
+  </div>
+</div>
+

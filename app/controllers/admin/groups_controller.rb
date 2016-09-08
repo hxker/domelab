@@ -6,11 +6,11 @@ class Admin::GroupsController <AdminController
   # GET /admin/groups
   # GET /admin/groups.json
   def index
+    groups = Group.left_joins(:teacher)
     if params[:field].present? && params[:keyword].present?
-      @groups = Group.all.where(["#{params[:field]} like ?", "%#{params[:keyword]}%"]).page(params[:page]).per(params[:per])
-    else
-      @groups = Group.all.page(params[:page]).per(params[:per])
+      groups = groups.where(["#{params[:field]} like ?", "%#{params[:keyword]}%"])
     end
+    @groups = groups.select('groups.*', 'users.nickname', 'users.fullname').page(params[:page]).per(params[:per])
   end
 
   # GET /admin/groups/1
@@ -21,7 +21,6 @@ class Admin::GroupsController <AdminController
   # GET /admin/groups/new
   def new
     @group = Group.new
-    @teachers = UserRole.joins(:user).where(role_id: 1, role_type: 6).select('users.id', 'users.nickname')
   end
 
   # GET /admin/groups/1/edit

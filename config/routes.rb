@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     resources :roles
     resources :courses
     resources :groups
+    resources :lessons
   end
 
   # -----------------------------------------------------------
