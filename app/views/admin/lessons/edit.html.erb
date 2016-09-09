@@ -1,0 +1,11 @@
+<h1 class="page-header">
+  编辑<%= t('activerecord.models.lesson') %>
+  <small class="pull-right">
+    <a href="<%= admin_lesson_path(@lesson) %>" title="显示该<%= t('activerecord.models.lesson') %>" class="btn btn-default">
+      <i class="icon-eye-open icon-only"></i></a>
+    <a href="<%= admin_lessons_path %>" title="<%= t('activerecord.models.lesson') %>列表" class="btn btn-default">
+      <i class="icon-list icon-only"></i></a>
+  </small>
+</h1>
+
+<%= render 'form' %>

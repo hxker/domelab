@@ -1,0 +1,41 @@
+<h1 class="page-header">
+  显示<%= t('activerecord.models.lesson') %>
+  <small class="pull-right">
+    <a href="<%= new_admin_lesson_path %>" title="新建<%= t('activerecord.models.lesson') %>" class="btn btn-default">
+      <i class="icon-plus icon-only"></i></a>
+    <a href="<%= edit_admin_lesson_path(@lesson) %>" title="编辑<%= t('activerecord.models.lesson') %>" class="btn btn-default">
+      <i class="icon-edit icon-only"></i></a>
+    <a href="<%= admin_lessons_path %>" title="列表" class="btn btn-default">
+      <i class="icon-list icon-only"></i></a>
+  </small>
+</h1>
+
+<% if notice %>
+    <div class="alert alert-success"><%= notice %>
+      <button class="close" data-dismiss="alert">
+        <i class="icon-remove"></i>
+      </button>
+    </div>
+<% end %>
+
+
+
+<div class="profile-user-info profile-user-info-striped">
+
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.course_id') %> </div>
+
+    <div class="profile-info-value">
+      <span><%= @lesson.course.name %></span>
+    </div>
+  </div>
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.name') %> </div>
+
+    <div class="profile-info-value">
+      <span><%= @lesson.name %></span>
+    </div>
+  </div>
+
+
+</div>

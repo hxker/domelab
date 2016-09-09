@@ -1,0 +1,42 @@
+<div class="panel panel-info">
+  <div class="panel-heading"><%= t('activerecord.models.lesson') %></div>
+  <div class="panel-body">
+    <%= simple_form_for([:admin, @lesson]) do |f| %>
+        <%= f.error_notification %>
+        <% if @lesson.errors.any? %>
+            <% if @lesson.errors[:content].present? %>
+                <div class="alert alert-danger">
+                  <p>课件:<%= @lesson.errors[:content].first %></p>
+                </div>
+            <% end %>
+
+        <% end %>
+
+        <div class="form-inputs">
+          <% if action_name == 'new' %>
+              <%= f.input :name, autofocus: true %>
+          <% else %>
+              <%= f.input :name %>
+          <% end %>
+          <%= f.input :course_id, collection: Course.select(:id, :name) %>
+
+
+          <% if @lesson.content.present? %>
+          <% end %>
+          <div class="form-lesson">
+            <label class="text required control-label" for="courses_content">
+              <abbr title="必填字段"></abbr>
+              课件
+            </label>
+            <%= f.file_field :content %>
+            <p class="help-block">格式：doc ppt xls (大小在 1M 以内)</p>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, class: 'btn btn-primary' %>
+        </div>
+    <% end %>
+  </div>
+</div>
+

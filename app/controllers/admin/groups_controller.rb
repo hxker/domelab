@@ -16,6 +16,51 @@ class Admin::GroupsController <AdminController
   # GET /admin/groups/1
   # GET /admin/groups/1.json
   def show
+    @has_courses = @group.group_course_ships.left_joins(:course).pluck(:id, 'courses.name')
+    if Date.today < @group.end_date
+      @courses = Course.select(:id, :name)
+    end
+
+  end
+
+  def add_course
+    group_id = params[:group_id]
+    course_ids = params[:course_ids]
+
+    if group_id && course_ids.present? && course_ids.is_a?(Array) && (course_ids.length < 4) && Group.exists?(group_id)
+      status = []
+      course_ids.each do |c|
+        g_c = GroupCourseShip.create(group_id: group_id, course_id: c)
+        unless g_c.save
+          status << false
+        end
+      end
+      if status.length > 0
+        result = [false, "有#{status.length}个课程添加失败"]
+      else
+        result = [true, '添加成功']
+      end
+    else
+      result = [false, '参数不规范']
+    end
+    render json: result
+  end
+
+  def delete_course
+    group_id = params[:group_id]
+    group_course_id = params[:group_course_id]
+    g_c = GroupCourseShip.where(id: group_course_id).joins(:group).select(:id, :group_id, 'groups.end_date').first
+
+    if g_c && (g_c.end_date > Date.today) && (g_c.group_id == group_id.to_i)
+      if g_c.destroy
+        result = [true, '删除成功']
+      else
+        result = [false, '删除失败']
+      end
+    else
+      result = [false, '不规范操作']
+    end
+    render json: result
   end
 
   # GET /admin/groups/new

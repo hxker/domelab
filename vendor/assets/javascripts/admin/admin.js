@@ -94,4 +94,70 @@ $(function () {
 
         $(".hacker-apply-status [name='hacker-apply']").prop("checked", false);
     });
+
+    // chosen select init
+    var chosen_select = $(".chosen-select");
+    chosen_select.chosen({
+        max_selected_options: 3
+    });
+
+    $('#show-add-group-course').on('shown.bs.modal', function () {
+        $(this).find('.chosen-container').each(function () {
+            var self = $(this);
+            self.find('a:first-child').css('width', '320px');
+            self.find('.chosen-drop').css('width', '320px');
+            self.find('.chosen-search input').css('width', '310px');
+
+        });
+        $(this).find('.chosen-container-multi').css('width', '320px');
+    });
+
+    // 班级添加课程
+    $('.group-add-course-submit').on('click', function () {
+        var course_ids = $("#selected-course-ids").val();
+        var group_id = $(this).attr('data-course');
+        if (course_ids == null) {
+            alert('请选择课程!');
+            return false;
+        }
+        if (course_ids.length > 3) {
+            alert('一次只能添加3个课程!');
+            return false;
+        }
+        $.ajax({
+            url: '/admin/groups/add_course',
+            type: 'post',
+            data: {
+                "group_id": group_id,
+                "course_ids": course_ids
+            },
+            success: function (data) {
+                alert(data[1]);
+                if (data[0]) {
+                    window.location.reload();
+                }
+            }
+        });
+    });
+
 });
+function delete_group_course(group_course_id, group_id) {
+    if (group_course_id && group_id) {
+        $.ajax({
+            url: '/admin/groups/delete_course',
+            type: 'post',
+            data: {
+                "group_id": group_id,
+                "group_course_id": group_course_id
+            },
+            success: function (data) {
+                alert(data[1]);
+                if (data[0]) {
+                    $('#delete-hide-' + group_course_id).addClass('hide');
+                }
+            }
+        });
+    } else {
+        alert('参数不完整');
+    }
+}

@@ -40,7 +40,12 @@ Rails.application.routes.draw do
     resources :districts
     resources :roles
     resources :courses
-    resources :groups
+    resources :groups do
+      collection do
+        post :add_course
+        post :delete_course
+      end
+    end
     resources :lessons
   end
 

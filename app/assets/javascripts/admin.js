@@ -7,6 +7,7 @@
 //= require admin/jquery.cookie
 //= require admin/admin
 //= require admin/frame
+//= require admin/chosen.jquery.min
 //= require admin/bootstrap-datepicker.min
 //= require admin/bootstrap-timepicker.min
 //= require admin/jquery.gritter.min
