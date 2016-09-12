@@ -23,6 +23,10 @@ class Admin::GroupsController <AdminController
 
   end
 
+  def add_schedule
+
+  end
+
   def add_course
     group_id = params[:group_id]
     course_ids = params[:course_ids]
