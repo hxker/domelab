@@ -23,8 +23,62 @@ class Admin::GroupsController <AdminController
 
   end
 
-  def add_schedule
+  def get_schedule
+    result = GroupSchedule.where(group_id: params[:group_id])
+    render json: result
+  end
 
+  def add_schedule
+    if request.method == 'POST'
+      group_id = params[:group_id]
+      title = params[:title]
+      start_time = params[:start]
+      end_time = params[:end]
+      all_day = params[:allDay]
+      g_s = GroupSchedule.create(group_id: group_id, title: title, start: start_time, end: end_time, allDay: all_day)
+      if g_s.save
+        result = [true, '添加成功']
+      else
+        result = [false, '添加失败']
+      end
+      render json: result
+    end
+  end
+
+  def update_schedule
+    id = params[:id]
+    title = params[:title]
+    if id.present? && title.present?
+      g_s = GroupSchedule.where(id: id).first
+      if g_s.present?
+        g_s.title = title
+        if g_s.save
+          result = [true, '更新成功']
+        else
+          result = [false, '更新失败']
+        end
+      else
+        result = [false, '参数不规范']
+      end
+    else
+      result = [false, '参数不完整']
+    end
+    render json: result
+  end
+
+  def delete_schedule
+    id = params[:id]
+    if id.present?
+      g_s = GroupSchedule.where(id: id).first
+      if g_s.present? && g_s.destroy
+        result = [true, '删除成功']
+      else
+        result = [false, '删除失败']
+      end
+    else
+      result = [false, '参数不完整']
+    end
+    render json: result
   end
 
   def add_course

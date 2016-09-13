@@ -46,6 +46,9 @@ Rails.application.routes.draw do
         post :delete_course
         get :add_schedule
         post :add_schedule
+        get :get_schedule
+        post :delete_schedule
+        post :update_schedule
       end
     end
     resources :lessons
