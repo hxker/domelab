@@ -24,7 +24,7 @@ class Admin::GroupsController <AdminController
   end
 
   def get_schedule
-    result = GroupSchedule.where(group_id: params[:group_id])
+    result = GroupSchedule.where(group_id: params[:group_id]).select(:id, :title, :start, :end, :allDay)
     render json: result
   end
 
@@ -37,7 +37,7 @@ class Admin::GroupsController <AdminController
       all_day = params[:allDay]
       g_s = GroupSchedule.create(group_id: group_id, title: title, start: start_time, end: end_time, allDay: all_day)
       if g_s.save
-        result = [true, '添加成功']
+        result = [true, '添加成功', g_s.id]
       else
         result = [false, '添加失败']
       end
@@ -46,13 +46,12 @@ class Admin::GroupsController <AdminController
   end
 
   def update_schedule
-    id = params[:id]
-    title = params[:title]
-    if id.present? && title.present?
-      g_s = GroupSchedule.where(id: id).first
+    event = params[:event]
+
+    if event[:id].present? && event.present?
+      g_s = GroupSchedule.where(id: event[:id]).first
       if g_s.present?
-        g_s.title = title
-        if g_s.save
+        if g_s.update_attributes(title: event[:title], start: event[:start], end: event[:end], allDay: event[:allDay])
           result = [true, '更新成功']
         else
           result = [false, '更新失败']

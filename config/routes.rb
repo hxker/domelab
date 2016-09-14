@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     delete "sign_out", to: "auth/cas_sessions#destroy"
   end
   get '/commonweal', to: 'commonweal#index'
+  get '/courses', to: 'courses#index'
+  get '/courses/dome', to: 'courses#dome'
+  post '/apply_group', to: 'course#apply_group'
 
   mount RuCaptcha::Engine => '/rucaptcha'
   namespace :kindeditor do

@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-3 col-xs-offset-4">
+      <%= simple_form_for(current_user, url: '/apply_group', method: :post) do |f| %>
+          <select name="select-group" class="form-control">
+            <option>请选择班级</option>
+            <% if @groups.present? %>
+                <% @groups.each do |g| %>
+                    <option value="<%= g.id %>"><%= g.name %></option>
+                <% end %>
+            <% end %>
+          </select>
+          <br>
+          <%= f.input :fullname, value: current_user.fullname %>
+          <%= f.input :student_code, value: current_user.student_code %>
+          <div class="form-actions">
+            <%= f.submit class: 'btn btn-block btn-primary', value: '提交', 'data-disable-with' => '正在提交' %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

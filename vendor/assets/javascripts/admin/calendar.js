@@ -96,12 +96,12 @@ $(function () {
                                 if (data[0]) {
                                     calendar.fullCalendar('renderEvent',
                                         {
+                                            id: data[2],
                                             title: title,
                                             start: start,
                                             end: end,
                                             allDay: allDay
                                         }
-                                        // true // make the event "stick"
                                     );
                                 } else {
                                     alert(data[1]);
@@ -114,12 +114,27 @@ $(function () {
                 });
                 calendar.fullCalendar('unselect');
             },
-
-            // dayClick: function (date, allDay, jsEvent, view) {//日期点击后弹出的jq ui的框，添加日程记录
-            //     var selectdate = $.fullCalendar.formatDate(date, "yyyy-MM-dd");//选择当前日期的时间转换
-            // },
-
-            eventClick: function (calEvent, jsEvent, view) {
+            eventMouseover: function (data) {
+                var tooltip = '<div class="tooltip-event" style="width:auto;height:auto;background:#9fe1e7;position:absolute;z-index:10001;padding:0 10px ; line-height: 200%;">'
+                    + data.title + '</br>' +
+                    (data.allDay ? "全天" : (data.start.getHours() + ":" + (data.start.getMinutes() == '0' ? '00' : data.start.getMinutes())) + (data.end != null ? ' -- ' + (data.end.getHours() + ":" + (data.end.getMinutes() == '0' ? "00" : data.end.getMinutes())) : '')) + '</div>';
+                $("body").append(tooltip);
+                $(this).mouseover(function (e) {
+                    $(this).css('z-index', 10000);
+                    var topic_event = $('.tooltip-event');
+                    topic_event.fadeIn('500');
+                    topic_event.fadeTo('10', 1.9);
+                }).mousemove(function (e) {
+                    var topic_event = $('.tooltip-event');
+                    topic_event.css('top', e.pageY + 10);
+                    topic_event.css('left', e.pageX + 20);
+                });
+            },
+            eventMouseout: function (event) {
+                $(this).css('z-index', 8);
+                $('.tooltip-event').remove();
+            },
+            eventClick: function (calEvent) {
 
                 var form = $("<form class='form-inline'><label>更改事件名称 &nbsp;</label></form>");
                 form.append("<input class='middle' autocomplete=off type=text value='" + calEvent.title + "' /> ");
@@ -133,19 +148,22 @@ $(function () {
                             "label": "<i class='icon-trash'></i> 删除",
                             "className": "btn-sm btn-danger",
                             "callback": function () {
-                                calendar.fullCalendar('removeEvents', calEvent.id);
+
                                 if (calEvent._id) {
                                     $.ajax({
                                         url: '/admin/groups/delete_schedule',
                                         type: 'post',
                                         data: {id: calEvent.id},
                                         success: function (data) {
-                                            if (!data[0]) {
+                                            if (data[0]) {
+                                                calendar.fullCalendar('removeEvents', calEvent.id);
+                                            } else {
                                                 alert(data[1]);
                                             }
                                         }
                                     });
                                 }
+
                             }
                         },
                         "close": {
@@ -160,20 +178,18 @@ $(function () {
                     calEvent.title = form.find("input[type=text]").val();
                     calendar.fullCalendar('updateEvent', calEvent);
                     if (calEvent._id) {
-                        $.ajax({
-                            url: '/admin/groups/update_schedule',
-                            type: 'post',
-                            data: {id: calEvent.id, title: calEvent.title},
-                            success: function (data) {
-                                if (!data[0]) {
-                                    alert(data[1]);
-                                }
-                            }
-                        });
+                        update_event(calEvent);
                     }
                     div.modal("hide");
                     return false;
                 });
+            },
+
+            eventDrop: function (event, revertFunc) {
+                update_event(event, 'update', revertFunc);
+            },
+            eventResize: function (event, revertFunc) {
+                update_event(event, 'update', revertFunc)
             },
             monthNames: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
             titleFormat: {
@@ -182,6 +198,7 @@ $(function () {
                 day: 'yyyy年 MMMM月d日 dddd'
             },
             firstDay: 1,
+            firstHour: 8,
             weekNumbers: true,
             allDayText: '全天',
             header: {
@@ -190,5 +207,27 @@ $(function () {
                 right: 'month,agendaWeek,agendaDay'
             }
         });
+
+        function update_event(calEvent, revertFunc) {
+            $.ajax({
+                url: '/admin/groups/update_schedule',
+                type: 'post',
+                data: {
+                    event: {
+                        id: calEvent.id,
+                        title: calEvent.title,
+                        start: calEvent.start,
+                        end: calEvent.end,
+                        allDay: calEvent.allDay
+                    }
+                },
+                success: function (data) {
+                    if (!data[0]) {
+                        alert(data[1]);
+                        revertFunc();
+                    }
+                }
+            });
+        }
     }
 });
