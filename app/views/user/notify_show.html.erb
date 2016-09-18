@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="user-center">
+    <div class="main-title">
+      个人中心
+    </div>
+    <%= render 'user/avatar' %>
+    <%= render 'user/menu' %>
+    <div class="user-main">
+      <%= render 'user/tab' %>
+      <div class="sub-content">
+
+        <% if @notification.present? %>
+            <% unless @notification.read %>
+                <% @notification.update_attributes(read: 1) %>
+            <% end %>
+            <%= @notification.content %>
+
+        <% else %>
+            <div class="alert alert-info">
+              <p> 不是您的消息,无法查看</p>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

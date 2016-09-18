@@ -23,6 +23,36 @@ $(function () {
         })
     }
 
+    // review group students
+    $('.open-review-student').on('click', function () {
+        var g_u_id = $(this).attr('data-id');
+        $('.review-student-submit').on('click', function () {
+            var status = $(".select-review-status [name='review-status']:checked").val();
+            if (!status) {
+                alert('请选择审核结果');
+                return false;
+            }
+            if (g_u_id) {
+                $.ajax({
+                    url: '/admin/checks/review_students',
+                    type: 'post',
+                    data: {
+                        "status": status, "g_u_id": g_u_id
+                    },
+                    success: function (data) {
+                        if (data[0]) {
+                            alert(data[1]);
+                            window.location.reload();
+                        } else {
+                            alert(data[1]);
+                        }
+                    }
+                });
+            }
+            $(".select-review-status [name='review-status']").prop('checked', false);
+        });
+    });
+
     // 教师审核
     $(".teacher-apply-status [name='teacher-apply']").on('click', function () {
         var status = $(".teacher-apply-status [name='teacher-apply']:checked").val();
@@ -142,7 +172,7 @@ $(function () {
 
 });
 function delete_group_course(group_course_id, group_id) {
-    if (group_course_id && group_id) {
+    if (group_course_id && group_id && confirm('确认删除?')) {
         $.ajax({
             url: '/admin/groups/delete_course',
             type: 'post',

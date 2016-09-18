@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/commonweal', to: 'commonweal#index'
   get '/courses', to: 'courses#index'
   get '/courses/dome', to: 'courses#dome'
-  post '/apply_group', to: 'course#apply_group'
+  post '/courses/apply_group', to: 'courses#apply_group'
 
   mount RuCaptcha::Engine => '/rucaptcha'
   namespace :kindeditor do
@@ -33,12 +33,14 @@ Rails.application.routes.draw do
         post :change_password_post
       end
     end
-    get '/checks/teachers' => 'checks#teachers'
-    get '/checks/teacher_list' => 'checks#teacher_list'
-    get '/checks/hackers' => 'checks#hackers'
-    get '/checks/hacker_list' => 'checks#hacker_list'
-    post '/checks/review_teacher' => 'checks#review_teacher'
-    post '/checks/review_hacker' => 'checks#review_hacker'
+    get '/checks/teachers', to: 'checks#teachers'
+    get '/checks/teacher_list', to: 'checks#teacher_list'
+    get '/checks/hackers', to: 'checks#hackers'
+    get '/checks/hacker_list', to: 'checks#hacker_list'
+    post '/checks/review_teacher', to: 'checks#review_teacher'
+    post '/checks/review_hacker', to: 'checks#review_hacker'
+    get '/checks/students', to: 'checks#students'
+    post '/checks/review_students', to: 'checks#review_students'
     resources :admins
     resources :districts
     resources :roles
@@ -52,6 +54,7 @@ Rails.application.routes.draw do
         get :get_schedule
         post :delete_schedule
         post :update_schedule
+        get :students
       end
     end
     resources :lessons
@@ -71,6 +74,8 @@ Rails.application.routes.draw do
   match 'user/reset_email' => 'user#reset_email', as: 'user_reset_email', via: [:get, :post]
   get '/user/get_schools' => 'user#get_schools', as: 'user_get_schools'
   get '/user/get_districts' => 'user#get_districts', as: 'user_get_districts'
+  match 'user/notifications' => 'user#notifications', as: 'user_notifications', via: [:get]
+  get '/user/notify' => 'user#notify_show'
 
   match '*path', via: :all, to: 'home#error_404'
 

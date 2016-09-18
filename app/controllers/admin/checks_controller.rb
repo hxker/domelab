@@ -47,7 +47,7 @@ class Admin::ChecksController < AdminController
             else
               th_level = '校级'
           end
-          # Notification.create(user_id: ur.user_id, content: '您的教师身份审核'+(status==1 ? '通过! 角色为'+th_level : '未通过!'), message_type: 0)
+          Notification.create(user_id: ur.user_id, content: '您的教师身份审核'+(status==1 ? '通过! 角色为'+th_level : '未通过!'), message_type: 0)
           result = [true, '操作成功，即将推送消息告知被审核用户']
         else
           result = [false, ur.errors.full_messages.first]
@@ -113,14 +113,14 @@ class Admin::ChecksController < AdminController
         if status == '1'
           ur.status = 1
           if ur.save
-            # Notification.create!(user_id: ur.user_id, content: '您的家庭创客身份审核'+(status=='1' ? '通过!' : '未通过!'), message_type: 0)
+            Notification.create(user_id: ur.user_id, content: '您的家庭创客身份审核通过!', message_type: 0)
             result = [true, '操作成功，即将推送消息告知被审核用户']
           else
             result = [false, '操作失败']
           end
         elsif status == '0'
           ur.delete
-          # Notification.create!(user_id: ur.user_id, content: '您的家庭创客身份审核'+(status=='1' ? '通过!' : '未通过!'), message_type: 0)
+          Notification.create(user_id: ur.user_id, content: '您的家庭创客身份审核未通过', message_type: 0)
           result = [true, '操作成功，即将推送消息告知被审核用户']
         else
           result = [false, '不规范参数']
@@ -130,6 +130,43 @@ class Admin::ChecksController < AdminController
       end
     else
       result = [false, '请选择审核结果']
+    end
+    render json: result
+  end
+
+  def students
+    @students = GroupUserShip.joins(:user, :group).where(status: 0).select(:id, 'groups.name', 'users.fullname', 'users.student_code', 'users.mobile', 'users.email').page(params[:page]).per(params[:per])
+  end
+
+  def review_students
+    status = params[:status]
+    g_u_id = params[:g_u_id]
+
+    if status && g_u_id.present?
+      g_u = GroupUserShip.joins(:group).where(id: g_u_id).select(:id, :group_id, :user_id, :status, 'groups.name').take
+      if g_u.present?
+        if status == '0'
+          if g_u.destroy
+            result = [true, '操作成功']
+            Notification.create(user_id: g_u.user_id, message_type: 0, content: '您申请的班级:'+g_u.name+',审核未通过')
+          else
+            result = [false, '操作失败']
+          end
+        elsif status == '1'
+          g_u.status = 1
+          if g_u.save
+            result = [true, '操作成功']
+          else
+            result = [false, '操作失败']
+          end
+        else
+          result = [false, '参数不规范']
+        end
+      else
+        result = [false, '不规范操作']
+      end
+    else
+      result = [false, '参数不完整']
     end
     render json: result
   end

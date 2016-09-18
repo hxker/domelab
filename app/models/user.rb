@@ -21,6 +21,10 @@ class User < ApplicationRecord
       case name.to_sym
         when :nickname
           self.nickname = value
+        when :mobile
+          self.mobile = value
+        when :email
+          self.email = value
       end
     end
   end

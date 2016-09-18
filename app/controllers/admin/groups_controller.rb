@@ -1,5 +1,5 @@
 class Admin::GroupsController <AdminController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: [:show, :edit, :update, :destroy, :students]
   before_action do
     authenticate_permissions(['super_admin', 'admin'])
   end
@@ -118,6 +118,10 @@ class Admin::GroupsController <AdminController
       result = [false, '不规范操作']
     end
     render json: result
+  end
+
+  def students
+    @users = @group.group_user_ships.joins(:user).where(status: 1).select(:id, 'users.fullname', 'users.id as user_id', 'users.student_code', 'users.mobile', 'users.email').page(params[:page]).per(params[:per])
   end
 
   # GET /admin/groups/new

@@ -1,5 +1,5 @@
 class Notification < ApplicationRecord
-  belongs_to :user, foreign_key: :guid
+  belongs_to :user
   validates :user_id, :message_type, :content, presence: true
 
   scope :unread, -> { where(read: false) }

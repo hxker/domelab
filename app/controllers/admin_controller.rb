@@ -5,6 +5,7 @@ class AdminController < ActionController::Base
     user_role = UserRole.where(status: 0)
     @review_th_num = user_role.where(role_id: 1).count
     @review_fh_num = user_role.where(role_id: 2).count
+    @review_group_user = GroupUserShip.where(status: 0).count
   end
 
   rescue_from ActiveRecord::RecordNotFound do |exception|

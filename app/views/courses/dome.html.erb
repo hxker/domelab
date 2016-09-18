@@ -1,22 +1,42 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-3 col-xs-offset-4">
-      <%= simple_form_for(current_user, url: '/apply_group', method: :post) do |f| %>
-          <select name="select-group" class="form-control">
-            <option>请选择班级</option>
-            <% if @groups.present? %>
-                <% @groups.each do |g| %>
-                    <option value="<%= g.id %>"><%= g.name %></option>
-                <% end %>
-            <% end %>
-          </select>
-          <br>
-          <%= f.input :fullname, value: current_user.fullname %>
-          <%= f.input :student_code, value: current_user.student_code %>
-          <div class="form-actions">
-            <%= f.submit class: 'btn btn-block btn-primary', value: '提交', 'data-disable-with' => '正在提交' %>
-          </div>
+  <% if @group_user %>
+      <% if @group_user.ship_status == 0 %>
+          <p class="text-center">您已申请加入班级:<br> <label class="label label-info"><%= @group_user.name %></label>
+            <br>请耐心等待审核,结果将消息推送告知您</p>
+      <% else %>
+          <p>班级: <%= @group_user.name %></p>
+
+          <p>任课老师: <%= @group_user.fullname %></p>
+          <p>微信班级群二维码:
+            <%= image_tag(@group_user.wx_code_url(:middle)) %></p>
+          <p>
+            <button>签到</button>
+          </p>
+          <p><a href="#">查看课程</a></p>
+          <p>签到纪录:0</p>
+          <p>平均正确率:0</p>
       <% end %>
-    </div>
-  </div>
+  <% else %>
+      <div class="row">
+        <div class="col-xs-3 col-xs-offset-4">
+          <%= simple_form_for(current_user, url: '/courses/apply_group', method: :post) do |f| %>
+              <select name="user[select_group]" class="form-control">
+                <option value="">请选择班级</option>
+                <% if @groups.present? %>
+                    <% @groups.each do |g| %>
+                        <option value="<%= g.id %>"><%= g.name %></option>
+                    <% end %>
+                <% end %>
+              </select>
+              <br>
+              <%= f.input :fullname, value: current_user.fullname %>
+              <%= f.input :student_code, value: current_user.student_code %>
+              <div class="form-actions">
+                <%= f.submit class: 'btn btn-block btn-primary', value: '提交', 'data-disable-with' => '正在提交' %>
+              </div>
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+
 </div>

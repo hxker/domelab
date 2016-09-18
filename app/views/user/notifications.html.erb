@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="user-center">
+    <div class="main-title">
+      个人中心
+    </div>
+    <%= render 'user/avatar' %>
+    <%= render 'user/menu' %>
+    <div class="user-main">
+      <%= render 'user/tab' %>
+      <div class="sub-content">
+
+        <% if @notifications.present? %>
+            <% @notifications.each do |no| %>
+                <div class="msg-box">
+                  <div class="msg-top">
+                    <div class="msg-time"><%= no.created_at.try(:strftime, '%Y-%m-%d') %></div>
+                    <div class="msg-status"><%= no.read ? '已读' : '未读' %></div>
+                  </div>
+                  <div class="msg-inner">
+                    <%= no.content[0..20] %>
+                  </div>
+                  <div class="msg-control">
+                    <a class="btn btn-default" href="<%= "/user/notify?id=#{no.id}" %>">查看详情</a>
+                  </div>
+                </div>
+            <% end %>
+            <nav>
+              <%= paginate @notifications %>
+            </nav>
+        <% else %>
+            <p> 暂无消息</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

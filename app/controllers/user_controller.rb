@@ -93,4 +93,15 @@ class UserController < ApplicationController
     render json: District.select(:id, :name, :city)
   end
 
+  def notifications
+    @notifications = current_user.notifications.order('created_at desc').page(params[:page]).per(params[:per])
+    if params[:id].present?
+      @notification = Notification.find(params[:id])
+    end
+  end
+
+  def notify_show
+    @notification = current_user.notifications.find(params[:id])
+  end
+
 end

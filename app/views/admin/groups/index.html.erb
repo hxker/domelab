@@ -58,6 +58,9 @@
           <%= link_to "/admin/groups/add_schedule?id=#{c.id}", title: '添加课程表', class: 'btn btn-xs btn-primary' do %>
               <i class="icon-plus bigger-120"></i>
           <% end %>
+          <%= link_to "/admin/groups/students?id=#{c.id}", title: '学生列表', class: 'btn btn-xs btn-info' do %>
+              <i class="icon-group bigger-120"></i>
+          <% end %>
           <%= link_to [:admin, c], title: '查看', class: 'btn btn-xs btn-warn' do %>
               <i class="icon-eye-open bigger-120"></i>
           <% end %>
