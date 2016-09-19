@@ -6,8 +6,10 @@ class CoursesController < ApplicationController
   end
 
   def dome
-    @group_user = Group.joins(:group_user_ships).left_joins(:teacher).where('group_user_ships.user_id = ?', current_user.id).where('groups.end_date > ?', Date.today).select(:user_id, 'group_user_ships.status as ship_status', 'groups.*', 'users.fullname').take
-    unless @group_user.present?
+    @group_user = Group.joins(:group_user_ships).left_joins(:teacher).where('group_user_ships.user_id = ?', current_user.id).where('groups.end_date > ?', Date.today).select('group_user_ships.status as ship_status', 'groups.*', 'users.fullname').take
+    if @group_user.present?
+      @group_courses = @group_user.courses.select(:id, :name)
+    else
       @groups = Group.where(status: 1).select(:id, :name)
     end
   end
@@ -41,5 +43,15 @@ class CoursesController < ApplicationController
       flash[:error] = '请将班级、姓名、学籍号填写完整'
     end
     redirect_to '/courses/dome'
+  end
+
+  def schedule
+    group_id = params[:id]
+    if group_id.present? && GroupUserShip.where(group_id: group_id, user_id: current_user.id).exists?
+      group = Group.find(group_id)
+      @group_schedules = group.group_schedules
+    else
+      render_optional_error(404)
+    end
   end
 end

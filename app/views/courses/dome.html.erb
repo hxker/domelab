@@ -12,9 +12,17 @@
           <p>
             <button>签到</button>
           </p>
-          <p><a href="#">查看课程</a></p>
+          <p><a href="<%= "/courses/schedule?id=#{@group_user.id}" %>">查看课程</a></p>
           <p>签到纪录:0</p>
           <p>平均正确率:0</p>
+          <div>
+            课程:
+            <% if @group_courses.present? %>
+                <% @group_courses.each do |c| %>
+                    <a href="<%= "#" %>"><%= c.name %></a>
+                <% end %>
+            <% end %>
+          </div>
       <% end %>
   <% else %>
       <div class="row">

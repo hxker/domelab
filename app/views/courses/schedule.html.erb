@@ -1,0 +1,10 @@
+<div class="container">
+
+  <% if @group_schedules %>
+      <% @group_schedules.each do |s| %>
+          <p><%= s.title %>
+            :<%= s.start.strftime('%Y-%m-%d %H:%M') %><%= " -- #{ s.end.try(:strftime, '%Y-%m-%d %H:%M')}" if s.end.present? %></p>
+      <% end %>
+  <% end %>
+  <%= link_to '返回', 'javascript:history.go(-1);' %>
+</div>
