@@ -5,9 +5,17 @@ class CoursesController < ApplicationController
     @courses = Course.where(course_type: 1, status: 1).select(:id, :name)
   end
 
+  def show
+    course_id = params[:id]
+    @course = GroupCourseShip.joins(:course).joins('left join group_user_ships g_u on g_u.group_id = group_course_ships.group_id').where(course_id: course_id).where('g_u.user_id=?', current_user.id).select('courses.name').take
+    @lessons = Lesson.where(course_id: course_id)
+  end
+
   def dome
-    @group_user = Group.joins(:group_user_ships).left_joins(:teacher).where('group_user_ships.user_id = ?', current_user.id).where('groups.end_date > ?', Date.today).select('group_user_ships.status as ship_status', 'groups.*', 'users.fullname').take
+    current_user_id = current_user.id
+    @group_user = Group.joins(:group_user_ships).left_joins(:teacher).where('group_user_ships.user_id = ?', current_user_id).where('groups.end_date > ?', Date.today).select('group_user_ships.status as ship_status', 'groups.*', 'users.fullname').take
     if @group_user.present?
+      @has_sign_in = SignIn.where(user_id: current_user_id).where('updated_at > ?', Time.now.midnight).exists?
       @group_courses = @group_user.courses.select(:id, :name)
     else
       @groups = Group.where(status: 1).select(:id, :name)
@@ -52,6 +60,40 @@ class CoursesController < ApplicationController
       @group_schedules = group.group_schedules
     else
       render_optional_error(404)
+    end
+  end
+
+  def sign_in
+    current_user_id = current_user.id
+    sign_in = SignIn.find_by_user_id(current_user_id)
+    if sign_in
+      time_now = Time.now
+      space_days = time_now.yday - sign_in.updated_at.yday
+
+      if space_days == 0
+        @result = [false, '今天你已签到']
+      else
+        if space_days == 1
+          sign_in.continuous_days += 1
+        end
+        sign_in.updated_at = time_now
+        sign_in.sign_count += 1
+        if sign_in.save
+          @result = [true, '签到成功']
+        else
+          @result = [false, '签到失败']
+        end
+      end
+    else
+      new_sign_in = SignIn.create(user_id: current_user_id)
+      if new_sign_in.save
+        @result = [true, '签到成功']
+      else
+        @result = [false, '签到失败']
+      end
+    end
+    respond_to do |format|
+      format.js
     end
   end
 end

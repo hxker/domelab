@@ -10,16 +10,24 @@
           <p>微信班级群二维码:
             <%= image_tag(@group_user.wx_code_url(:middle)) %></p>
           <p>
-            <button>签到</button>
+            <% if @has_sign_in %>
+                <label class="label label-default ">已签到</label>
+            <% else %>
+
+                <%= link_to '/courses/sign_in', data: {method: :post, type: 'script', remote: true}, title: '签到', class: 'btn btn-xs btn-primary no-sign-in' do %>
+                    签到
+                <% end %>
+                <label class="label label-default for-show-sign-in hide">已签到</label>
+            <% end %>
           </p>
-          <p><a href="<%= "/courses/schedule?id=#{@group_user.id}" %>">查看课程</a></p>
+          <p><a href="<%= "/courses/schedule?id=#{@group_user.id}" %>">查看课程表</a></p>
           <p>签到纪录:0</p>
           <p>平均正确率:0</p>
           <div>
             课程:
             <% if @group_courses.present? %>
                 <% @group_courses.each do |c| %>
-                    <a href="<%= "#" %>"><%= c.name %></a>
+                    <a href="<%= "/courses/#{c.id}" %>"><%= c.name %></a>
                 <% end %>
             <% end %>
           </div>

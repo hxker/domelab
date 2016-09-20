@@ -1,0 +1,5 @@
+<% if @result[0] %>
+$('.no-sign-in').addClass('hide');
+$('.for-show-sign-in').removeClass('hide');
+<% end %>
+$.notify('<%= @result[1] %>', 'error');

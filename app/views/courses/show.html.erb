@@ -1,0 +1,10 @@
+<div class="container">
+  课程名:<%= @course.name %>
+  <hr>
+  课时:
+  <% if @lessons.present? %>
+      <% @lessons.each do |l| %>
+          <%= l.name %>
+      <% end %>
+  <% end %>
+</div>

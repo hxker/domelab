@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get '/courses/dome', to: 'courses#dome'
   post '/courses/apply_group', to: 'courses#apply_group'
   get '/courses/schedule', to: 'courses#schedule'
+  post '/courses/sign_in', to: 'courses#sign_in'
+  get '/courses/:id', to: 'courses#show'
 
   mount RuCaptcha::Engine => '/rucaptcha'
   namespace :kindeditor do
