@@ -7,6 +7,9 @@
             <% @admin.errors[:permissions].each do |msg| %>
                 <div class="alert alert-danger"> 权限：<%= msg %> </div>
             <% end %>
+            <% @admin.errors[:avatar].each do |msg| %>
+                <div class="alert alert-danger"> 头像：<%= msg %></div>
+            <% end %>
         <% end %>
 
         <div class="form-inputs">
@@ -18,8 +21,8 @@
 
           <div class="well">
             <%
-               permissions = @admin.permissions.try(:split, ',')
-               Admin::PERMISSIONS.each do |id, name|
+              permissions = @admin.permissions.try(:split, ',')
+              Admin::PERMISSIONS.each do |id, name|
             %>
                 <div class="checkbox">
                   <label>
@@ -27,7 +30,7 @@
                   </label>
                 </div>
             <%
-               end
+              end
             %>
           </div>
           <!--<%= f.input :permissions, :collection => Admin::PERMISSIONS, :label_method => :last, :value_method => :first, :as => :check_boxes, prompt: 1 %>-->
@@ -36,6 +39,20 @@
           <%= f.input :gender, collection: Admin::GENDER.map { |key, val| [t('gender.'+key.to_s), val] } %>
           <%= f.input :email %>
           <%= f.input :phone %>
+          <div class="image_container">
+            <img id="preview_img" width="300" height="300">
+          </div>
+          <% if @admin.avatar.present? %>
+              <%= image_tag(@admin.avatar_url(:middle)) %>
+          <% end %>
+          <div class="form-group">
+            <label class="text control-label" for="admin_avatar">
+              头像
+            </label>
+            <%= f.file_field :avatar, id: 'check-img-type-size' %>
+            <%= f.hidden_field :avatar_cache %>
+            <p class="help-block">格式：jpg jpeg gif png (图片大小在 1M 以内)</p>
+          </div>
           <%= f.input :address %>
         </div>
 

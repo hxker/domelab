@@ -2,6 +2,7 @@ class Course < ApplicationRecord
   has_many :lessons, :dependent => :destroy
   has_many :group_course_ships
   has_many :groups, through: :group_course_ships
+  has_many :course_stars, :dependent => :destroy
   validates :name, presence: true, uniqueness: true, length: {maximum: 60}
   validates :course_type, presence: true
   validates :status, presence: true

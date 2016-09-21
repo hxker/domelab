@@ -7,16 +7,21 @@ class CoursesController < ApplicationController
 
   def show
     course_id = params[:id]
-    @course = GroupCourseShip.joins(:course).joins('left join group_user_ships g_u on g_u.group_id = group_course_ships.group_id').where(course_id: course_id).where('g_u.user_id=?', current_user.id).select('courses.name').take
-    @lessons = Lesson.where(course_id: course_id)
+    @course = GroupCourseShip.joins(:course).joins('left join group_user_ships g_u on g_u.group_id = group_course_ships.group_id').where(course_id: course_id).where('g_u.user_id=?', current_user.id).select('courses.name', 'courses.course_star').take
+    if @course
+      @lessons = Lesson.where(course_id: course_id)
+    else
+      render_optional_error(404)
+    end
+
   end
 
   def dome
     current_user_id = current_user.id
-    @group_user = Group.joins(:group_user_ships).left_joins(:teacher).where('group_user_ships.user_id = ?', current_user_id).where('groups.end_date > ?', Date.today).select('group_user_ships.status as ship_status', 'groups.*', 'users.fullname').take
+    @group_user = Group.joins(:group_user_ships).left_joins(:teacher).where('group_user_ships.user_id = ?', current_user_id).where('groups.end_date > ?', Date.today).select('group_user_ships.status as ship_status', 'groups.*', 'admins.name as teacher_name', 'admins.avatar').take
     if @group_user.present?
       @has_sign_in = SignIn.where(user_id: current_user_id).where('updated_at > ?', Time.now.midnight).exists?
-      @group_courses = @group_user.courses.select(:id, :name)
+      @group_courses = @group_user.courses.select(:id, :name, :cover)
     else
       @groups = Group.where(status: 1).select(:id, :name)
     end
@@ -68,12 +73,12 @@ class CoursesController < ApplicationController
     sign_in = SignIn.find_by_user_id(current_user_id)
     if sign_in
       time_now = Time.now
-      space_days = time_now.yday - sign_in.updated_at.yday
+      today_dawn = time_now.midnight
 
-      if space_days == 0
+      if sign_in.updated_at > today_dawn
         @result = [false, '今天你已签到']
       else
-        if space_days == 1
+        if sign_in.updated_at > (today_dawn-1.day)
           sign_in.continuous_days += 1
         end
         sign_in.updated_at = time_now

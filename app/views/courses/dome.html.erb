@@ -4,9 +4,9 @@
           <p class="text-center">您已申请加入班级:<br> <label class="label label-info"><%= @group_user.name %></label>
             <br>请耐心等待审核,结果将消息推送告知您</p>
       <% else %>
+          <p>老师形象:<%= image_tag("/uploads/dome_teacher_avatar/middle_#{@group_user.avatar}") %></p>
           <p>班级: <%= @group_user.name %></p>
-
-          <p>任课老师: <%= @group_user.fullname %></p>
+          <p>任课老师: <%= @group_user.teacher_name %></p>
           <p>微信班级群二维码:
             <%= image_tag(@group_user.wx_code_url(:middle)) %></p>
           <p>
@@ -25,13 +25,21 @@
           <p>平均正确率:0</p>
           <div>
             课程:
+
+            <div class="social-or-login center">
+              <span class="bigger-110">Or Login Using</span>
+            </div>
             <% if @group_courses.present? %>
                 <% @group_courses.each do |c| %>
+                    <p>
+                      <%= image_tag(c.cover_url(:middle)) %>
                     <a href="<%= "/courses/#{c.id}" %>"><%= c.name %></a>
+                    </p>
                 <% end %>
             <% end %>
           </div>
       <% end %>
+
   <% else %>
       <div class="row">
         <div class="col-xs-3 col-xs-offset-4">

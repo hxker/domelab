@@ -10,7 +10,7 @@ class Admin::GroupsController <AdminController
     if params[:field].present? && params[:keyword].present?
       groups = groups.where(["#{params[:field]} like ?", "%#{params[:keyword]}%"])
     end
-    @groups = groups.select('groups.*', 'users.nickname', 'users.fullname').page(params[:page]).per(params[:per])
+    @groups = groups.select('groups.*', 'admins.name as teacher_name').page(params[:page]).per(params[:per])
   end
 
   # GET /admin/groups/1

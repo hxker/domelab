@@ -3,7 +3,7 @@ class Group < ApplicationRecord
   has_many :users, through: :group_user_ships
   has_many :group_course_ships, :dependent => :destroy
   has_many :courses, through: :group_course_ships
-  belongs_to :teacher, class_name: User, foreign_key: :teacher_id
+  belongs_to :teacher, class_name: Admin, foreign_key: :teacher_id
   has_many :group_schedules, :dependent => :destroy
 
   validates :name, presence: true, uniqueness: true

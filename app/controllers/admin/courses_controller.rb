@@ -17,6 +17,7 @@ class Admin::CoursesController < AdminController
   # GET /admin/courses/1
   # GET /admin/courses/1.json
   def show
+    @stars = @course.course_stars
   end
 
   # GET /admin/courses/new
@@ -26,6 +27,28 @@ class Admin::CoursesController < AdminController
 
   # GET /admin/courses/1/edit
   def edit
+  end
+
+  def add_attr_star
+    id = params[:id]
+    attr = params[:attr]
+    stars = params[:star]
+    if id && attr && stars
+      course = Course.find_by_id(id)
+      if course
+        c_s = course.course_stars.create(name: attr, stars: stars)
+        if c_s.save
+          result = [true, '添加成功']
+        else
+          result = [false, c_s.errors.full_messages.first]
+        end
+      else
+        result = [false, '不规范操作']
+      end
+    else
+      result = [false, '参数不完整']
+    end
+    render json: result
   end
 
   # POST /admin/courses

@@ -23,6 +23,35 @@ $(function () {
         })
     }
 
+    // check file extension and size, then preview
+    var check_img_ts = $('#check-img-type-size');
+    if (check_img_ts.length > 0) {
+
+        check_img_ts.bind('change', function () {
+            var this_file = this.files[0];
+            var file_name = this_file.name;
+            var file_type = file_name.substring(file_name.lastIndexOf(".") + 1);
+
+            if ($.inArray(file_type, ['jpg', 'jpeg', 'png', 'gif']) == -1) {
+                alert('文件格式不规范,请上传 jpg、jpeg、png、gif 格式的文件');
+                this.value = '';
+                return false;
+            }
+            var file_size = this_file.size / 1024 / 1024;
+            if (file_size > 1) {
+                alert("文件大小不能大于1MB，请重新选择图片");
+                this.value = '';
+                return false;
+            }
+            var windowURL = window.URL || window.webkitURL;
+            var dataURL;
+            var preview_img = $("#preview_img");
+            dataURL = windowURL.createObjectURL(this_file);
+            preview_img.attr('src', dataURL);
+        });
+    }
+
+
     // review group students
     $('.open-review-student').on('click', function () {
         var g_u_id = $(this).attr('data-id');
@@ -169,25 +198,57 @@ $(function () {
             }
         });
     });
+    // 课程添加属性星级
+    $('.course-add-stars-submit').on('click', function () {
+        var course_attr = trim($("#course-attr").val());
+        var course_star = trim($("#course-star").val());
+        var course_id = $(this).attr('data-course');
 
-});
-function delete_group_course(group_course_id, group_id) {
-    if (group_course_id && group_id && confirm('确认删除?')) {
+        if (course_attr == '') {
+            alert('请填写中文属性!');
+            return false;
+        }
+        if (course_star == '') {
+            alert('请选择星级!');
+            return false;
+        }
         $.ajax({
-            url: '/admin/groups/delete_course',
+            url: '/admin/courses/add_attr_star',
             type: 'post',
             data: {
-                "group_id": group_id,
-                "group_course_id": group_course_id
+                "id": course_id,
+                "attr": course_attr,
+                "star": course_star
             },
             success: function (data) {
                 alert(data[1]);
                 if (data[0]) {
-                    $('#delete-hide-' + group_course_id).addClass('hide');
+                    window.location.reload();
                 }
             }
         });
-    } else {
-        alert('参数不完整');
+    });
+
+});
+function delete_group_course(group_course_id, group_id) {
+    if (confirm('确认删除?')) {
+        if (group_course_id && group_id) {
+            $.ajax({
+                url: '/admin/groups/delete_course',
+                type: 'post',
+                data: {
+                    "group_id": group_id,
+                    "group_course_id": group_course_id
+                },
+                success: function (data) {
+                    alert(data[1]);
+                    if (data[0]) {
+                        $('#delete-hide-' + group_course_id).addClass('hide');
+                    }
+                }
+            });
+        } else {
+            alert('参数不完整');
+        }
     }
 }

@@ -79,7 +79,7 @@ class Admin::AdminsController < AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def admin_params
-    params.require(:admin).permit(:job_number, :password, :name, {:permissions => []}, :position, :age, :gender, :email, :phone, :address).tap do |list|
+    params.require(:admin).permit(:job_number, :password, :name, {:permissions => []}, :position, :avatar, :age, :gender, :email, :phone, :address).tap do |list|
       if params[:admin][:permissions].present?
         list[:permissions] = params[:admin][:permissions].join(',')
       else

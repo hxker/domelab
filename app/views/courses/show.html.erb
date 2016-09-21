@@ -1,5 +1,6 @@
 <div class="container">
   课程名:<%= @course.name %>
+  <p><%= @course.course_star.split(',') %></p>
   <hr>
   课时:
   <% if @lessons.present? %>

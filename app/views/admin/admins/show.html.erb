@@ -19,6 +19,14 @@
 
 
 <div class="profile-user-info profile-user-info-striped">
+  <% if @admin.avatar.present? %>
+      <div class="profile-info-row">
+        <div class="profile-info-name">头像</div>
+        <div class="show-row-margin">
+          <span><%= image_tag(@admin.avatar_url(:middle)) %></span>
+        </div>
+      </div>
+  <% end %>
   <div class="profile-info-row">
     <div class="profile-info-name"> <%= t('simple_form.labels.defaults.job_number') %></div>
 
@@ -63,7 +71,7 @@
     <div class="profile-info-name"> <%= t('simple_form.labels.defaults.gender') %> </div>
 
     <div class="profile-info-value">
-      <span><%= @admin.gender %></span>
+      <span><%= @admin.gender == 1 ? '男' : (@admin.gender == 2 ? '女' : '') %></span>
     </div>
   </div>
   <div class="profile-info-row">
