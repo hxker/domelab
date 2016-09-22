@@ -1,4 +1,4 @@
-class FileUploader < CarrierWave::Uploader::Base
+class LessonUploader < CarrierWave::Uploader::Base
 
   storage :file
 
@@ -7,7 +7,7 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   def extension_white_list
-    %w(doc docx xls xlsx ppt)
+    %w(doc docx ppt pptx)
   end
 
   def filename

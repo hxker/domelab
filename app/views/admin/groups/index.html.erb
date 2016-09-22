@@ -51,7 +51,7 @@
       <tr>
         <td><%= c.id %></td>
         <td><%= c.name %></td>
-        <th><%= c.nickname %></th>
+        <th><%= c.teacher_name %></th>
         <td><%= t('status.status'+c.status.to_s) %></td>
         <td><%= c.start_date %><%= " -- #{c.end_date}" if c.start_date != c.end_date %></td>
         <td>

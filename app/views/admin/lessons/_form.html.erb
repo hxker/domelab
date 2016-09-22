@@ -22,14 +22,17 @@
 
 
           <% if @lesson.content.present? %>
+              <a href="https://view.officeapps.live.com/op/view.aspx?src=<%= Settings.domain %><%= @lesson.content %>">
+                查看课件</a>
           <% end %>
           <div class="form-lesson">
             <label class="text required control-label" for="courses_content">
               <abbr title="必填字段"></abbr>
               课件
             </label>
-            <%= f.file_field :content %>
-            <p class="help-block">格式：doc ppt xls (大小在 1M 以内)</p>
+            <%= f.file_field :content, id: 'check-file-type-size' %>
+            <%= f.hidden_field :content_cache %>
+            <p class="help-block">格式：doc docx ppt pptx (大小在 10M 以内)</p>
           </div>
         </div>
 

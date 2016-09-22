@@ -1,6 +1,9 @@
 <h1 class="page-header">
   显示<%= t('activerecord.models.course') %>
   <small class="pull-right">
+    <%= link_to "#{new_admin_course_star_path}?id=#{@course.id}", title: '新建属性星级', remote: true, class: 'btn btn-info' do %>
+        <i class="icon-star icon-only"></i>
+    <% end %>
     <a href="<%= new_admin_course_path %>" title="新建<%= t('activerecord.models.course') %>" class="btn btn-default">
       <i class="icon-plus icon-only"></i></a>
     <a href="<%= edit_admin_course_path(@course) %>" title="编辑<%= t('activerecord.models.course') %>" class="btn btn-default">
@@ -17,6 +20,7 @@
       </button>
     </div>
 <% end %>
+
 
 
 
@@ -43,6 +47,25 @@
       <span><%= t('status.status'+@course.status.to_s) %></span>
     </div>
   </div>
+  <div class="profile-info-row">
+    <div class="profile-info-name">星级</div>
+
+    <div class="profile-info-value course-stars-list">
+
+      <span>
+      <ul class="chosen-choices ">
+        <% @stars.each do |s| %>
+            <li id="<%= "hide-course-star-#{s.id}" %>" class="search-choice">
+                  <%= "#{s.name}: #{s.stars}" %>
+              <%= link_to [:admin, s], method: :delete, data: {confirm: '确认删除吗?', remote: true}, title: '删除', class: 'search-choice-close' do %>
+              <% end %>
+            </li>
+        <% end %>
+      </ul>
+      </span>
+    </div>
+  </div>
+
   <% if @course.cover.present? %>
       <div class="profile-info-row">
         <div class="profile-info-name">封面</div>
@@ -61,4 +84,41 @@
       </div>
   <% end %>
 
+</div>
+<div>
+  <div id="show-edit-course-star" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="blue bigger center"><%= @course.name %></h4>
+        </div>
+
+        <div class="modal-body overflow-visible">
+          <div class="row">
+
+            <div class="col-xs-12 col-sm-8 col-xs-offset-2">
+              <div class="form-group">
+                <input type="text" id="course-attr" placeholder="属性" value="" class="form-control"/><br>
+                <input type="text" id="course-star" placeholder="星级" value="" class="form-control"/>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-sm" data-dismiss="modal">
+            <i class="icon-remove"></i>
+            取消
+          </button>
+
+          <button class="btn btn-sm btn-primary edit-course-stars-submit">
+            <i class="icon-ok"></i>
+            提交
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

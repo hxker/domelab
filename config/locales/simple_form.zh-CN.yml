@@ -51,7 +51,7 @@ zh-CN:
         teacher_id: '主讲教师'
         start_date: '开始日期'
         end_date: '结束日期'
-        course_star: '属性星级'
+        stars: '星级'
 
 
     "yes": '是'

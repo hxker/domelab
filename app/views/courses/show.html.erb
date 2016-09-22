@@ -1,6 +1,14 @@
 <div class="container">
   课程名:<%= @course.name %>
-  <p><%= @course.course_star.split(',') %></p>
+  <p>
+    <% if @stars.present? %>
+        <% @stars.each do |s| %>
+            <%= "#{s.name}:#{s.stars}" %>
+        <% end %>
+    <% end %>
+  </p>
+  <p>课程封面:<%= image_tag(@course.cover_url(:middle)) %></p>
+
   <hr>
   课时:
   <% if @lessons.present? %>
@@ -8,4 +16,6 @@
           <%= l.name %>
       <% end %>
   <% end %>
+  <hr>
+  <%= @course.course_info.html_safe %>
 </div>

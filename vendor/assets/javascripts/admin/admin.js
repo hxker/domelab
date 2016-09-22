@@ -25,6 +25,7 @@ $(function () {
 
     // check file extension and size, then preview
     var check_img_ts = $('#check-img-type-size');
+    var check_lesson_ts = $('#check-file-type-size');
     if (check_img_ts.length > 0) {
 
         check_img_ts.bind('change', function () {
@@ -48,6 +49,26 @@ $(function () {
             var preview_img = $("#preview_img");
             dataURL = windowURL.createObjectURL(this_file);
             preview_img.attr('src', dataURL);
+        });
+    }
+    // check course lesson type and size
+    if (check_lesson_ts.length > 0) {
+        check_lesson_ts.bind('change', function () {
+            var this_file = this.files[0];
+            var file_name = this_file.name;
+            var file_type = file_name.substring(file_name.lastIndexOf(".") + 1);
+
+            if ($.inArray(file_type, ['ppt', 'pptx', 'doc', 'docx']) == -1) {
+                alert('文件格式不规范,请上传 ppt、pptx、doc、docx 格式的文件');
+                this.value = '';
+                return false;
+            }
+            var file_size = this_file.size / 1024 / 1024;
+            if (file_size > 10) {
+                alert("文件大小不能大于10MB，请重新选择文件");
+                this.value = '';
+                return false;
+            }
         });
     }
 

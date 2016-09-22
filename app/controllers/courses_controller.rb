@@ -7,9 +7,10 @@ class CoursesController < ApplicationController
 
   def show
     course_id = params[:id]
-    @course = GroupCourseShip.joins(:course).joins('left join group_user_ships g_u on g_u.group_id = group_course_ships.group_id').where(course_id: course_id).where('g_u.user_id=?', current_user.id).select('courses.name', 'courses.course_star').take
+    @course = Course.joins(:group_course_ships).joins('left join group_user_ships g_u on g_u.group_id = group_course_ships.group_id').where(id: course_id).where('g_u.user_id=?', current_user.id).select(:id, :name, :cover, :course_info).take
     if @course
       @lessons = Lesson.where(course_id: course_id)
+      @stars = @course.course_stars.select(:name, :stars)
     else
       render_optional_error(404)
     end

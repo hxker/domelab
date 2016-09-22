@@ -1,0 +1,10 @@
+$.gritter.add({
+  title: '操作状态:',
+  text: '<%= @result[1] %>',
+  time: '5000'
+});
+<% if @course_star.errors.present? %>
+bootbox.hideAll();
+<% else %>
+$("#<%= "hide-course-star-#{@result[2]}" %>").addClass('hide');
+<% end %>

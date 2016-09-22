@@ -52,6 +52,7 @@ Rails.application.routes.draw do
         post :add_attr_star
       end
     end
+    resources :course_stars
     resources :groups do
       collection do
         post :add_course
