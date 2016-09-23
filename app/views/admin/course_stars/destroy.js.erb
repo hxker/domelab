@@ -1,8 +1,4 @@
-$.gritter.add({
-  title: '操作状态:',
-  text: '<%= @result[1] %>',
-  time: '5000'
-});
+admin_gritter_notice('<%= @result[1] %>');
 <% if @course_star.errors.present? %>
 bootbox.hideAll();
 <% else %>

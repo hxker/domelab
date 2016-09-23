@@ -22,6 +22,12 @@ $(function () {
             }
         })
     }
+    // ########## lesson-test ###############
+    $('#select-course-list').on('change', function () {
+        var course_id = $('#select-course-list').val();
+        get_course_lessons(course_id);
+    });
+
 
     // check file extension and size, then preview
     var check_img_ts = $('#check-img-type-size');
@@ -271,5 +277,31 @@ function delete_group_course(group_course_id, group_id) {
         } else {
             alert('参数不完整');
         }
+    }
+}
+
+function get_course_lessons(course_id) {
+    if (course_id) {
+        $.ajax({
+            url: '/admin/courses/get_lessons',
+            type: 'get',
+            data: {
+                "course_id": course_id
+            },
+            success: function (data) {
+                var select_lesson_list = $('#lesson_test_lesson_id');
+                select_lesson_list.empty();
+                var preview_option = $('<option value="">请选择课程</option>');
+                select_lesson_list.append(preview_option);
+                if (data[0]) {
+                    $.each(data[1], function (key, val) {
+                        var option = $('<option value="' + val.id + '">' + val.name + '</option>');
+                        select_lesson_list.append(option);
+                    });
+                } else {
+                    alert('暂无课时')
+                }
+            }
+        });
     }
 }

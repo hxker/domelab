@@ -91,6 +91,18 @@ class Admin::CoursesController < AdminController
     end
   end
 
+  def get_lessons
+    course_id = params[:course_id]
+    lessons = Lesson.where(course_id: course_id).select(:id, :name)
+    if lessons.present?
+      result = [true, lessons]
+    else
+      result = [false, '暂无课时']
+    end
+    render json: result
+
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_course

@@ -52,6 +52,8 @@ zh-CN:
         start_date: '开始日期'
         end_date: '结束日期'
         stars: '星级'
+        answer: '答案'
+        lesson_id: '所属课时'
 
 
     "yes": '是'

@@ -1,0 +1,1 @@
+json.extract! @lesson_test, :name, :created_at, :updated_at

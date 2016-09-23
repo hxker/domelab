@@ -1,0 +1,55 @@
+<div class="panel panel-info">
+  <div class="panel-heading"><%= t('activerecord.models.lesson_test') %></div>
+  <div class="panel-body">
+    <%= simple_form_for([:admin, @lesson_test]) do |f| %>
+        <%= f.error_notification %>
+        <% if @lesson_test.errors.any? %>
+            <% if @lesson_test.errors[:answer].present? %>
+                <div class="alert-danger alert"><%= @lesson_test.errors[:answer].first %></div>
+            <% end %>
+            <% if @lesson_test.errors[:lesson_id].present? %>
+                <div class="alert-danger alert">所属课时:<%= @lesson_test.errors[:lesson_id].first %></div>
+            <% end %>
+        <% end %>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="row">
+              <div class="col-xs-4">
+                <label>所属课程:</label>
+                <select id="select-course-list" class="form-control">
+                  <option value="">请选择课程</option>
+                  <% Course.select(:id, :name).each do |course| %>
+                      <option value="<%= course.id %>"><%= course.name %></option>
+                  <% end %>
+                </select>
+              </div>
+              <div class="col-xs-4">
+                <% if @lessons.present? %>
+                    <%= f.input :lesson_id, collection: @lessons %>
+                <% else %>
+                    <label>所属课程:</label>
+                    <select id="lesson_test_lesson_id" name="lesson_test[lesson_id]" class="form-control">
+                      <option value="">请选择课时</option>
+                    </select>
+                <% end %>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-inputs">
+
+          <%= f.input :name, autofocus: true %>
+          <% [1, 2, 3, 4].each do |option| %>
+              <%= f.input "option_#{option}", label: "选项#{option}" %>
+          <% end %>
+          <%= f.input :answer, collection: 1..4, hint: '对应选项' %>
+
+        </div>
+        <div class="form-actions">
+          <%= f.button :submit, class: 'btn btn-primary' %>
+        </div>
+    <% end %>
+  </div>
+</div>

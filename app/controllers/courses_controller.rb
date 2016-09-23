@@ -102,4 +102,9 @@ class CoursesController < ApplicationController
       format.js
     end
   end
+
+  def lesson_test
+    lesson_id = params[:id]
+    @tests = LessonTest.where(lesson_id: lesson_id)
+  end
 end

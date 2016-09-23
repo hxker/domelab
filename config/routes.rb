@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/courses/schedule', to: 'courses#schedule'
   post '/courses/sign_in', to: 'courses#sign_in'
   get '/courses/:id', to: 'courses#show'
+  get '/courses/lesson_test/:id', to: 'courses#lesson_test'
 
   mount RuCaptcha::Engine => '/rucaptcha'
   namespace :kindeditor do
@@ -50,6 +51,7 @@ Rails.application.routes.draw do
     resources :courses do
       collection do
         post :add_attr_star
+        get :get_lessons
       end
     end
     resources :course_stars
@@ -65,7 +67,12 @@ Rails.application.routes.draw do
         get :students
       end
     end
-    resources :lessons
+    resources :lessons do
+      collection do
+        get :add_test
+      end
+    end
+    resources :lesson_tests
   end
 
   # -----------------------------------------------------------

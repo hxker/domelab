@@ -1,5 +1,5 @@
 $(function () {
-    
+
     // 操作结果提示信息
     if ($('#notice').length > 0) {
         $.gritter.add({
@@ -67,4 +67,11 @@ function ltrim(str) {
 //删除右边的空格
 function rtrim(str) {
     return str.replace(/(\s*$)/g, "");
+}
+function admin_gritter_notice(respond_message) {
+    $.gritter.add({
+        title: '操作状态:',
+        text: respond_message,
+        time: '3000'
+    });
 }
