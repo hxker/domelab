@@ -17,14 +17,33 @@
       </button>
     </div>
 <% end %>
-<div class="panel panel-info">
-  <div class="panel-heading">
-    <%= t('activerecord.models.lesson_test') %>
+
+
+<div class="profile-user-info profile-user-info-striped">
+
+
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.lesson_id') %> </div>
+
+    <div class="profile-info-value">
+      <span><%= "#{@lesson_info.course_name} -- #{@lesson_info.name}" %></span>
+    </div>
   </div>
-  <ul class="list-group">
-    <li class="list-group-item">
-      <h4><%= t('simple_form.labels.defaults.name') %>:</h4>
-      <%= @lesson_test.name %>
-    </li>
-  </ul>
+
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.name') %> </div>
+
+    <div class="profile-info-value">
+      <span><%= @lesson_test.name %></span>
+    </div>
+  </div>
+  <% ['1', '2', '3', '4'].each do |no| %>
+      <div class="profile-info-row">
+        <div class="profile-info-name"> 选项<%= no %></div>
+        <div class="profile-info-value">
+          <span class="<%= 'pink' if no == @lesson_test.answer %>"><%= @lesson_test["option_#{no}"] %></span>
+        </div>
+      </div>
+  <% end %>
+
 </div>

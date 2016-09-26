@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   post '/courses/sign_in', to: 'courses#sign_in'
   get '/courses/:id', to: 'courses#show'
   get '/courses/lesson_test/:id', to: 'courses#lesson_test'
+  post '/courses/check_lesson_test', to: 'courses#check_lesson_test'
+  get 'test' => 'test#index'
 
   mount RuCaptcha::Engine => '/rucaptcha'
   namespace :kindeditor do

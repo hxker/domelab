@@ -16,6 +16,7 @@ class Admin::LessonTestsController < AdminController
   # GET /admin/lesson_tests/1
   # GET /admin/lesson_tests/1.json
   def show
+    @lesson_info = Lesson.joins(:course).where(id: @lesson_test.lesson_id).select(:name, 'courses.name as course_name').take
   end
 
   # GET /admin/lesson_tests/new
@@ -25,7 +26,7 @@ class Admin::LessonTestsController < AdminController
 
   # GET /admin/lesson_tests/1/edit
   def edit
-    @lessons = Lesson.joins(:course).where(course_id: @lesson_test.lesson.course_id).select(:id, :name)
+    @lessons = Lesson.find_by_sql("select l.id,CONCAT(c.name,'--',l.name ) as name from lessons l left join courses c on l.course_id = c.id where l.course_id = #{@lesson_test.lesson.course_id}")
   end
 
   # POST /admin/lesson_tests
@@ -83,8 +84,8 @@ class Admin::LessonTestsController < AdminController
     params.require(:lesson_test).permit!
   end
 
-  def get_course_lesson
-    Lesson.find_by_sql("select l.id,CONCAT(c.name,':',l.name) as name from lessons l left join courses c on c.id=l.course_id order by c.id")
-  end
+  # def get_course_lesson
+  #   Lesson.find_by_sql("select l.id,CONCAT(c.name,':',l.name) as name from lessons l left join courses c on c.id=l.course_id order by c.id")
+  # end
 
 end

@@ -15,4 +15,5 @@
 //= require bootstrap.min
 //= require cable
 //= require notify
+//= require course
 //= require turbolinks

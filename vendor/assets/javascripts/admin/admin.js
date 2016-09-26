@@ -23,10 +23,19 @@ $(function () {
         })
     }
     // ########## lesson-test ###############
-    $('#select-course-list').on('change', function () {
-        var course_id = $('#select-course-list').val();
-        get_course_lessons(course_id);
-    });
+    if ($('#select-course-list').length > 0) {
+        var select_course_list = $('#select-course-list');
+        // select_course_list.on('click', function () {
+        //     console.log(this.options.length);
+        //     if (this.options.length == 1) {
+        //         get_courses
+        //     }
+        // });
+        select_course_list.on('change', function () {
+            var course_id = $('#select-course-list').val();
+            get_course_lessons(course_id);
+        });
+    }
 
 
     // check file extension and size, then preview

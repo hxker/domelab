@@ -34,59 +34,26 @@
 </div>
 
 <% if @lesson_tests.present? %>
-    <% if 1==2 %>
-        <table class="table table-bordered table-hover table-striped">
-          <thead>
-          <tr>
-            <th>ID</th>
-            <th><%= t('simple_form.labels.defaults.name') %></th>
-            <th>操作</th>
-          </tr>
-          </thead>
-
-          <tbody>
-          <% @lesson_tests.each do |lt| %>
-              <tr id="role-<%= lt.id %>">
-                <td><%= lt.id %></td>
-                <td><%= lt.name %></td>
-                <td><%= link_to [:admin, lt], title: '查看', class: 'btn btn-xs btn-warn' do %>
-                      <i class="icon-eye-open bigger-120"></i>
-                  <% end %>
-                  <%= link_to edit_admin_lesson_test_path(lt), title: '编辑', class: 'btn btn-xs btn-info' do %>
-                      <i class="icon-edit bigger-120"></i>
-                  <% end %>
-                  <%= link_to [:admin, lt], method: :delete, data: {confirm: '确认删除吗?', remote: true}, title: '删除', class: 'btn btn-xs btn-danger' do %>
-                      <i class="icon-trash bigger-120"></i>
-                  <% end %></td>
-              </tr>
-          <% end %>
-          </tbody>
-        </table>
-
-        <nav>
-          <%= paginate @lesson_tests %>
-        </nav>
-    <% end %>
 
     <div class="row">
       <div class="col-xs-12">
         <% if @lesson_tests.present? %>
 
             <div class="row">
-              <% @lesson_tests.each do |team| %>
-                  <div class="col-xs-12 col-sm-6 col-md-4" id="<%= "hide-lesson-test-#{team.id}" %>">
+              <% @lesson_tests.each do |test| %>
+                  <div class="col-xs-12 col-sm-6 col-md-4" id="<%= "hide-lesson-test-#{test.id}" %>">
 
                     <div class="widget-box">
                       <div class="widget-header widget-header-small">
                         <h4 class="">
-                          <%= team.name %>
+                          <%= test.name %>
                         </h4>
                         <div class="widget-toolbar action-buttons">
-                          <%= link_to edit_admin_lesson_test_path(team.id), title: '编辑' do %>
+                          <%= link_to edit_admin_lesson_test_path(test.id), title: '编辑' do %>
                               <i class="icon-edit" title="编辑"></i>
                           <% end %>
                           &nbsp;
-                          <%= link_to [:admin, team], method: :delete, data: {confirm: '确认删除吗?', remote: true}, title: '删除', class: 'pink' do %>
+                          <%= link_to [:admin, test], method: :delete, data: {confirm: '确认删除吗?', remote: true}, title: '删除', class: 'pink' do %>
                               <i class="icon-trash" title="编辑"></i>
                           <% end %>
                         </div>
@@ -94,9 +61,12 @@
                       <div class="widget-body">
                         <div class="widget-main padding-8">
                           <div class="event-team profile-feed">
-                            <% [team.option_1, team.option_2, team.option_3, team.option_4].each do |te| %>
+                            <% [test.option_1, test.option_2, test.option_3, test.option_4].each do |te| %>
                                 <div class="profile-activity clearfix" id="<%= "hide-player-#{}" %>">
                                   <div>
+                                    <% if te==test.answer %>
+                                    <icon class="icon-ok"></icon>
+                                    <% end %>
                                     <%= te %>
                                   </div>
                                 </div>

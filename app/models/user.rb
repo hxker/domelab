@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :notifications
   has_many :group_user_ships
   has_many :groups, through: :group_user_ships
+  has_many :user_lesson_tests
   alias_attribute :username, :id
   attr_accessor :desc_family, :desc_certificate, :cover
   devise :cas_authenticatable

@@ -105,6 +105,44 @@ class CoursesController < ApplicationController
 
   def lesson_test
     lesson_id = params[:id]
-    @tests = LessonTest.where(lesson_id: lesson_id)
+    if lesson_id.present? && check_group_user(lesson_id)
+      @tests = LessonTest.where(lesson_id: lesson_id)
+    else
+      render_optional_error(404)
+    end
+  end
+
+  def check_lesson_test
+    lesson_id = params[:lesson_id]
+    answers = params[:answers].to_unsafe_h
+    if lesson_id && check_group_user(lesson_id)
+      if current_user.user_lesson_tests.where(lesson_id: lesson_id).exists?
+        result = [false, '您已做过该测试']
+      else
+        tests = LessonTest.where(lesson_id: lesson_id)
+        test_keys = tests.pluck(:id).map { |x| x.to_i }
+        answers_keys = answers.keys
+        if tests && tests.length == answers.length && (test_keys == answers_keys)
+          right_per = []
+          tests.each do |test|
+            right_per << true if test["option_#{test.answer}"] == answers["#{test.id}"]
+          end
+          result = [true, (Float(right_per.length)/tests.length)]
+        else
+          result = [false, '答案不完整']
+        end
+
+      end
+    else
+      render_optional_error(404)
+    end
+
+    render json: result
+  end
+
+  private
+
+  def check_group_user(lesson_id)
+    GroupCourseShip.left_j_lesson.left_j_group_user.where('l.id=?', lesson_id).where('g_u.user_id=?', current_user.id).exists?
   end
 end

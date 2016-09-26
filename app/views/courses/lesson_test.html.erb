@@ -1,0 +1,16 @@
+<div class="container">
+  <% if @tests.present? %>
+      <%= @tests.pluck(:id) %>
+      <% @tests.each_with_index do |test, index| %>
+          <h3><%= index+1 %>. <%= test.name %></h3>
+          <% [1, 2, 3, 4].each do |no| %>
+              <p><label><input type="radio" value="<%= test["option_#{no}"] %>" name="lesson-answer[<%= test.id %>]"/> <%= test["option_#{no}"] %></label>
+              </p>
+          <% end %>
+          <hr>
+      <% end %>
+      <input type="hidden" id="course-lesson-id" value="<%= params[:id] %>"/>
+      <input type="hidden" id="lesson-test-ids" value="<%= @tests.pluck(:id).join(',') %>"/>
+      <span id="user-lesson-test-submit" class="btn btn-lg btn-danger">提交</span>
+  <% end %>
+</div>
