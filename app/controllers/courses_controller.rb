@@ -28,6 +28,10 @@ class CoursesController < ApplicationController
     end
   end
 
+  def add_group
+    render
+  end
+
   def apply_group
     group_id = params[:user][:select_group]
     username = params[:user][:fullname]

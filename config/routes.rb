@@ -95,5 +95,4 @@ Rails.application.routes.draw do
   get '/user/notify' => 'user#notify_show'
 
   match '*path', via: :all, to: 'home#error_404'
-
 end

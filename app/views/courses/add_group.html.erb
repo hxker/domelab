@@ -1,0 +1,30 @@
+<div class="container add_group">
+  <div class="add_group_head">
+    <h7>请先绑定班级</h7>
+    <p><%= image_tag("/assets/images/add-group-icon.png") %></p>
+  </div>
+  <div class="add_group_wrapper">
+    <form class="add_group_form">
+
+
+        <div class="form-group">
+            <label for="group">班级</label>
+            <select class="form-control" id="group">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="student_code">学籍号:</label>
+            <input type="text" class="form-control" id="student_code">
+        </div>
+        <div class="form-group">
+            <label for="fullname">真实姓名</label>
+            <input type="text" class="form-control" id="fullname">
+        </div>
+        <button type="submit" class="btn btn-default">确定</button>
+    </form>
+  </div>
+</div>

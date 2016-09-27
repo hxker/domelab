@@ -1,0 +1,41 @@
+.apply_group_head{
+  text-align: center;
+}
+
+.apply_group_head h7{
+  font-size: 30px;
+}
+
+.apply_group_icon{
+  width: 70px;
+  margin: 10px auto 0px auto;
+  display: block;
+}
+
+.apply_group_wrapper{
+  width: 90%;
+  background: image-url('apply-group-border.png') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: 100% 100%;
+  min-height: 625.99px;
+}
+
+.apply_group_form{
+  width: 348px;
+  height: 46.79px;
+  padding-top: 150px;
+}
+
+.caution{
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  color:#9B9B9B;
+}
+
+.dome_courses_head{
+  width: 90%;
+  border: 2px solid #DDF2F6;
+  border-radius: 14px;
+}
