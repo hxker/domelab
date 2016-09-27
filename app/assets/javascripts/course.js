@@ -11,25 +11,30 @@ $(function () {
             var answers = {};
             if (test_ids.length > 0) {
                 for (var i = 0; i < test_ids.length; i++) {
-                    // console.log(test_ids[i]);
                     var answer = $('input[name="lesson-answer[' + test_ids[i] + ']"]:checked').val();
-                    // console.log(answer);
                     if (answer) {
                         answers[test_ids[i]] = answer;
                     } else {
-                        alert('没有选择做完测验!');
+                        alert('请做完测验再提交!');
                         return false;
                     }
                 }
             }
-            console.log(answers); //
             if (answers && getJsonLength(answers) == test_ids.length) {
                 $.ajax({
                     url: '/courses/check_lesson_test',
                     type: 'post',
                     data: {answers: answers, lesson_id: lesson_id},
                     success: function (data) {
-                        console.log(data)
+                        console.log(data);
+                        if (data[0]) {
+                            var html = $('<div><h1>正确率:' + data[1]["right_per"] + '</h1><p><img src="' + data[1]["teacher_avatar"] + '"></p>' +
+                                '<p><a class="btn btn-xs btn-primary" href="javascript:history.go(-1);">返回</a></p></div>');
+                            $('#lesson-test-container').html(html)
+                        } else {
+                            alert(data[1])
+                        }
+
                     }
                 })
             }

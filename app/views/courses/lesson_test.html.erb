@@ -1,16 +1,25 @@
-<div class="container">
+<div id="lesson-test-container" class="container">
+  <%= link_to '返回', 'javascript:history.go(-1);', class: 'btn btn-xs btn-primary' %>
+
   <% if @tests.present? %>
-      <%= @tests.pluck(:id) %>
       <% @tests.each_with_index do |test, index| %>
           <h3><%= index+1 %>. <%= test.name %></h3>
           <% [1, 2, 3, 4].each do |no| %>
-              <p><label><input type="radio" value="<%= test["option_#{no}"] %>" name="lesson-answer[<%= test.id %>]"/> <%= test["option_#{no}"] %></label>
+              <p>
+                <label><input type="radio" value="<%= test["option_#{no}"] %>" name="lesson-answer[<%= test.id %>]"/> <%= test["option_#{no}"] %>
+                </label>
               </p>
           <% end %>
           <hr>
       <% end %>
-      <input type="hidden" id="course-lesson-id" value="<%= params[:id] %>"/>
-      <input type="hidden" id="lesson-test-ids" value="<%= @tests.pluck(:id).join(',') %>"/>
-      <span id="user-lesson-test-submit" class="btn btn-lg btn-danger">提交</span>
+      <% if @has_test %>
+          <h3 class="text-center">您已经提交过该测试,正确率为<%= @has_test.right_percent %>%</h3>
+      <% else %>
+          <input type="hidden" id="course-lesson-id" value="<%= params[:id] %>"/>
+          <input type="hidden" id="lesson-test-ids" value="<%= @tests.pluck(:id).join(',') %>"/>
+          <span id="user-lesson-test-submit" class="btn btn-lg btn-danger">提交</span>
+      <% end %>
+  <% else %>
+      <div class="alert alert-info">暂无测验题目</div>
   <% end %>
 </div>

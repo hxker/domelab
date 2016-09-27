@@ -105,44 +105,57 @@ class CoursesController < ApplicationController
 
   def lesson_test
     lesson_id = params[:id]
-    if lesson_id.present? && check_group_user(lesson_id)
+    check_ability = check_group_user(lesson_id)
+    if lesson_id.present? && check_ability.present?
       @tests = LessonTest.where(lesson_id: lesson_id)
+      @has_test = current_user.user_lesson_tests.find_by(lesson_id: lesson_id)
     else
-      render_optional_error(404)
+      render_optional_error(403)
     end
   end
 
   def check_lesson_test
     lesson_id = params[:lesson_id]
-    answers = params[:answers].to_unsafe_h
-    if lesson_id && check_group_user(lesson_id)
-      if current_user.user_lesson_tests.where(lesson_id: lesson_id).exists?
-        result = [false, '您已做过该测试']
-      else
-        tests = LessonTest.where(lesson_id: lesson_id)
-        test_keys = tests.pluck(:id).map { |x| x.to_i }
-        answers_keys = answers.keys
-        if tests && tests.length == answers.length && (test_keys == answers_keys)
-          right_per = []
-          tests.each do |test|
-            right_per << true if test["option_#{test.answer}"] == answers["#{test.id}"]
-          end
-          result = [true, (Float(right_per.length)/tests.length)]
-        else
-          result = [false, '答案不完整']
-        end
+    answers = params[:answers]
 
+    if lesson_id && answers
+      check_ability = check_group_user(lesson_id)
+      if check_ability.present?
+        answers = answers.to_unsafe_h
+        if current_user.user_lesson_tests.where(lesson_id: lesson_id).exists?
+          result = [false, '您已做过该测试']
+        else
+          tests = LessonTest.where(lesson_id: lesson_id)
+          test_keys = tests.pluck(:id).map { |x| x.to_s }
+          answers_keys = answers.keys
+          if test_keys == answers_keys
+            right_per = []
+            tests.each do |test|
+              right_per << true if test["option_#{test.answer}"] == answers["#{test.id}"]
+            end
+            right_percent = (((Float(right_per.length)/tests.length).round(2))*100).to_i
+            teacher_avatar = Admin.joins(:groups).where('groups.id = ?', check_ability.group_id).select(:id, :avatar).map { |a| {
+                id: a.id,
+                avatar: a.avatar.present? ? ActionController::Base.helpers.asset_path(a.avatar_url(:middle)) : nil
+            } }
+            result = [true, {right_per: right_percent, teacher_avatar: teacher_avatar[0][:avatar]}]
+            # current_user.user_lesson_tests.create(lesson_id: lesson_id, right_percent: right_percent)
+          else
+            result = [false, '答案不完整']
+          end
+        end
+      else
+        result = [false, '403']
       end
     else
-      render_optional_error(404)
+      result = [false, '参数不完整']
     end
-
     render json: result
   end
 
   private
 
   def check_group_user(lesson_id)
-    GroupCourseShip.left_j_lesson.left_j_group_user.where('l.id=?', lesson_id).where('g_u.user_id=?', current_user.id).exists?
+    GroupCourseShip.left_j_lesson.left_j_group_user.where('l.id=?', lesson_id).where('g_u.user_id=?', current_user.id).select(:id, :group_id, :course_id).take
   end
 end

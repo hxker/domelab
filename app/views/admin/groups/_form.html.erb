@@ -22,7 +22,7 @@
           <% else %>
               <%= f.input :name %>
           <% end %>
-          <%= f.input :teacher_id, collection: Admin.select(:id, :name) %>
+          <%= f.input :teacher_id, collection: Admin.where('permissions like ?', "%teacher%").select(:id, :name) %>
           <%= f.input :class_address %>
           <%= f.input :status, collection: Course::STATUS, prompt: 1 %>
 
