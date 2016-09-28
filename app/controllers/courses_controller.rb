@@ -7,7 +7,7 @@ class CoursesController < ApplicationController
 
   def show
     course_id = params[:id]
-    @course = Course.joins(:group_course_ships).joins('left join group_user_ships g_u on g_u.group_id = group_course_ships.group_id').where(id: course_id).where('g_u.user_id=?', current_user.id).select(:id, :name, :cover, :course_info).take
+    @course = Course.joins(:group_course_ships).joins('left join group_user_ships g_u on g_u.group_id = group_course_ships.group_id').where(id: course_id).where('g_u.user_id=?', current_user.id).select(:id, :name, :cover, :course_info, 'group_course_ships.group_id').take
     if @course
       @lessons = Lesson.where(course_id: course_id)
       @stars = @course.course_stars.select(:name, :stars)
@@ -28,9 +28,6 @@ class CoursesController < ApplicationController
     end
   end
 
-  def add_group
-    render
-  end
 
   def apply_group
     group_id = params[:user][:select_group]
@@ -79,11 +76,12 @@ class CoursesController < ApplicationController
     if sign_in
       time_now = Time.now
       today_dawn = time_now.midnight
+      sign_in_update_at = sign_in.updated_at
 
-      if sign_in.updated_at > today_dawn
+      if sign_in_update_at > today_dawn
         @result = [false, '今天你已签到']
       else
-        if sign_in.updated_at > (today_dawn-1.day)
+        if sign_in_update_at > (today_dawn-1.day)
           sign_in.continuous_days += 1
         end
         sign_in.updated_at = time_now
@@ -132,7 +130,7 @@ class CoursesController < ApplicationController
           tests = LessonTest.where(lesson_id: lesson_id)
           test_keys = tests.pluck(:id).map { |x| x.to_s }
           answers_keys = answers.keys
-          if test_keys == answers_keys
+          if (test_keys & answers_keys) == test_keys.length
             right_per = []
             tests.each do |test|
               right_per << true if test["option_#{test.answer}"] == answers["#{test.id}"]
@@ -143,7 +141,7 @@ class CoursesController < ApplicationController
                 avatar: a.avatar.present? ? ActionController::Base.helpers.asset_path(a.avatar_url(:middle)) : nil
             } }
             result = [true, {right_per: right_percent, teacher_avatar: teacher_avatar[0][:avatar]}]
-            # current_user.user_lesson_tests.create(lesson_id: lesson_id, right_percent: right_percent)
+            current_user.user_lesson_tests.create(lesson_id: lesson_id, right_percent: right_percent)
           else
             result = [false, '答案不完整']
           end
