@@ -1,0 +1,8 @@
+<div class="container">
+  <%= @group.name %>
+  <%= image_tag(@group.teacher.avatar_url(:middle)) %>
+  <hr>
+  <a class="btn btn-lg">作品展示</a>
+  <a href="<%= "/courses/discuss/#{@group.id}" %>" class="btn btn-lg">讨论区</a>
+  <a class="btn btn-lg">上传作品</a>
+</div>

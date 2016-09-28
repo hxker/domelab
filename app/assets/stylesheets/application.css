@@ -11,6 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  *= require bootstrap.min
+ *= require font-awesome.min
  *= require swiper.min
  *= require base
  *= require layout
@@ -19,5 +20,5 @@
  *= require commonweal
  *= //require_tree .
  *= require_self
-  *= require dome
+ *= require dome
  */

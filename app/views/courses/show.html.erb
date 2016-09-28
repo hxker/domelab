@@ -16,11 +16,11 @@
               </li>
             <% end %>
           </ul>
-
+          <h2><a href="<%= "/courses/community/#{@course.group_id}" %>">课程圈子</a></h2>
         <% end %>
       </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-md-6">
       <p><%= image_tag(@course.cover_url(:middle),alt:"课程封面") %></p>
     </div>
   </div>
