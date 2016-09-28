@@ -130,7 +130,7 @@ class CoursesController < ApplicationController
           tests = LessonTest.where(lesson_id: lesson_id)
           test_keys = tests.pluck(:id).map { |x| x.to_s }
           answers_keys = answers.keys
-          if (test_keys & answers_keys) == test_keys.length
+          if (test_keys & answers_keys).count == test_keys.length
             right_per = []
             tests.each do |test|
               right_per << true if test["option_#{test.answer}"] == answers["#{test.id}"]
