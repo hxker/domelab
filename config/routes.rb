@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'group_community/index'
+
+  get 'group_community/discuss'
+
   root to: 'home#index'
 
   devise_for :users, skip: [:sessions], controllers: {cas_sessions: 'our_cas_sessions'}
@@ -17,6 +21,9 @@ Rails.application.routes.draw do
   get '/courses/:id', to: 'courses#show'
   get '/courses/lesson_test/:id', to: 'courses#lesson_test'
   post '/courses/check_lesson_test', to: 'courses#check_lesson_test'
+  get '/courses/community/:id', to: 'courses#community'
+  get '/courses/discuss/:id', to: 'courses#discuss'
+  post '/courses/discuss_post', to: 'courses#discuss_post'
   get 'test' => 'test#index'
 
   mount RuCaptcha::Engine => '/rucaptcha'

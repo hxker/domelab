@@ -110,6 +110,7 @@ class CoursesController < ApplicationController
     check_ability = check_group_user(lesson_id)
     if lesson_id.present? && check_ability.present?
       @tests = LessonTest.where(lesson_id: lesson_id)
+      @belong_name = Lesson.joins(:course).where(id: lesson_id).select(:name, 'courses.name as course_name').take
       @has_test = current_user.user_lesson_tests.find_by(lesson_id: lesson_id)
     else
       render_optional_error(403)
@@ -153,6 +154,33 @@ class CoursesController < ApplicationController
       result = [false, '参数不完整']
     end
     render json: result
+  end
+
+  def community
+    group_id = params[:id]
+    @group = Group.find(group_id)
+  end
+
+  def discuss
+    group_id = params[:id]
+    @group = Group.find(group_id)
+    @comments = GroupCommunity.includes(:user, :child_group_communities).where(group_id: group_id, parent_id: nil)
+  end
+
+  def discuss_post
+    g_c_params = params[:group_community]
+    group_id = g_c_params[:group_id]
+    content = g_c_params[:content]
+    anonymous = g_c_params[:anonymous]
+    group_community = GroupCommunity.create(group_id: group_id, user_id: current_user.id, content: content, anonymous: anonymous)
+    if group_community.save
+      flash[:notice] = '提交成功'
+    else
+      flash[:error] = group_community.errors.full_messages.first
+    end
+
+    redirect_to "/courses/discuss/#{group_id}"
+
   end
 
   private
