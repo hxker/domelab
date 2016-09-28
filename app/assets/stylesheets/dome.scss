@@ -35,7 +35,271 @@
 }
 
 .dome_courses_head{
-  width: 90%;
-  border: 2px solid #DDF2F6;
+  width: 98%;
+  border: 2px solid #182A87;
   border-radius: 14px;
+  height:335px;
+  background-color: #DDF2F6;
+}
+
+.dome_courses_head:after {
+  content: "";
+  display: block;
+}
+
+.group_info_left {
+  padding-top: 30px;
+}
+
+.group_info_middle{
+  padding-top: 60px;
+}
+
+.group-info-right{
+  padding: 40px 20px 0px 50px;
+}
+
+.group_info_middle p{
+  padding-left: 15px;
+}
+
+.group_info_left p{
+  font-size:18px;
+  color: #24358C;
+  text-align: left;
+  padding-left: 25%;
+}
+.group-info-right .label-default{
+  font-size: 14px;
+}
+
+.group-info-right .wx_code{
+  width: 184px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.teacher_avatar{
+  width:189px;
+  margin-bottom: 20px;
+}
+
+.progress-course{
+  height: 49px;
+  font-size: 24px;
+  line-height: 49px;
+  border-radius: 24px;
+  width: 518px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.progress-course .progress-bar{
+  background-color: #83C7D6;
+  font-size: 24px;
+  line-height: 49px;
+  border-radius: 24px;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.text-gray{
+  font-size: 18px;
+  color:#9B9B9B;
+}
+
+.btn-course-link{
+  border:2px solid #182A87;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 11px;
+  color:#182A87;
+  line-height: 21px;
+  padding:0px;
+  width: 85px;
+  letter-spacing: 0.35px;
+}
+
+.btn-check-in{
+  line-height: 25px;
+  width: 90px;
+  font-size: 11px;
+  color: #182A87;
+  border:2px solid #182A87;
+  border-radius: 5px;
+  background-color: white;
+  padding: 0px;
+}
+
+.dome-course-list-wrapper{
+  width:80%;
+  margin:10px auto;
+}
+
+.course-item{
+  width: 300px !important;
+  height: 310px !important;
+  float: left;
+  position: relative;
+}
+
+.dome-course-list a{
+  display: block;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.course-item-img-wrapper{
+  border-radius: 21px;
+  background-color: #DDF2F6;
+  padding:10px;
+  height: 250px;
+  vertical-align: middle;
+}
+
+.dome-course-list .course-item-name{
+  margin-top: 10px;
+  padding: 2px 20px;
+  background-color: #7EDAED;
+  border-radius: 39px;
+  font-size: 18px;
+}
+
+hr.dome-courses {
+	border-top: 1px solid #B8E986;
+	text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+hr.dome-courses:after {
+	content: '豆姆课例';
+	display: inline-block;
+	position: relative;
+	top: -14px;
+	padding: 0 20px;
+	background: #fff;
+	color: #B8E986;
+	font-size: 24px;
+}
+
+.course-head{
+  padding:50px 30px;
+  width:90%;
+  border:2px solid #182A87;
+  height: 320px;
+  border-radius: 18px;
+}
+
+.stars{
+  width:150px;
+  height: 30px;
+  float:left;
+  position: relative;
+}
+
+.stars span{
+  color: #E95E21;
+}
+
+.stars-wrapper{
+  border-top:2px solid #182A87;
+  border-bottom:2px solid #182A87;
+  width:70%;
+  margin: 10px auto;
+  overflow: hidden;
+}
+
+.lesson-list{
+  margin: 30px auto;
+  text-align: center;
+}
+
+.lesson-list li{
+  float:left;
+  width:30%;
+  margin-bottom: 30px;
+}
+
+.lesson-list li div{
+  margin-bottom: 10px;
+}
+
+.btn-lesson-item{
+  background-color: #182A87;
+  border-radius: 40px;
+}
+
+.course-info{
+  text-align: center;
+  margin: 200px auto;
+}
+#lesson-test-outer{
+  border:1px solid #B7DEE5;
+  background-color: #B7DEE5;
+  border-radius: 20px;
+  padding:50px 60px;
+}
+
+#lesson-test-inner{
+  border:1px solid #FFF;
+  background-color: #FFF;
+  border-radius: 20px;
+  padding:30px 40px;
+}
+
+#lesson-test-inner .question{
+  font-size:20px;
+  letter-spacing: 2.32px;
+  line-height: 28px;
+}
+
+#lesson-test-inner label{
+  font-size: 12px;
+  letter-spacing: 1.39px;
+  line-height: 17px;
+  font-weight: normal;
+  margin-left: 30px;
+}
+
+#lesson-test-inner hr{
+  border-width: 3px;
+}
+
+#user-lesson-test-submit{
+  border:2px solid #182A87;
+  margin-top: 30px;
+  border-radius: 5px;
+  background-color: white;
+  padding:3px 30px;
+  font-size: 18px;
+}
+
+h1.lesson-name{
+  color:#182A87;
+}
+
+h7.lesson-name{
+  font-size: 24px;
+  color: #FFA178;
+  letter-spacing: 0.77px;
+  line-height: 33px;
+}
+
+#test-result {
+  margin-top: 50px;
+}
+
+#test-result-container p{
+  font-size: 18px;
+  letter-spacing: 0.58px;
+  color:#9B9B9B;
+  margin-bottom: 10px;
+}
+
+#test-teacher-wrapper{
+  background: image-url("test-result-bg.png") no-repeat center center;
+  height: 272px;
+  width: 975px;
 }

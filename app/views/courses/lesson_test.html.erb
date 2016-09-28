@@ -1,9 +1,12 @@
+
 <div id="lesson-test-container" class="container">
   <%= link_to '返回', 'javascript:history.go(-1);', class: 'btn btn-xs btn-primary' %>
-
+  <h1 class="text-center lesson-name"><%= @lesson_name %></h1>
   <% if @tests.present? %>
+    <div id="lesson-test-outer">
+      <div id="lesson-test-inner">
       <% @tests.each_with_index do |test, index| %>
-          <h3><%= index+1 %>. <%= test.name %></h3>
+          <h7 class="question"><%= index+1 %>. <%= test.name %></h7>
           <% [1, 2, 3, 4].each do |no| %>
               <p>
                 <label><input type="radio" value="<%= test["option_#{no}"] %>" name="lesson-answer[<%= test.id %>]"/> <%= test["option_#{no}"] %>
@@ -12,14 +15,27 @@
           <% end %>
           <hr>
       <% end %>
+      </div>
+    </div>
       <% if @has_test %>
           <h3 class="text-center">您已经提交过该测试,正确率为<%= @has_test.right_percent %>%</h3>
       <% else %>
           <input type="hidden" id="course-lesson-id" value="<%= params[:id] %>"/>
           <input type="hidden" id="lesson-test-ids" value="<%= @tests.pluck(:id).join(',') %>"/>
-          <span id="user-lesson-test-submit" class="btn btn-lg btn-danger">提交</span>
+          <div class="text-center">
+            <button id="user-lesson-test-submit" class="btn">提交</button>
+          </div>
       <% end %>
   <% else %>
       <div class="alert alert-info">暂无测验题目</div>
   <% end %>
+</div>
+
+<div id="test-result-container" class="container text-center hidden">
+  <h7 class="text-center lesson-name"><%= @lesson_name %></h7>
+  <p id="test-result">正确率：<span></span>%</p>
+  <p id="timepassed">用时：<span></span></p>
+  <div id="test-teacher-wrapper" class="center-block"></div>
+  <p id="full-marks" class="hidden">全都做对啦~~~~<br><br>真是太棒了！！！！！</p>
+  <p id="not-full-marks" class="hidden">再接再厉继续努力哦~~~<br><br>明天上课认真听课，把错误的题目都搞懂~</p>
 </div>

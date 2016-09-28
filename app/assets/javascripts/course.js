@@ -3,6 +3,7 @@
  */
 
 $(function () {
+    var start_time = Data.now;
     var user_lesson_test = $('#user-lesson-test-submit');
     if (user_lesson_test.length > 0) {
         user_lesson_test.on('click', function () {
@@ -21,16 +22,21 @@ $(function () {
                 }
             }
             if (answers && getJsonLength(answers) == test_ids.length) {
+                var end_time = Date.now();
                 $.ajax({
                     url: '/courses/check_lesson_test',
                     type: 'post',
                     data: {answers: answers, lesson_id: lesson_id},
                     success: function (data) {
                         console.log(data);
-                        if (data[0]) {
-                            var html = $('<div><h1>正确率:' + data[1]["right_per"] + '</h1><p><img src="' + data[1]["teacher_avatar"] + '"></p>' +
-                                '<p><a class="btn btn-xs btn-primary" href="javascript:history.go(-1);">返回</a></p></div>');
-                            $('#lesson-test-container').html(html)
+                        if (data[0]==true) {
+                            // var html = $('<div><h1>正确率:' + data[1]["right_per"] + '</h1><p><img src="' + data[1]["teacher_avatar"] + '"></p>' +
+                            //     '<p><a class="btn btn-xs btn-primary" href="javascript:history.go(-1);">返回</a></p></div>');
+                            // $('#lesson-test-container').html(html)
+                            $('#lesson-test-container').addClass("hidden");
+                            $('#timepassed span').text(end_time-start_time);
+                            $('#test-result span').text(data[1]["right_per"]);
+                            $('#test-result-container').removeClass("hidden");
                         } else {
                             alert(data[1])
                         }

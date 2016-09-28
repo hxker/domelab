@@ -1,27 +1,55 @@
 <div class="container">
-  课程名:<%= @course.name %>
-  <p>
-    <% if @stars.present? %>
-        <% @stars.each do |s| %>
-            <%= "#{s.name}:#{s.stars}" %>
-        <% end %>
-    <% end %>
-  </p>
-  <p>课程封面:<%= image_tag(@course.cover_url(:middle)) %></p>
+  <div class="row course-head center-block text-center">
+    <div class="col-md-6">
+      <h2><%= @course.name %></h2>
+      <div class="stars-wrapper text-left">
+        <% if @stars.present? %>
+          <ul>
+            <% @stars.each do |s| %>
+              <li class="stars">
+                <%= "#{s.name}:" %>
+                <span>
+                  <% s.stars.times do %>
+                    &starf;
+                  <% end %>
+                </span>
+              </li>
+            <% end %>
+          </ul>
 
-  <hr>
-  课时:
-  <% if @lessons.present? %>
-      <% @lessons.each do |l| %>
-          <%= l.name %>
-          <% if l.content.present? %>
-              <a href="">课件ppt</a>
-          <% end %>
-          <% if l.lesson_tests.present? %>
-              <a href="/courses/lesson_test/<%= l.id %>">test</a>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <p><%= image_tag(@course.cover_url(:middle),alt:"课程封面") %></p>
+    </div>
+  </div>
+
+  <div class="lesson-list">
+    <ul>
+      <% if @lessons.present? %>
+          <% @lessons.each do |l| %>
+
+            <li>
+                <div class="btn btn-lesson-item"><span class="gear">&#9881;</span><%= l.name %></div>
+                <% if l.content.present? %>
+                  <div>
+                      <a class="btn btn-info" href="">课件</a>
+                  </div>
+                <% end %>
+                <% if l.lesson_tests.present? %>
+                  <div>
+                      <a class="btn btn-info" href="/courses/lesson_test/<%= l.id %>">测试</a>
+                  </div>
+                <% end %>
+              </li>
           <% end %>
       <% end %>
-  <% end %>
-  <hr>
-  <%= @course.course_info.html_safe %>
+    </ul>
+
+  </div>
+  <div class="clearfix"></div>
+  <div class="course-info">
+    <%= @course.course_info.html_safe %>
+  </div>
 </div>
