@@ -50,6 +50,8 @@ $(function () {
 
         });
     }
+    scheduler.init('scheduler_here', new Date(),"month");
+    var data= $('.scheduler-data').data('scheduler');
 });
 function getJsonLength(jsonObj) {
 

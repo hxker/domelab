@@ -17,3 +17,4 @@
 //= require notify
 //= require course
 //= require turbolinks
+//= require dhtmlxscheduler

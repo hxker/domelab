@@ -1,7 +1,6 @@
-
 <div id="lesson-test-container" class="container">
   <%= link_to '返回', 'javascript:history.go(-1);', class: 'btn btn-xs btn-primary' %>
-  <h1 class="text-center lesson-name"><%= @lesson_name %></h1>
+  <h1 class="text-center lesson-name"><%= @belong_name.course_name %>--<%= @belong_name.name %></h1>
   <% if @tests.present? %>
     <div id="lesson-test-outer">
       <div id="lesson-test-inner">

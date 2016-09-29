@@ -1,10 +1,20 @@
-<div class="container">
 
-  <% if @group_schedules %>
-      <% @group_schedules.each do |s| %>
-          <p><%= s.title %>
-            :<%= s.start.strftime('%Y-%m-%d %H:%M') %><%= " -- #{ s.end.try(:strftime, '%Y-%m-%d %H:%M')}" if s.end.present? %></p>
-      <% end %>
-  <% end %>
-  <%= link_to '返回', 'javascript:history.go(-1);' %>
+
+  <!-- // <% if @group_schedules %>
+  //     <% @group_schedules.each do |s| %>
+  //         <p><%= s.title %>
+  //           :<%= s.start.strftime('%Y-%m-%d %H:%M') %><%= " -- #{ s.end.try(:strftime, '%Y-%m-%d %H:%M')}" if s.end.present? %></p>
+  //     <% end %>
+  // <% end %> -->
+<%= content_tag :div, class: "scheduler-data", data: {scheduler: @group_schedules.to_json(:only =>["title","start"])} do %>
+<% end %>
+<div id="scheduler_here" class="dhx_cal_container" style='width:900px; height:500px;'>
+    <div class="dhx_cal_navline">
+        <div class="dhx_cal_prev_button">&nbsp;</div>
+        <div class="dhx_cal_next_button">&nbsp;</div>
+        <div class="dhx_cal_today_button"></div>
+        <div class="dhx_cal_date"></div>
+    </div>
+    <div class="dhx_cal_header"></div>
+    <div class="dhx_cal_data"></div>
 </div>

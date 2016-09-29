@@ -21,4 +21,6 @@
  *= //require_tree .
  *= require_self
  *= require dome
+ *= require simple_calendar
+ *= require dhtmlxscheduler
  */
