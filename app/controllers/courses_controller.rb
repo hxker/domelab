@@ -111,7 +111,7 @@ class CoursesController < ApplicationController
     if lesson_id.present? && check_ability.present?
       @tests = LessonTest.where(lesson_id: lesson_id)
       @has_test = current_user.user_lesson_tests.find_by(lesson_id: lesson_id)
-      @lesson_name = Lesson.find(lesson_id).name
+      @belong_name = Lesson.joins(:course).where(id: lesson_id).select(:name, 'courses.name as course_name').take
     else
       render_optional_error(403)
     end
