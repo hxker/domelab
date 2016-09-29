@@ -156,6 +156,32 @@ class CoursesController < ApplicationController
     render json: result
   end
 
+  def community
+    group_id = params[:id]
+    @group = Group.find(group_id)
+  end
+
+  def discuss
+    group_id = params[:id]
+    @group = Group.find(group_id)
+    @comments = GroupCommunity.includes(:user, :child_group_communities).where(group_id: group_id).where('parent_id is ?', nil)
+  end
+
+  def discuss_post
+    g_c_params = params[:group_community]
+    group_id = g_c_params[:group_id]
+    content = g_c_params[:content]
+    anonymous = g_c_params[:anonymous]
+    group_community = GroupCommunity.create(group_id: group_id, user_id: current_user.id, content: content, anonymous: anonymous)
+    if group_community.save
+      flash[:notice] = '提交成功'
+    else
+      flash[:error] = group_community.errors.full_messages.first
+    end
+
+    redirect_to "/courses/discuss/#{group_id}"
+  end
+
   private
 
   def check_group_user(lesson_id)

@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get '/courses/community/:id', to: 'courses#community'
   get '/courses/discuss/:id', to: 'courses#discuss'
   post '/courses/discuss_post', to: 'courses#discuss_post'
+  post '/courses/like_comment', to: 'courses#like_comment'
+  post '/courses/unlike_comment', to: 'courses#unlike_comment'
   get 'test' => 'test#index'
 
   mount RuCaptcha::Engine => '/rucaptcha'
