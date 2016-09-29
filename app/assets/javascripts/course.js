@@ -3,7 +3,7 @@
  */
 
 $(function () {
-    var start_time = Data.now;
+    var start_time = Date.now();
     var user_lesson_test = $('#user-lesson-test-submit');
     if (user_lesson_test.length > 0) {
         user_lesson_test.on('click', function () {
@@ -22,7 +22,9 @@ $(function () {
                 }
             }
             if (answers && getJsonLength(answers) == test_ids.length) {
-                var end_time = Date.now();
+                var ms = start_time-Date.now();
+                    min = (ms/1000/60) << 0,
+                    sec = (ms/1000) % 60;
                 $.ajax({
                     url: '/courses/check_lesson_test',
                     type: 'post',
@@ -34,8 +36,9 @@ $(function () {
                             //     '<p><a class="btn btn-xs btn-primary" href="javascript:history.go(-1);">返回</a></p></div>');
                             // $('#lesson-test-container').html(html)
                             $('#lesson-test-container').addClass("hidden");
-                            $('#timepassed span').text(end_time-start_time);
+                            $('#timepassed span').text(min + ':' + sec);
                             $('#test-result span').text(data[1]["right_per"]);
+                            $('test-teacher-wrapper').aapend($('<img>',{src:data[1]["teacher_avatar"]}));
                             $('#test-result-container').removeClass("hidden");
                         } else {
                             alert(data[1])
