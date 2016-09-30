@@ -6,9 +6,9 @@ class CreateSchools < ActiveRecord::Migration[5.0]
       t.integer :district_id, null: false
       t.integer :teacher_role
       t.integer :school_type
-      t.boolean :status, null: false, default: 1
+      t.boolean :status, null: false, default: true
       t.boolean :audit
-      t.boolean :user_add, null: false, default: 0
+      t.boolean :user_add, null: false, default: false
       t.integer :user_id
       t.timestamps
     end

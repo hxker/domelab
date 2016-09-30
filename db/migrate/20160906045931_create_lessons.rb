@@ -4,7 +4,7 @@ class CreateLessons < ActiveRecord::Migration[5.0]
       t.string :name, null: false, limit: 50
       t.integer :course_id, null: false
       t.string :content
-      t.boolean :status, null: false, default: 1
+      t.boolean :status, null: false, default: true
       t.timestamps
     end
     add_index :lessons, :course_id

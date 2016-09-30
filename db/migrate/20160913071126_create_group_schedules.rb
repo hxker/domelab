@@ -7,9 +7,9 @@ class CreateGroupSchedules < ActiveRecord::Migration[5.0]
       t.datetime :end
       t.string :className
       t.string :backgroundColor
-      t.boolean :allDay, null: false, default: 0
-      t.boolean :editable, null: false, default: 0
-      t.boolean :startEditable, null: false, default: 0
+      t.boolean :allDay, null: false, default: false
+      t.boolean :editable, null: false, default: false
+      t.boolean :startEditable, null: false, default: false
       t.timestamps
     end
     add_index :group_schedules, :group_id

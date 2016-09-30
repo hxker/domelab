@@ -62,3 +62,4 @@ gem 'mini_magick'
 gem 'rails_kindeditor', github: 'javyliu/rails_kindeditor'
 gem 'sidekiq'
 gem 'sinatra', git: 'https://github.com/sinatra/sinatra.git', require: false
+gem 'pg'
