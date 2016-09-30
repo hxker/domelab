@@ -1,4 +1,5 @@
 class GroupCommunity < ApplicationRecord
+  include Likeable
   belongs_to :group
   belongs_to :user
   has_many :child_group_communities, class_name: GroupCommunity, foreign_key: :parent_id
