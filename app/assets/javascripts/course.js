@@ -73,38 +73,46 @@ function initScheduler() {
         var fd = [d.getMonth() + 1, "/", d.getDate(), "/", d.getFullYear()].join('')
         return fd
     }
-    scheduler.config.start_on_monday = false;
-    scheduler.config.readonly = true;
-    scheduler.config.month_day = "%j";
-    scheduler.config.week_date = "%D";
-    scheduler.templates.month_date = function(date) {
-        var d = new Date(date);
-        var month = d.getMonth() + 1;
-        $(".month-list a").removeClass("selected");
-        $(".month-list li:nth-child(" + month + ") a").addClass("selected");
-        return d.getFullYear();
-    };
-    scheduler.init('scheduler_here', new Date(), "month");
-    scheduler.templates.event_bar_date = function(start, end, ev) {
-        return "";
-    };
-    scheduler.templates.event_bar_text = function(start, end, event) {
-        return "<div class='course'>" + event.text + "</div>" + "<div class='lesson'>" + event.text + "</div>";
-    };
+    var scheduler_here = $("#scheduler_here");
+    if (scheduler_here.length) {
+        scheduler.config.start_on_monday = false;
+        scheduler.config.readonly = true;
+        scheduler.config.month_day = "%j";
+        scheduler.config.week_date = "%D";
+        scheduler.templates.month_date = function(date) {
+            var d = new Date(date);
+            var month = d.getMonth() + 1;
+            $(".month-list a").removeClass("selected");
+            $(".month-list li:nth-child(" + month + ") a").addClass("selected");
+            return d.getFullYear();
+        };
+        scheduler_here.dhx_scheduler({
+            date: new Date(),
+            mode: "month"
+        });
+        //scheduler.init('scheduler_here', new Date(), "month");
+        scheduler.templates.event_bar_date = function(start, end, ev) {
+            return "";
+        };
+        scheduler.templates.event_bar_text = function(start, end, event) {
+            return "<div class='course'>" + event.text + "</div>" + "<div class='lesson'>" + event.text + "</div>";
+        };
 
-    var data = $('.scheduler-data').data('scheduler');
-    var final_data = data.map(function(obj) {
-        return {
-            text: obj.title,
-            start_date: formate_date(obj.start),
-            end_date: formate_date(obj.end)
-        }
-    });
-    scheduler.parse(final_data, "json");
-    $(".month-list li").click(function() {
-        var year = $(".dhx_cal_date").text();
-        var month = $(".month-list li").index(this);
-        scheduler.setCurrentView(new Date(year, month, 1), "month");
-    });
+        var data = $('.scheduler-data').data('scheduler');
+        var final_data = data.map(function(obj) {
+            return {
+                text: obj.title,
+                start_date: formate_date(obj.start),
+                end_date: formate_date(obj.end)
+            }
+        });
+        scheduler.parse(final_data, "json");
+        $(".month-list li").click(function() {
+            var year = $(".dhx_cal_date").text();
+            var month = $(".month-list li").index(this);
+            scheduler.setCurrentView(new Date(year, month, 1), "month");
+        });
+    }
+
 
 }
