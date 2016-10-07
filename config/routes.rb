@@ -24,9 +24,10 @@ Rails.application.routes.draw do
   get '/courses/community/:id', to: 'courses#community'
   get '/courses/discuss/:id', to: 'courses#discuss'
   post '/courses/discuss_post', to: 'courses#discuss_post'
-  post '/courses/like_comment', to: 'courses#like_comment'
-  post '/courses/unlike_comment', to: 'courses#unlike_comment'
   get 'test' => 'test#index'
+
+  resources :likes
+  post '/courses/upload_opus', to: 'courses#upload_opus'
 
   mount RuCaptcha::Engine => '/rucaptcha'
   namespace :kindeditor do
@@ -56,6 +57,8 @@ Rails.application.routes.draw do
     post '/checks/review_hacker', to: 'checks#review_hacker'
     get '/checks/students', to: 'checks#students'
     post '/checks/review_students', to: 'checks#review_students'
+    get '/checks/opus', to: 'checks#opus'
+    post '/checks/review_opus', to: 'checks#review_opus'
     resources :admins
     resources :districts
     resources :roles
@@ -102,6 +105,7 @@ Rails.application.routes.draw do
   get '/user/get_districts' => 'user#get_districts', as: 'user_get_districts'
   match 'user/notifications' => 'user#notifications', as: 'user_notifications', via: [:get]
   get '/user/notify' => 'user#notify_show'
+  get '/user/opus', to: 'user#opus'
 
   match '*path', via: :all, to: 'home#error_404'
 end

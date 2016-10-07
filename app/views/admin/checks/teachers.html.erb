@@ -23,7 +23,7 @@
 
       <tbody>
       <% @teacher_array.each do |th| %>
-          <tr>
+          <tr id="<%= "teacher-#{th[:user_id]}" %>">
             <td><%= th[:username] %></td>
             <td><%= th[:gender]==1 ? '男' : '女' %></td>
             <td><%= th[:mobile] %></td>

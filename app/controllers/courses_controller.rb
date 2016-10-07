@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:upload_opus]
   before_action :authenticate_user!, except: [:index]
 
   def index
@@ -159,6 +160,7 @@ class CoursesController < ApplicationController
   def community
     group_id = params[:id]
     @group = Group.find(group_id)
+    @group_opus = @group.group_opus.includes(:user).where(status: 1).page(params[:page]).per(params[:per])
   end
 
   def discuss
@@ -180,6 +182,30 @@ class CoursesController < ApplicationController
     end
 
     redirect_to "/courses/discuss/#{group_id}"
+  end
+
+  def upload_opus
+    group_opus = params[:group_opu]
+    group_id = group_opus[:group_id]
+    course_id = group_opus[:course_id]
+    content = group_opus[:content]
+    current_user_id = current_user.id
+    if group_id.present? && content.present?
+      group_user = GroupUserShip.where(user_id: current_user_id, group_id: group_id).exists?
+      if group_user
+        g_o = GroupOpu.create(course_id: course_id, group_id: group_id, content: content, user_id: current_user.id)
+        if g_o.save
+          flash[:success] = '上传成功,审核通过后会显示'
+        else
+          flash[:error] = '上传失败'
+        end
+      else
+        flash[:error] = '您没有权限上传'
+      end
+    else
+      flash[:error]= '参数不完整'
+    end
+    redirect_to "/courses/community/#{group_id}"
   end
 
   private

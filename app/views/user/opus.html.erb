@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="user-center">
+      <div class="main-title">
+        个人中心
+      </div>
+      <%= render 'user/menu' %>
+      <div class="user-main">
+        <div class="sub-content">
+          <% if @opus.present? %>
+
+              <div class="row">
+                <div class="col-sx-12">
+                  <div class="row text-center">
+                    <% @opus.each do |opus| %>
+                        <div class="col-xs-4">
+                          <%= image_tag(opus.content_url(:middle)) %>
+                          <div><i class="icon icon-heart"></i><%= opus.likes_count %></div>
+                          <div><%= opus.group_name %></div>
+                          <div><%= opus.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+                        </div>
+                    <% end %>
+                  </div>
+                  <nav>
+                    <%= paginate @opus %>
+                  </nav>
+                </div>
+              </div>
+          <% else %>
+              <div class="alert alert-primary">
+                您暂无作品
+              </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

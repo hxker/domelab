@@ -17,41 +17,38 @@
             <div id="calendar"></div>
           </div>
 
-          <% if 1==2 %>
-              <div class="col-sm-3">
-                <div class="widget-box transparent">
-                  <div class="widget-header">
-                    <h4>拖动课时</h4>
-                  </div>
+          <div class="col-sm-3">
+            <div class="widget-box transparent">
+              <div class="widget-header">
+                <h4>拖动课时</h4>
+              </div>
 
-                  <div class="widget-body">
-                    <div class="widget-main no-padding">
-                      <div id="external-events">
-                        <div class="external-event label-grey" data-class="label-grey">
-                          <i class="icon-move"></i>
-                          课时1
-                        </div>
+              <div class="widget-body">
+                <div class="widget-main no-padding">
 
-                        <div class="external-event label-success" data-class="label-success">
-                          <i class="icon-move"></i>
-                          课时2
-                        </div>
 
-                        <div class="external-event label-danger" data-class="label-danger">
-                          <i class="icon-move"></i>
-                          课时3
-                        </div>
+                  <div id="external-events">
 
-                        <label>
-                          <input type="checkbox" class="ace ace-checkbox" id="drop-remove"/>
-                          <span class="lbl"> 拖动后移除</span>
-                        </label>
-                      </div>
-                    </div>
+                    <% if @group.group_course_ships.present? %>
+                        <% @group.group_course_ships.includes(:course).each do |group_course| %>
+                            <% group_course.course.lessons.each do |lesson| %>
+                                <div class="external-event label-success" data-lesson="<%= lesson.id %>" data-class="label-success">
+                                  <i class="icon-move"></i>
+                                  <%= group_course.course.name %>--<%= lesson.name %>
+                                </div>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                    <br>
+                    <label>
+                      <input type="checkbox" class="ace ace-checkbox" id="drop-remove"/>
+                      <span class="lbl"> 拖动后移除</span>
+                    </label>
                   </div>
                 </div>
               </div>
-          <% end %>
+            </div>
+          </div>
         </div>
 
         <!-- PAGE CONTENT ENDS -->

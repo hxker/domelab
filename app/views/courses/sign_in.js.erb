@@ -2,4 +2,4 @@
 $('.no-sign-in').addClass('hide');
 $('.for-show-sign-in').removeClass('hide');
 <% end %>
-$.notify('<%= @result[1] %>', 'error');
+$.notify('<%= @result[1] %>', '<%= @result[0] %>' == 'true' ? 'success' : 'error');

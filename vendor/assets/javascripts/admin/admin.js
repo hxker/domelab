@@ -62,6 +62,7 @@ $(function () {
             var windowURL = window.URL || window.webkitURL;
             var dataURL;
             var preview_img = $("#preview_img");
+            preview_img.removeClass('hide');
             dataURL = windowURL.createObjectURL(this_file);
             preview_img.attr('src', dataURL);
         });
@@ -145,11 +146,10 @@ $(function () {
                     "status": status, "level": level, "ud": ud
                 },
                 success: function (data) {
+                    alert(data[1]);
                     if (data[0]) {
-                        alert(data[1]);
-                        window.location.reload();
-                    } else {
-                        alert(data[1]);
+                        $('#modal-form-' + ud).modal('hide');
+                        $("#teacher-" + ud).addClass('hide');
                     }
                 }
             });
@@ -159,6 +159,32 @@ $(function () {
 
         $(".teacher-apply-status [name='teacher-apply']").prop("checked", false);
         $(".teacher-apply-level [name='teacher-apply-level']").prop("checked", false);
+    });
+
+    // opus audit
+    $('.review-group-opus-submit').on('click', function () {
+        var status = $(".audit-group-opus [name='group-opus-status']:checked").val();
+        var group_opus_id = $(this).attr('data-id');
+
+        if (status && group_opus_id) {
+            $.ajax({
+                url: '/admin/checks/review_opus',
+                type: 'post',
+                data: {
+                    "status": status, "group_opus_id": group_opus_id
+                },
+                success: function (data) {
+                    alert(data[1]);
+                    if (data[0]) {
+                        $('#modal-form-' + group_opus_id).modal('hide');
+                        $("#group-opus-" + group_opus_id).addClass('hide');
+                    }
+                }
+            });
+        } else {
+            alert('请选择审核结果');
+        }
+        $(".audit-group-opus [name='group-opus-status']").prop("checked", false);
     });
 
     // 家庭创客审核

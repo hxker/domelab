@@ -22,9 +22,7 @@
           <%= c.content %>
           <%= c.created_at.strftime('%Y-%m-%d %H:%M') %>
 
-          <button type="button" class="btn btn-info btn-lg">
-            <i class="icon-thumbs-up-alt"></i>
-          </button>
+            <%= likeable_tag(c) %>
           <button type="button" class="btn btn-warning btn-lg">
 
             评论

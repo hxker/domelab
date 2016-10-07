@@ -42,6 +42,7 @@
           <li><a href="/admin/checks/teachers">教师：<span><%= @review_th_num %></span></a></li>
           <li><a href="/admin/checks/hackers">创客：<span><%= @review_fh_num %></span></a></li>
           <li><a href="/admin/checks/students">学生：<span><%= @review_group_user %></span></a></li>
+          <li><a href="/admin/checks/opus">作品：<span><%= GroupOpu.where(status: 0).size %></span></a></li>
         </ul>
       </div>
     </div>

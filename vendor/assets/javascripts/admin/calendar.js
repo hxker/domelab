@@ -14,6 +14,7 @@ $(function () {
             // it doesn't need to have a start or end
             var eventObject = {
                 title: $.trim($(this).text()) // use the element's text as the event title
+                // start: $.trim($(this).text())
             };
 
             // store the Event Object in the DOM element so we can get to it later
@@ -52,6 +53,7 @@ $(function () {
                 // retrieve the dropped element's stored Event Object
                 var originalEventObject = $(this).data('eventObject');
                 var $extraEventClass = $(this).attr('data-class');
+                var $extraEventLesson = $(this).attr('data-lesson');
 
 
                 // we need to copy it, so that multiple events don't have a reference to the same object
@@ -60,11 +62,43 @@ $(function () {
                 // assign it the date that was reported
                 copiedEventObject.start = date;
                 copiedEventObject.allDay = allDay;
+
                 if ($extraEventClass) copiedEventObject['className'] = [$extraEventClass];
+
+                if ($extraEventLesson && group_id) {
+                    $.ajax({
+                        url: '/admin/groups/add_schedule',
+                        type: 'post',
+                        data: {
+                            title: originalEventObject.title,
+                            start: date,
+                            lesson_id: $extraEventLesson,
+                            end: null,
+                            allDay: allDay,
+                            group_id: group_id
+                        },
+                        success: function (data) {
+                            if (data[0]) {
+                                calendar.fullCalendar('renderEvent',
+                                    {
+                                        id: data[2],
+                                        title: originalEventObject.title,
+                                        start: date,
+                                        end: null,
+                                        allDay: allDay
+                                    }
+                                );
+                            } else {
+                                alert(data[1]);
+                            }
+                        }
+                    });
+                }
+
 
                 // render the event on the calendar
                 // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-                $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+                // $('#calendar').fullCalendar('renderEvent', copiedEventObject, true); // important
 
                 // is the "remove after drop" checkbox checked?
                 if ($('#drop-remove').is(':checked')) {
@@ -78,40 +112,40 @@ $(function () {
             selectHelper: true,
             select: function (start, end, allDay) {
 
-                bootbox.prompt("新事件:", function (title) {
-
-                    if ($.trim(title) != '' && title !== null) {
-
-                        $.ajax({
-                            url: '/admin/groups/add_schedule',
-                            type: 'post',
-                            data: {
-                                title: title,
-                                start: start,
-                                end: end,
-                                allDay: allDay,
-                                group_id: group_id
-                            },
-                            success: function (data) {
-                                if (data[0]) {
-                                    calendar.fullCalendar('renderEvent',
-                                        {
-                                            id: data[2],
-                                            title: title,
-                                            start: start,
-                                            end: end,
-                                            allDay: allDay
-                                        }
-                                    );
-                                } else {
-                                    alert(data[1]);
-                                }
-                            }
-                        });
-
-
-                    }
-                });
+                // bootbox.prompt("新事件:", function (title) {
+                //
+                //     if ($.trim(title) != '' && title !== null) {
+                //
+                //         $.ajax({
+                //             url: '/admin/groups/add_schedule',
+                //             type: 'post',
+                //             data: {
+                //                 title: title,
+                //                 start: start,
+                //                 end: end,
+                //                 allDay: allDay,
+                //                 group_id: group_id
+                //             },
+                //             success: function (data) {
+                //                 if (data[0]) {
+                //                     calendar.fullCalendar('renderEvent',
+                //                         {
+                //                             id: data[2],
+                //                             title: title,
+                //                             start: start,
+                //                             end: end,
+                //                             allDay: allDay
+                //                         }
+                //                     );
+                //                 } else {
+                //                     alert(data[1]);
+                //                 }
+                //             }
+                //         });
+                //
+                //
+                //     }
+                // });
                 calendar.fullCalendar('unselect');
             },
             eventMouseover: function (data) {
@@ -199,6 +233,7 @@ $(function () {
             },
             firstDay: 1,
             firstHour: 8,
+            slotMinutes: 15,
             weekNumbers: true,
             allDayText: '全天',
             header: {

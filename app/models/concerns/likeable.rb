@@ -6,6 +6,6 @@ module Likeable
 
   def liked_by_user?(user)
     return false if user.blank?
-    liked_user_ids.include?(user.id.to_s)
+    liked_user_ids.include?(user.id)
   end
 end

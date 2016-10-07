@@ -171,5 +171,32 @@ class Admin::ChecksController < AdminController
     render json: result
   end
 
+  def opus
+    @opus = GroupOpu.joins(:user, :group).where(status: 0).select('group_opus.*', 'users.fullname', 'groups.name as group_name').page(params[:page]).per(params[:per])
+  end
+
+  def review_opus
+    status = params[:status]
+    group_opus_id = params[:group_opus_id]
+    if status.in?(%w(0 1)) && group_opus_id
+      group_opus = GroupOpu.find_by_id(group_opus_id)
+      if group_opus
+        status = status.to_i == 0 ? -1 : 1
+        group_opus.status = status
+        if group_opus.save
+          result = [true, '审核成功']
+        else
+          result = [true, '审核失败']
+        end
+        Notification.create(user_id: group_opus.user_id, message_type: 0, content: '您上传的作品审核'+"#{status == 1 ? '通过' : '未通过'}")
+      else
+        result = [false, '不规范操作']
+      end
+    else
+      result = [false, '参数不完整']
+    end
+    render json: result
+  end
+
 end
 

@@ -104,4 +104,8 @@ class UserController < ApplicationController
     @notification = current_user.notifications.find(params[:id])
   end
 
+  def opus
+    @opus = current_user.group_opus.joins(:group).select('group_opus.*', 'groups.name as group_name').page(params[:page]).per(params[:per])
+  end
+
 end

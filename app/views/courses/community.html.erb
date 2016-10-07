@@ -4,5 +4,73 @@
   <hr>
   <a class="btn btn-lg">作品展示</a>
   <a href="<%= "/courses/discuss/#{@group.id}" %>" class="btn btn-lg">讨论区</a>
-  <a class="btn btn-lg">上传作品</a>
+  <a href="#modal-form" role="button" class="blue btn btn-lg" data-toggle="modal">上传作品 </a>
+  <hr>
+  <% if @group_opus.present? %>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row">
+
+            <% @group_opus.each do |opus| %>
+                <div class="col-xs-4 text-center">
+                  <%= image_tag(opus.content_url(:middle)) %>
+                  <div style="margin: 0 90px">
+                    <div class="pull-left">
+                    <%= likeable_tag(opus) %>
+                    </div>
+                  </div>
+                  <br>
+                  <div>作者:<%= opus.user.fullname %></div>
+                </div>
+            <% end %>
+
+          </div>
+          <nav class="text-center">
+            <%= paginate @group_opus %>
+          </nav>
+        </div>
+
+      </div>
+
+  <% end %>
+
+  <div id="modal-form" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="blue bigger">上传我的作品</h4>
+        </div>
+
+        <%= simple_form_for(GroupOpu.new, url: courses_upload_opus_path, method: :post) do |f| %>
+            <div class="modal-body overflow-visible">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="space"></div>
+
+
+                  <%= f.error_notification %>
+                  <%= f.hidden_field :course_id, value: @group.id %>
+                  <%= f.hidden_field :group_id, value: @group.id %>
+                  <%= f.file_field :content %>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-sm" data-dismiss="modal">
+                <i class="icon-remove"></i>
+                取消
+              </button>
+
+              <%= f.button :submit, class: 'btn btn-sm btn-primary' %>
+              <!--<button class="btn btn-sm btn-primary">-->
+              <!--<i class="icon-ok"></i>-->
+              <!--提交-->
+              <!--</button>-->
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

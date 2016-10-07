@@ -6,6 +6,7 @@ class Group < ApplicationRecord
   belongs_to :teacher, class_name: Admin, foreign_key: :teacher_id
   has_many :group_schedules, :dependent => :destroy
   has_many :group_community, :dependent => :destroy
+  has_many :group_opus
 
   validates :name, presence: true, uniqueness: true
   validates :class_address, :teacher_id, :start_date, :end_date, presence: true

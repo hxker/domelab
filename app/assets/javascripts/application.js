@@ -16,5 +16,6 @@
 //= require cable
 //= require notify
 //= require course
+//= require like
 //= require turbolinks
 //= require dhtmlxscheduler

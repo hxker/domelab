@@ -29,13 +29,17 @@ class Admin::GroupsController <AdminController
   end
 
   def add_schedule
+    if request.method == 'GET'
+      @group = Group.find(params[:id])
+    end
     if request.method == 'POST'
       group_id = params[:group_id]
+      lesson_id = params[:lesson_id]
       title = params[:title]
       start_time = params[:start]
       end_time = params[:end]
       all_day = params[:allDay]
-      g_s = GroupSchedule.create(group_id: group_id, title: title, start: start_time, end: end_time, allDay: all_day)
+      g_s = GroupSchedule.create(group_id: group_id, lesson_id: lesson_id, title: title, start: start_time, end: end_time, allDay: all_day)
       if g_s.save
         result = [true, '添加成功', g_s.id]
       else
