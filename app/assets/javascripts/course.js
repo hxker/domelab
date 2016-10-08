@@ -109,17 +109,20 @@ function initScheduler() {
         };
 
         var data = $('.scheduler-data').data('scheduler');
-        var final_data = data.map(function(obj) {
-            var tmp = formate_date(obj.start);
-            return {
-                text: obj.title,
-                start_date: tmp,
-                end_date: tmp,
-                course_id: obj.course_id
-            }
-        });
+        if (date.length) {
+            var final_data = data.map(function(obj) {
+                var tmp = formate_date(obj.start);
+                return {
+                    text: obj.title,
+                    start_date: tmp,
+                    end_date: tmp,
+                    course_id: obj.course_id
+                }
+            });
 
-        scheduler.parse(final_data, "json");
+            scheduler.parse(final_data, "json");
+        }
+
         $(".month-list li").click(function() {
             var year = $(".dhx_cal_date").text();
             var month = $(".month-list li").index(this);

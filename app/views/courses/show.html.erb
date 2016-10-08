@@ -1,70 +1,73 @@
 <div class="container">
-  <div class="row course-head center-block text-center">
-    <div class="col-md-6">
-      <h2>
-        <%= @course.name %>
-      </h2>
-      <% if @course.course_type == 1 %>
-          <h4>英文名:<%= @course.english_name %></h4>
-      <% end %>
-      <div class="stars-wrapper text-left">
-        <% if @course.course_type==0 %>
-            <% if @stars.present? %>
+    <div class="row course-head center-block text-center">
+        <div class="col-md-6">
+            <h2>
+                <%= @course.name %>
+            </h2>
+            <% if @course.course_type == 1 %>
+            <h4>英文名:<%= @course.english_name %></h4>
+            <% end %>
+            <div class="stars-wrapper text-left">
+                <% if @course.course_type==0 %>
+                <% if @stars.present? %>
                 <ul>
-                  <% @stars.each do |s| %>
-                      <li class="stars">
+                    <% @stars.each do |s| %>
+                    <li class="stars">
                         <%= "#{s.name}:" %>
                         <span>
-                  <% s.stars.times do %>
-                    &starf;
-                  <% end %>
-                </span>
-                      </li>
-                  <% end %>
+                            <% s.stars.times do %>
+                            &starf;
+                            <% end %>
+                        </span>
+                    </li>
+                    <% end %>
+                    <li>
+                        <a href="/courses/community/<%= @course.group_id %>">班级圈</a>
+                    </li>
                 </ul>
-                <h2><a href="<%= "/courses/community/#{@course.group_id}" %>">班级圈</a></h2>
-            <% end %>
-        <% else %>
-            作者:<%= @course.author %>
-        <% end %>
+                <% end %>
+            <% else %>
+                作者:<%= @course.author %>
+                <% end %>
 
-      </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <p>
+                <%= image_tag(@course.cover_url(:middle), alt: "课程封面") %>
+            </p>
+        </div>
     </div>
-    <div class="col-md-6">
-      <p>
-        <%= image_tag(@course.cover_url(:middle), alt: "课程封面") %>
-      </p>
-    </div>
-  </div>
 
-  <% if @course.course_type==0 %>
-      <div class="lesson-list">
+    <% if @course.course_type==0 %>
+    <div class="lesson-list">
         <ul>
-          <% if @lessons.present? %>
-              <% @lessons.each do |l| %>
+            <% if @lessons.present? %>
+            <% @lessons.each do |l| %>
 
-                  <li>
-                    <div class="btn btn-lesson-item"><span class="gear">&#9881;</span>
-                      <%= l.name %>
-                    </div>
-                    <% if l.content.present? %>
-                        <div>
-                          <a class="btn btn-info" href="">课件</a>
-                        </div>
-                    <% end %>
-                    <% if l.lesson_tests.present? %>
-                        <div>
-                          <a class="btn btn-info" href="/courses/lesson_test/<%= l.id %>">测试</a>
-                        </div>
-                    <% end %>
-                  </li>
-              <% end %>
-          <% end %>
+            <li>
+                <div class="btn btn-lesson-item">
+                    <span class="gear">&#9881;</span>
+                    <%= l.name %>
+                </div>
+                <% if l.content.present? %>
+                <div>
+                    <a class="btn btn-info" href="">课件</a>
+                </div>
+                <% end %>
+                <% if l.lesson_tests.present? %>
+                <div>
+                    <a class="btn btn-info" href="/courses/lesson_test/<%= l.id %>">测试</a>
+                </div>
+                <% end %>
+            </li>
+            <% end %>
+            <% end %>
         </ul>
-      </div>
-  <% end %>
-  <div class="clearfix"></div>
-  <div class="course-info">
-    <%= raw(@course.course_info) %>
-  </div>
+    </div>
+    <% end %>
+    <div class="clearfix"></div>
+    <div class="course-info">
+        <%= raw(@course.course_info) %>
+    </div>
 </div>

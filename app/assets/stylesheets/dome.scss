@@ -186,17 +186,14 @@ hr.dome-courses:after {
 
 .course-head{
   padding:50px 30px;
-  width:90%;
-  border:2px solid #182A87;
+  width:80%;
   height: 320px;
+  background-image: linear-gradient(-129deg, #FDFDFD 0%, #FCFCFC 43%, #E5E5E5 100%);
+  border: 8px solid #182A87;
   border-radius: 18px;
 }
 
 .stars{
-  width:150px;
-  height: 30px;
-  float:left;
-  position: relative;
 }
 
 .stars span{
@@ -204,11 +201,22 @@ hr.dome-courses:after {
 }
 
 .stars-wrapper{
-  border-top:2px solid #182A87;
-  border-bottom:2px solid #182A87;
+  border-top:4px solid #182A87;
+  border-bottom:4px solid #182A87;
   width:70%;
   margin: 10px auto;
   overflow: hidden;
+}
+
+.stars-wrapper ul{
+  padding: 10px;
+}
+
+.stars-wrapper li{
+  width: 50%;
+  height: 30px;
+  float: left;
+  position: relative;
 }
 
 .lesson-list{
