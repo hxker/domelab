@@ -30,3 +30,5 @@
 # Ignore Byebug command history file.
 .byebug_history
 Guardfile
+
+**/.DS_Store

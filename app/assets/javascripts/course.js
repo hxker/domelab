@@ -70,8 +70,7 @@ function getJsonLength(jsonObj) {
 function initScheduler() {
     function formate_date(datestring) {
         var d = new Date(datestring);
-        var fd = [d.getMonth() + 1, "/", d.getDate(), "/", d.getFullYear()].join('')
-        return fd
+        return [d.getMonth() + 1, "/", d.getDate(), "/", d.getFullYear()].join('');
     }
     var scheduler_here = $("#scheduler_here");
     if (scheduler_here.length) {
@@ -86,26 +85,40 @@ function initScheduler() {
             $(".month-list li:nth-child(" + month + ") a").addClass("selected");
             return d.getFullYear();
         };
+        scheduler.templates.month_day = function(date) {
+            var dateToStr_func = scheduler.date.date_to_str(scheduler.config.month_day);
+            return "<div>" + dateToStr_func(date) + "</div>";
+        };
+        scheduler.xy.bar_height = 100;
+        scheduler.xy.month_scale_height = 40;
+        scheduler.xy.scale_height = 30;
+        scheduler.xy.margin_top = 20;
         scheduler_here.dhx_scheduler({
             date: new Date(),
             mode: "month"
         });
-        //scheduler.init('scheduler_here', new Date(), "month");
         scheduler.templates.event_bar_date = function(start, end, ev) {
             return "";
         };
         scheduler.templates.event_bar_text = function(start, end, event) {
-            return "<div class='course'>" + event.text + "</div>" + "<div class='lesson'>" + event.text + "</div>";
+            //console.log(event);
+            var name = event.text.split("--");
+            var link = "/courses/" + event.course_id;
+            $("tbody tr:nth-child(" + (event._sweek + 1) + ") td:nth-child(" + (event._sday + 1) + ") .dhx_month_head div").addClass("hasLesson");
+            return "<a href='" + link + "'><div class='course'>" + name[0] + "</div>" + "<div class='lesson'>" + name[1] + "</div></a>";
         };
 
         var data = $('.scheduler-data').data('scheduler');
         var final_data = data.map(function(obj) {
+            var tmp = formate_date(obj.start);
             return {
                 text: obj.title,
-                start_date: formate_date(obj.start),
-                end_date: formate_date(obj.end)
+                start_date: tmp,
+                end_date: tmp,
+                course_id: obj.course_id
             }
         });
+
         scheduler.parse(final_data, "json");
         $(".month-list li").click(function() {
             var year = $(".dhx_cal_date").text();
