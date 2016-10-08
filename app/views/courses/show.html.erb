@@ -8,7 +8,7 @@
           <h4>英文名:<%= @course.english_name %></h4>
       <% end %>
       <div class="stars-wrapper text-left">
-        <% if @course.course_type==0 %>
+        <% if @course.course_type == 0 %>
             <% if @stars.present? %>
                 <ul>
                   <% @stars.each do |s| %>
