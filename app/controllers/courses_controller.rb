@@ -64,8 +64,8 @@ class CoursesController < ApplicationController
   def schedule
     group_id = params[:id]
     if group_id.present? && GroupUserShip.where(group_id: group_id, user_id: current_user.id).exists?
-      group = Group.find(group_id)
-      @group_schedules = group.group_schedules
+      @group = Group.find(group_id)
+      @group_schedules = @group.group_schedules
     else
       render_optional_error(404)
     end

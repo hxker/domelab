@@ -1,8 +1,7 @@
-<%= debug @group_schedules.to_json %>
 <%= content_tag :div, class: "scheduler-data", data: {scheduler: @group_schedules.to_json(:only =>["title","start","end","course_id"])} do %>
 <% end %>
 <div class="container-fluid">
-  <h1 style="text-align: center;color:#9B9B9B;font-weight:normal;margin-top:50px;">进才北校课程表</h1>
+  <h1 style="text-align: center;color:#9B9B9B;font-weight:normal;margin-top:50px;"><%= @group.name %></h1>
   <div class="scheduler-wrapper">
     <div id="scheduler_here" class="dhx_cal_container center-block">
         <div class="dhx_cal_navline">
