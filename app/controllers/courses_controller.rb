@@ -32,8 +32,9 @@ class CoursesController < ApplicationController
     if @group_user.present?
       @has_sign_in = SignIn.where(user_id: current_user_id).where('updated_at > ?', Time.now.midnight).exists?
       @group_courses = @group_user.courses.select(:id, :name, :cover)
+      @progress = GroupSchedule.find_by_sql("select count(a.id) as all_num,(select count(a.id) from group_schedules a where a.start>'#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}') as already_num from group_schedules a where a.group_id = #{@group_user.id}").first
     else
-      @groups = Group.where(status: 1).select(:id, :name)
+      render_optional_error(403)
     end
   end
 
