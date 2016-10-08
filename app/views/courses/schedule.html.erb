@@ -1,33 +1,33 @@
+<%= debug @group_schedules.to_json %>
+<%= content_tag :div, class: "scheduler-data", data: {scheduler: @group_schedules.to_json(:only =>["title","start","end","course_id"])} do %>
+<% end %>
+<div class="container-fluid">
+  <h1 style="text-align: center;color:#9B9B9B;font-weight:normal;margin-top:50px;">进才北校课程表</h1>
+  <div class="scheduler-wrapper">
+    <div id="scheduler_here" class="dhx_cal_container center-block">
+        <div class="dhx_cal_navline">
+          <ul class="month-list">
+            <li><a>01</a></li>
+            <li><a>02</a></li>
+            <li><a>03</a></li>
+            <li><a>04</a></li>
+            <li><a>05</a></li>
+            <li><a>06</a></li>
+            <li><a>07</a></li>
+            <li><a>08</a></li>
+            <li><a>09</a></li>
+            <li><a>10</a></li>
+            <li><a>11</a></li>
+            <li><a>12</a></li>
+          </ul>
+            <div class="dhx_cal_prev_button">&nbsp;</div>
+            <div class="dhx_cal_next_button">&nbsp;</div>
+            <div class="dhx_cal_date"></div>
+        </div>
+        <div class="dhx_cal_header"></div>
+        <div class="dhx_cal_data"></div>
 
-
-  <!-- // <% if @group_schedules %>
-  //     <% @group_schedules.each do |s| %>
-  //         <p><%= s.title %>
-  //           :<%= s.start.strftime('%Y-%m-%d %H:%M') %><%= " -- #{ s.end.try(:strftime, '%Y-%m-%d %H:%M')}" if s.end.present? %></p>
-  //     <% end %>
-  // <% end %> -->
-  <%= content_tag :div, class: "scheduler-data", data: {scheduler: @group_schedules.to_json(:only =>["title","start","end"])} do %>
-  <% end %>
-<div id="scheduler_here" class="dhx_cal_container center-block" style='height: 700px;width: 800px;'>
-    <div class="dhx_cal_navline">
-      <ul class="month-list">
-        <li><a>01</a></li>
-        <li><a>02</a></li>
-        <li><a>03</a></li>
-        <li><a>04</a></li>
-        <li><a>05</a></li>
-        <li><a>06</a></li>
-        <li><a>07</a></li>
-        <li><a>08</a></li>
-        <li><a>09</a></li>
-        <li><a>10</a></li>
-        <li><a>11</a></li>
-        <li><a>12</a></li>
-      </ul>
-        <div class="dhx_cal_prev_button">&nbsp;</div>
-        <div class="dhx_cal_next_button">&nbsp;</div>
-        <div class="dhx_cal_date"></div>
     </div>
-    <div class="dhx_cal_header"></div>
-    <div class="dhx_cal_data"></div>
+  </div>
+
 </div>
