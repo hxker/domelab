@@ -14,7 +14,6 @@ $(function () {
             // it doesn't need to have a start or end
             var eventObject = {
                 title: $.trim($(this).text()) // use the element's text as the event title
-                // start: $.trim($(this).text())
             };
 
             // store the Event Object in the DOM element so we can get to it later
@@ -53,7 +52,7 @@ $(function () {
                 // retrieve the dropped element's stored Event Object
                 var originalEventObject = $(this).data('eventObject');
                 var $extraEventClass = $(this).attr('data-class');
-                var $extraEventLesson = $(this).attr('data-lesson');
+                var $extraEventCourse = $(this).attr('data-course');
 
 
                 // we need to copy it, so that multiple events don't have a reference to the same object
@@ -65,14 +64,14 @@ $(function () {
 
                 if ($extraEventClass) copiedEventObject['className'] = [$extraEventClass];
 
-                if ($extraEventLesson && group_id) {
+                if ($extraEventCourse && group_id) {
                     $.ajax({
                         url: '/admin/groups/add_schedule',
                         type: 'post',
                         data: {
                             title: originalEventObject.title,
                             start: date,
-                            lesson_id: $extraEventLesson,
+                            course_id: $extraEventCourse,
                             end: null,
                             allDay: allDay,
                             group_id: group_id
@@ -93,6 +92,8 @@ $(function () {
                             }
                         }
                     });
+                } else {
+                    alert('不规范操作');
                 }
 
 

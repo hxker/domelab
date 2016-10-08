@@ -24,7 +24,7 @@ class Admin::GroupsController <AdminController
   end
 
   def get_schedule
-    result = GroupSchedule.where(group_id: params[:group_id]).select(:id, :title, :start, :end, :allDay)
+    result = GroupSchedule.where(group_id: params[:group_id]).select(:id, :title, :start, :end, :allDay, :course_id)
     render json: result
   end
 
@@ -34,12 +34,12 @@ class Admin::GroupsController <AdminController
     end
     if request.method == 'POST'
       group_id = params[:group_id]
-      lesson_id = params[:lesson_id]
+      course_id = params[:course_id]
       title = params[:title]
       start_time = params[:start]
       end_time = params[:end]
       all_day = params[:allDay]
-      g_s = GroupSchedule.create(group_id: group_id, lesson_id: lesson_id, title: title, start: start_time, end: end_time, allDay: all_day)
+      g_s = GroupSchedule.create(group_id: group_id, course_id: course_id, title: title, start: start_time, end: end_time, allDay: all_day)
       if g_s.save
         result = [true, '添加成功', g_s.id]
       else

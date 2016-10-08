@@ -32,7 +32,7 @@
                     <% if @group.group_course_ships.present? %>
                         <% @group.group_course_ships.includes(:course).each do |group_course| %>
                             <% group_course.course.lessons.each do |lesson| %>
-                                <div class="external-event label-success" data-lesson="<%= lesson.id %>" data-class="label-success">
+                                <div class="external-event label-success" data-course="<%= group_course.course_id %>" data-class="label-success">
                                   <i class="icon-move"></i>
                                   <%= group_course.course.name %>--<%= lesson.name %>
                                 </div>
