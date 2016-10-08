@@ -4,11 +4,11 @@
     <%= simple_form_for([:admin, @course]) do |f| %>
         <%= f.error_notification %>
         <% if @course.errors.any? %>
-            <div class="alert alert-danger">
-              <% if @course.errors[:cover].present? %>
+            <% if @course.errors[:cover].present? %>
+                <div class="alert alert-danger">
                   <p>封面:<%= @course.errors[:cover].first %></p>
-              <% end %>
-            </div>
+                </div>
+            <% end %>
         <% end %>
 
         <div class="form-inputs">
@@ -18,6 +18,8 @@
               <%= f.input :name %>
           <% end %>
           <%= f.input :course_type, collection: Course::TYPE, prompt: 1 %>
+          <%= f.input :english_name, hint: '课程类型为名师时必填' %>
+          <%= f.input :author, hint: '课程类型为名师时必填' %>
           <%= f.input :status, collection: Course::STATUS, prompt: 1 %>
           <% if @course.cover.present? %>
               <%= image_tag(@course.cover_url(:middle)) %>

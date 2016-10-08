@@ -3,19 +3,27 @@ class CoursesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @courses = Course.where(course_type: 1, status: 1).select(:id, :name)
+    @courses = Course.where(course_type: 1, status: 1).select(:id, :name, :cover, :author).page(params[:page]).per(params[:per])
   end
 
   def show
     course_id = params[:id]
-    @course = Course.joins(:group_course_ships).joins('left join group_user_ships g_u on g_u.group_id = group_course_ships.group_id').where(id: course_id).where('g_u.user_id=?', current_user.id).select(:id, :name, :cover, :course_info, 'group_course_ships.group_id').take
-    if @course
-      @lessons = Lesson.where(course_id: course_id)
-      @stars = @course.course_stars.select(:name, :stars)
+    course = Course.find(course_id)
+    if course
+      if course.course_type == 0
+        @course = Course.joins(:group_course_ships).joins('left join group_user_ships g_u on g_u.group_id = group_course_ships.group_id').where(id: course_id).where('g_u.user_id=?', current_user.id).select(:id, :name, :cover, :course_type, :course_info, 'group_course_ships.group_id').take
+        if @course
+          @lessons = Lesson.where(course_id: course_id)
+          @stars = course.course_stars.select(:name, :stars)
+        else
+          render_optional_error(403)
+        end
+      else
+        @course = course
+      end
     else
       render_optional_error(404)
     end
-
   end
 
   def dome
@@ -160,7 +168,7 @@ class CoursesController < ApplicationController
   def community
     group_id = params[:id]
     @group = Group.find(group_id)
-    @group_opus = @group.group_opus.includes(:user).where(status: 1).page(params[:page]).per(params[:per])
+    @group_opus = @group.group_opus.includes(:user).where(status: 1).order('likes_count desc').page(params[:page]).per(params[:per])
   end
 
   def discuss

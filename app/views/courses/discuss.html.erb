@@ -3,7 +3,7 @@
   <%= @group.name %>
   <%= image_tag(@group.teacher.avatar_url(:middle)) %>
   <hr>
-  <a class="btn btn-lg">作品展示</a>
+  <a href="<%= "/courses/community/#{@group.id}" %>" class="btn btn-lg">作品展示</a>
   <a href="<%= "/courses/discuss/#{@group.id}" %>" class="btn btn-lg">讨论区</a>
   <br>
   <%= simple_form_for(GroupCommunity.new, url: '/courses/discuss_post', method: :post) do |f| %>
@@ -22,7 +22,7 @@
           <%= c.content %>
           <%= c.created_at.strftime('%Y-%m-%d %H:%M') %>
 
-            <%= likeable_tag(c) %>
+          <%= likeable_tag(c) %>
           <button type="button" class="btn btn-warning btn-lg">
 
             评论

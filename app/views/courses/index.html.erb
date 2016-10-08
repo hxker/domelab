@@ -1,9 +1,22 @@
 <div class="container">
   <div class="row">
     <% if @courses.present? %>
-        <% @courses.each do |c| %>
-            <%= c.name %>
-        <% end %>
+        <div class="row">
+          <div class="col-xs-12 col-md-6 col-lg-12">
+            <div class="row">
+              <% @courses.each do |c| %>
+                  <div class="col-xs-4 text-center">
+                    <%= image_tag(c.cover_url(:middle)) %>
+                    <p><%= c.name %></p>
+                    <p>作者:<%= c.author %></p>
+                  </div>
+              <% end %>
+            </div>
+            <nav>
+              <%= paginate @courses %>
+            </nav>
+          </div>
+        </div>
     <% end %>
   </div>
 </div>

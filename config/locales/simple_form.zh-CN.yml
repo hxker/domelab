@@ -54,6 +54,8 @@ zh-CN:
         stars: '星级'
         answer: '答案'
         lesson_id: '所属课时'
+        english_name: '英文名'
+        author: '作者'
 
 
     "yes": '是'
