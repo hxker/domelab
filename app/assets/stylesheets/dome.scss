@@ -306,75 +306,144 @@ h7.lesson-name{
 
 // scheduler
 
+
+.container-fluid #scheduler_here {
+			height: 760px;
+			width: 700px;
+      overflow: visible;
+	}
+
+.scheduler-wrapper{
+  height: 900px;
+  width: 740px;
+  margin:50px auto;
+  background: #fff6f2;
+}
+
+.dhx_cal_data.dhx_resize_denied.dhx_move_denied{
+  top: 116px !important;
+  height: 100% !important;
+  overflow: hidden;
+}
+
 #scheduler_here .dhx_cal_navline .dhx_cal_date{
   text-align: left;
+  font-size: 30px;
+  color:#9B9B9B;
+  font-weight: normal;
 }
 #scheduler_here .dhx_month_head{
-  height: 40px;
   text-align: left;
-}
-#scheduler_here .dhx_month_body{
-  height: 60px !important;
 }
 
 .dhx_cal_navline .month-list li{
   float: left;
-  margin-left: 20px;
+  margin-left: 22px;
 }
 
 .dhx_cal_navline .month-list{
   position: absolute;
-  top: 20px;
-  right: 150px
+  top: 30px;
+  left: 130px
 }
 
-.month-list .selected{
+.dhx_cal_navline .month-list a{
+  color: #9B9B9B;
+  font-size: 12px;
+}
+
+
+.dhx_cal_navline .month-list .selected{
   color: orange;
 }
 
 #scheduler_here .dhx_cal_event_clear{
-  height: 60px;
+  height: 80%;
 }
 
 #scheduler_here .dhx_cal_event_clear div{
   border-radius: 4px;
-  padding: 5px 10px ;
   text-align: center;
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 #scheduler_here .dhx_cal_event_clear .course{
   color: #4A90E2;
   background: #C1D6F4;
   border:1px solid #4A90E2;
+  padding: 0 10px;
+  white-space: normal;
+  max-height: 3em;
+  word-wrap: break-word;
+  overflow: hidden;
 }
 
 #scheduler_here .dhx_cal_event_clear .lesson{
   color: #E67F97;
   background: #FFD5DF;
+  padding: 0 10px;
   border:1px solid #E67F97;
 }
 
 #scheduler_here{
-  background-color: rgba(255,208,188,0.5);
+  background-color: #fff6f2;
 }
 
 #scheduler_here .dhx_cal_navline{
-  border-bottom: 1px solid #D8D8D8;
+  border-bottom: 2px solid #D8D8D8;
+  width: 740px !important;
+  height: 49px !important;
+  left: -20px !important;
 }
 
 #scheduler_here .dhx_cal_header .dhx_scale_bar{
   background-color: #D8D8D8;
   color: #FFFFFF;
-  font-size: 20px;
+  font-size: 14px;
   border-color: #D8D8D8;
+  line-height: 30px;
+  text-transform: uppercase;
 }
 
 #scheduler_here .dhx_cal_data{
   border:none;
 }
 
+#scheduler_here tr div{
+  border-width: 2px;
+  border-color: #D8D8D8;
+}
+
 #scheduler_here tr td:last-child div{
   border-right: none;
+}
+
+#scheduler_here tr:last-child div{
+  border-bottom: none;
+}
+
+#scheduler_here .dhx_cal_header{
+  width: 740px !important;
+  left: -20px !important;
+  top: 55px !important;
+  background: #D8D8D8;
+}
+
+.dhx_month_head div{
+  position: relative;
+  top: 10px;
+  left: 10px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+  font-size: 18px;
+  color: #9B9B9B;
+}
+
+.dhx_month_head .hasLesson{
+  color:white;
+  border-radius: 30px;
+  background-color: #f5a623;
 }
