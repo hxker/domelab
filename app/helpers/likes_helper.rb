@@ -1,6 +1,6 @@
 module LikesHelper
 
-  def likeable_tag(likeable)
+  def likeable_tag(likeable,type)
 
     return '' if likeable.blank?
 
@@ -15,10 +15,14 @@ module LikesHelper
         end
     icon = content_tag('i', '', class: "like-change icon-#{icon_name}")
     like_label = raw "#{icon} <span>#{label}</span>"
-
+    if type=="button"
+      style = "btn likeable #{state}"
+    else
+      style = "likeable #{state}"
+    end
     link_to(like_label, '#', title: title, 'data-count' => likeable.likes_count,
             'data-state' => state, 'data-type' => likeable.class, 'data-id' => likeable.id,
-            class: "likeable #{state}")
+            class: style)
   end
 
   private

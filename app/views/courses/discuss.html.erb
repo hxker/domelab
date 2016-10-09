@@ -1,48 +1,84 @@
-<div class="container">
+<div class="container discuss">
 
-  <%= @group.name %>
-  <%= image_tag(@group.teacher.avatar_url(:middle)) %>
-  <hr>
-  <a href="<%= "/courses/community/#{@group.id}" %>" class="btn btn-lg">作品展示</a>
-  <a href="<%= "/courses/discuss/#{@group.id}" %>" class="btn btn-lg">讨论区</a>
-  <br>
-  <%= simple_form_for(GroupCommunity.new, url: '/courses/discuss_post', method: :post) do |f| %>
-      <textarea id="group_community_content" class="text form-control" style="width:500px;height:180px" name="group_community[content]"></textarea>
-      <%= f.input :anonymous, label: '匿名提交' %>
-      <%= f.hidden_field :group_id, value: @group.id %>
-      <div class="form-actions">
-        <%= f.submit class: 'btn btn-primary', value: '提交' %>
-      </div>
-  <% end %>
-  <hr>
-  <% if @comments %>
-      <% @comments.each do |c| %>
-          <%= image_tag('avatar/thumb.png') %>
-          <%= c.user.fullname %>
-          <%= c.content %>
-          <%= c.created_at.strftime('%Y-%m-%d %H:%M') %>
+    <div class="community">
+        <div class="header">
+            <h2><%= @group.name %></h1>
+            <div class="img-wrapper"><img src="<%= image_path('community-header.png') %>" alt=""/></div>
+        </div>
 
-          <%= likeable_tag(c) %>
-          <button type="button" class="btn btn-warning btn-lg">
+        <nav class="text-center">
+            <a class="btn btn-domelab active">作品展示</a>
+            <a href="/courses/discuss/<%= @group.id %>" class="btn btn-domelab">讨论区</a>
+        </nav>
+    </div>
 
-            评论
-          </button>
-          <div>
-            <% if c.child_group_communities.present? %>
-                <div style="margin: 20px">
+    <%= simple_form_for(GroupCommunity.new, url: '/courses/discuss_post', method: :post,html: { class: "comment-post"}) do |f| %>
+    <textarea id="group_community_content" class="text form-control" name="group_community[content]" placeholder="快加入讨论吧～"></textarea>
+    <%= f.hidden_field :group_id, value: @group.id %>
+    <div class="bottom">
+        <%= f.input :anonymous, label: '匿名提交'%>
+        <%= f.button :submit, "提交", class: "submit", data: { disable_with: "正在提交。。。"} %>
+    </div>
+    <% end %>
 
-                  <% c.child_group_communities.each do |child_c| %>
-                      <%= image_tag('avatar/thumb.png') %>
-                      <%= child_c.user.fullname %>
-                      <%= child_c.content %>
-                      <%= child_c.created_at.strftime('%Y-%m-%d %H:%M') %>
-                  <% end %>
+    <div class="comments-wrapper">
+        <% if @comments %>
+        <ul class="comments">
+            <% @comments.each do |c| %>
+            <li class="comment-item" data-id="<%= c.id %>">
+                <div class="comment">
+                    <div class="img-wrapper">
+                        <%= image_tag('avatar/thumb.png',class:"img-circle") %>
+                    </div>
+                    <div class="middle">
+                        <div class="poster">
+                            <%= c.user.fullname %>
+                        </div>
+                        <p class="content">
+                            <%= c.content %>
+                        </p>
+                        <div class="date">
+                            <%= c.created_at.strftime('%Y-%m-%d %H:%M') %>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <%= likeable_tag(c,'button') %>
+                        <button type="button" class="btn reply">
+                            评论
+                        </button>
+                    </div>
+
                 </div>
+                <div class="sub-comments">
+                <% if c.child_group_communities.present? %>
+                    <div>
+                        <% c.child_group_communities.each do |child_c| %>
 
+                        <div class="comment">
+                            <div class="img-wrapper">
+                                <%= image_tag('avatar/thumb.png',class:"img-circle") %>
+                            </div>
+                            <div class="right">
+                                <div class="poster">
+                                    <%= c.user.fullname %>
+                                </div>
+                                <p class="content">
+                                    <%= c.content %>
+                                </p>
+                                <div class="date">
+                                    <%= c.created_at.strftime('%Y-%m-%d %H:%M') %>
+                                </div>
+                            </div>
+                        </div>
+                        <% end %>
+                    </div>
 
+                <% end %>
+                </div>
+            </li>
             <% end %>
-          </div>
-          <br>
-      <% end %>
-  <% end %>
+        </ul>
+        <% end %>
+    </div>
+
 </div>

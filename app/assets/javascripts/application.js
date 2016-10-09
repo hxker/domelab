@@ -19,3 +19,4 @@
 //= require like
 //= require turbolinks
 //= require dhtmlxscheduler
+//= require discuss
