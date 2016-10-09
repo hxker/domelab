@@ -33,7 +33,7 @@ class CoursesController < ApplicationController
       @has_sign_in = SignIn.where(user_id: current_user_id).where('updated_at > ?', Time.now.midnight).exists?
       @group_courses = @group_user.courses.select(:id, :name, :cover)
       progress = GroupSchedule.find_by_sql("select count(a.id) as all_num,(select count(a.id) from group_schedules a where a.start < '#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}') as already_num from group_schedules a where a.group_id = #{@group_user.id}").first
-      @progress = {already_num: progress.already_num, all_num: progress.all_num, progress: ((Float(progress.already_num)/progress.all_num)*100).round(0)}
+      @progress = {already_num: progress.already_num, all_num: progress.all_num, progress: (progress.all_num > 0) ? ((Float(progress.already_num)/progress.all_num)*100).round(0) : 0}
     else
       render_optional_error(403)
     end
