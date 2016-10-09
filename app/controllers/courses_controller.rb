@@ -32,7 +32,8 @@ class CoursesController < ApplicationController
     if @group_user.present?
       @has_sign_in = SignIn.where(user_id: current_user_id).where('updated_at > ?', Time.now.midnight).exists?
       @group_courses = @group_user.courses.select(:id, :name, :cover)
-      @progress = GroupSchedule.find_by_sql("select count(a.id) as all_num,(select count(a.id) from group_schedules a where a.start>'#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}') as already_num from group_schedules a where a.group_id = #{@group_user.id}").first
+      progress = GroupSchedule.find_by_sql("select count(a.id) as all_num,(select count(a.id) from group_schedules a where a.start < '#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}') as already_num from group_schedules a where a.group_id = #{@group_user.id}").first
+      @progress = {already_num: progress.already_num, all_num: progress.all_num, progress: ((Float(progress.already_num)/progress.all_num)*100).round(0)}
     else
       render_optional_error(403)
     end
@@ -181,9 +182,10 @@ class CoursesController < ApplicationController
   def discuss_post
     g_c_params = params[:group_community]
     group_id = g_c_params[:group_id]
+    parent_id = g_c_params[:parent_id]
     content = g_c_params[:content]
     anonymous = g_c_params[:anonymous]
-    group_community = GroupCommunity.create(group_id: group_id, user_id: current_user.id, content: content, anonymous: anonymous)
+    group_community = GroupCommunity.create(group_id: group_id, user_id: current_user.id, parent_id: parent_id, content: content, anonymous: anonymous)
     if group_community.save
       flash[:notice] = '提交成功'
     else
