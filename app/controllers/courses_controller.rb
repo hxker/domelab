@@ -206,17 +206,20 @@ class CoursesController < ApplicationController
       if group_user
         g_o = GroupOpu.create(course_id: course_id, group_id: group_id, content: content, user_id: current_user.id)
         if g_o.save
-          flash[:success] = '上传成功,审核通过后会显示'
+          @message = '上传成功,审核通过后会显示'
         else
-          flash[:error] = '上传失败'
+          @message = '上传失败'
         end
       else
-        flash[:error] = '您没有权限上传'
+        @message = '您没有权限上传'
       end
     else
-      flash[:error]= '参数不完整'
+      @message = '参数不完整'
     end
-    redirect_to "/courses/community/#{group_id}"
+    respond_to do |format|
+      format.html { redirect_to "/courses/community/#{group_id}", notice: @message }
+      format.js
+    end
   end
 
   private
