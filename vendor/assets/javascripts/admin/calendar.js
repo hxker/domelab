@@ -170,10 +170,10 @@ $(function () {
                 $('.tooltip-event').remove();
             },
             eventClick: function (calEvent) {
-
-                var form = $("<form class='form-inline'><label>更改事件名称 &nbsp;</label></form>");
-                form.append("<input class='middle' autocomplete=off type=text value='" + calEvent.title + "' /> ");
-                form.append("<button type='submit' class='btn btn-sm btn-success'><i class='icon-ok'></i> 提交</button>");
+                var form = $('<h3>确认删除吗?</h3>');
+                // var form = $("<form class='form-inline'><label>更改事件名称 &nbsp;</label></form>");
+                // form.append("<input class='middle' autocomplete=off type=text value='" + calEvent.title + "' /> ");
+                // form.append("<button type='submit' class='btn btn-sm btn-success'><i class='icon-ok'></i> 提交</button>");
 
                 var div = bootbox.dialog({
                     message: form,
