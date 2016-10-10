@@ -1,6 +1,6 @@
 module LikesHelper
 
-  def likeable_tag(likeable,type)
+  def likeable_tag(likeable,type=nil)
 
     return '' if likeable.blank?
 

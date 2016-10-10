@@ -492,13 +492,14 @@ h7.lesson-name {
     background: #FFFFFF;
     border: 1px solid #979797;
     border-radius: 14px;
-    padding: 30px 40px 20px;
+    padding: 2% 3%;
     width:70%;
     margin: auto;
 
     textarea {
         border: none;
         height: 200px;
+        resize: none;
     }
     .bottom{
       margin: 20px 50px 0px;
@@ -534,8 +535,7 @@ h7.lesson-name {
   }
 
   .comment{
-    padding-top: 30px;
-
+    padding-bottom: 5px;
     .img-wrapper{
       float: left;
       width: 20%;
@@ -603,8 +603,12 @@ h7.lesson-name {
   opacity: 0.51;
   background: rgba(215,215,215,0.58);
 
+  .comment{
+    padding-top: 10px;
+  }
+
   .comment-post{
-    width: 100%;
+    margin: 15px auto 25px;
 
     textarea{
       height: 100px;
