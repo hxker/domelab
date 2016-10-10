@@ -7,8 +7,8 @@
         </div>
 
         <nav class="text-center">
-            <a class="btn btn-domelab active">作品展示</a>
-            <a href="/courses/discuss/<%= @group.id %>" class="btn btn-domelab">讨论区</a>
+            <a href="/courses/community/<%= @group.id %>" class="btn btn-rect" style="margin-right: 50px;">作品展示</a>
+            <a  class="btn btn-rect active">讨论区</a>
         </nav>
     </div>
 
@@ -17,7 +17,7 @@
     <%= f.hidden_field :group_id, value: @group.id %>
     <div class="bottom">
         <%= f.input :anonymous, label: '匿名提交'%>
-        <%= f.button :submit, "提交", class: "submit", data: { disable_with: "正在提交。。。"} %>
+        <%= f.button :submit, "发送", class: "btn-rect btn-sm submit", data: { disable_with: "正在发送。。。"} %>
     </div>
     <% end %>
 
@@ -32,7 +32,7 @@
                     </div>
                     <div class="middle">
                         <div class="poster">
-                            <%= c.user.fullname %>
+                            <%= c.anonymous ? '匿名评论' : c.user.fullname %>
                         </div>
                         <p class="content">
                             <%= c.content %>
@@ -60,13 +60,13 @@
                             </div>
                             <div class="right">
                                 <div class="poster">
-                                    <%= c.user.fullname %>
+                                    <%= child_c.anonymous ? '匿名评论' : child_c.user.fullname %>
                                 </div>
                                 <p class="content">
-                                    <%= c.content %>
+                                    <%= child_c.content %>
                                 </p>
                                 <div class="date">
-                                    <%= c.created_at.strftime('%Y-%m-%d %H:%M') %>
+                                    <%= child_c.created_at.strftime('%Y-%m-%d %H:%M') %>
                                 </div>
                             </div>
                         </div>

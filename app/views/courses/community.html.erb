@@ -6,48 +6,49 @@
     </div>
 
     <nav class="text-center">
-        <a class="btn btn-domelab active">作品展示</a>
-        <a href="/courses/discuss/<%= @group.id %>" class="btn btn-domelab">讨论区</a>
+        <a class="btn btn-rect active" style="margin-right: 50px;">作品展示</a>
+        <a href="/courses/discuss/<%= @group.id %>" class="btn btn-rect">讨论区</a>
     </nav>
   </div>
 
     <div class="opus-wrapper">
         <div class="text-center">
-            <a href="#modal-form" role="button" class="btn btn-domelab" data-toggle="modal">上传我的作品</a>
+            <a href="#modal-form" role="button" class="btn btn-rect" data-toggle="modal">上传我的作品</a>
         </div>
         <% if @group_opus.present? %>
-        <div class="row">
-            <div class="col-xs-12">
+
+            <div class="opus-list center-block">
                 <div class="row">
                     <% @group_opus.each do |opus| %>
-                    <div class="col-xs-4 text-center">
-                        <%= image_tag(opus.content_url(:middle)) %>
-                        <div style="margin: 0 90px">
-                            <div class="pull-left">
-                                <%= likeable_tag(opus) %>
-                            </div>
+                        <div class="col-xs-4 text-center opus-item">
+                          <div class="img-wrapper">
+                            <%= image_tag(opus.content_url(:middle)) %>
+                            <hr>
+                            <%= likeable_tag(opus) %>
+                          </div>
+                            <div class="author">作者：<%= opus.user.fullname %></div>
                         </div>
-                        <br>
-                        <div>作者:<%= opus.user.fullname %></div>
-                    </div>
+
                     <% end %>
 
                 </div>
-                <nav class="text-center">
+                <nav class="text-center ">
                     <%= paginate @group_opus %>
                 </nav>
             </div>
 
-        </div>
-
         <% end %>
     </div>
 
-    <div id="modal-form" class="modal" tabindex="-1">
-        <div class="modal-dialog">
+    <div id="modal-form" class="modal opus-form" tabindex="-1">
+        <div class="modal-dialog text-center">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <div class="img-wrapper">
+                      <img src="<%= image_path('upload.png') %>" alt=""/>
+                    </div>
+
                     <h4 class="blue bigger">上传我的作品</h4>
                 </div>
 
@@ -55,26 +56,19 @@
                 <div class="modal-body overflow-visible">
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="space"></div>
                             <%= f.error_notification %>
                             <%= f.hidden_field :course_id, value: @group.id %>
                             <%= f.hidden_field :group_id, value: @group.id %>
+                            <div class="btn upload-path">请选择文件</div>
                             <%= f.file_field :content %>
+                            <%= f.label :content, "浏览", class:"btn btn-rect active" %>
                         </div>
+                          <img class="preview" src="#" alt="预览" />
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button class="btn btn-sm" data-dismiss="modal">
-                        <i class="icon-remove"></i>
-                        取消
-                    </button>
-
-                    <%= f.button :submit, class: 'btn btn-sm btn-primary' %>
-                    <!--<button class="btn btn-sm btn-primary">-->
-                    <!--<i class="icon-ok"></i>-->
-                    <!--提交-->
-                    <!--</button>-->
+                    <%= f.button :submit,"上传我的作品", class: 'btn btn-rect', data: { disable_with: "正在发送。。。"} %>
                 </div>
                 <% end %>
             </div>

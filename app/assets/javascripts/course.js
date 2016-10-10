@@ -34,10 +34,7 @@ $(function() {
                     },
                     success: function(data) {
                         console.log(data);
-                        if (data[0] == true) {
-                            // var html = $('<div><h1>正确率:' + data[1]["right_per"] + '</h1><p><img src="' + data[1]["teacher_avatar"] + '"></p>' +
-                            //     '<p><a class="btn btn-xs btn-primary" href="javascript:history.go(-1);">返回</a></p></div>');
-                            // $('#lesson-test-container').html(html)
+                        if (data[0] === true) {
                             $('#lesson-test-container').addClass("hidden");
                             $('#timepassed span').text(min + ':' + sec);
                             $('#test-result span').text(data[1]["right_per"]);
@@ -46,11 +43,11 @@ $(function() {
                             }));
                             $('#test-result-container').removeClass("hidden");
                         } else {
-                            alert(data[1])
+                            alert(data[1]);
                         }
 
                     }
-                })
+                });
             }
 
         });
@@ -109,7 +106,7 @@ function initScheduler() {
         };
 
         var data = $('.scheduler-data').data('scheduler');
-        if (date.length) {
+        if (data.length) {
             var final_data = data.map(function(obj) {
                 var tmp = formate_date(obj.start);
                 return {
@@ -117,7 +114,7 @@ function initScheduler() {
                     start_date: tmp,
                     end_date: tmp,
                     course_id: obj.course_id
-                }
+                };
             });
 
             scheduler.parse(final_data, "json");

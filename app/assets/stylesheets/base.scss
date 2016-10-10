@@ -108,6 +108,26 @@ input[type="color"]:focus,
   color:white;
 }
 
+.btn-rect{
+  opacity: 0.7;
+  background: #FFFFFF;
+  border: 2px solid #182A87;
+  border-radius: 5px;
+  font-size: 18px;
+  color: #182A87;
+  letter-spacing: 0.57px;
+  padding: 0px 15px;
+}
+
+.btn-rect.active{
+  background: #182A87;
+  color: #FFFFFF;
+}
+
+.btn.btn-sm{
+  font-size: 12px;
+}
+
 label{
   font-size: 20px;
 }
