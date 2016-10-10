@@ -10,7 +10,7 @@ class UserController < ApplicationController
   def profile
     current_user_id = current_user.id
     @user_info = User.where(id: current_user_id).left_joins(:school, :district).select(:fullname, :email, :mobile, :nickname, :gender, :grade, :bj, :school_id, :district_id, 'schools.name as school_name', 'districts.name as district_name', :birthday).take
-    @has_roles = UserRole.where(user_id: current_user_id).pluck(:role_id, :status)
+    @roles = Role.find_by_sql("select r.id,r.name,(select u_r.status from user_roles u_r where u_r.user_id = #{current_user_id} and u_r.role_id = r.id) as status from roles r")
 
     if request.method == 'POST'
       user_params = params[:user]

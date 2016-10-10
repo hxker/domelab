@@ -32,11 +32,11 @@
             <td><%= th[:num] %></td>
             <td>
               <% if th[:certificate].present? %>
-                  <a href="<%= "#modal-form-#{th[:id]}" %>" role="button" data-toggle="modal" class="btn btn-xs btn-warning">
+                  <a href="<%= "#modal-form-#{th[:user_id]}" %>" role="button" data-toggle="modal" class="btn btn-xs btn-warning">
                     审核
                   </a>
 
-                  <div id="<%= "modal-form-#{th[:id]}" %>" class="modal" tabindex="-1">
+                  <div id="<%= "modal-form-#{th[:user_id]}" %>" class="modal" tabindex="-1">
                     <div class="modal-dialog">
                       <div class="modal-content" style="width: 700px">
                         <div class="widget-header model-header">

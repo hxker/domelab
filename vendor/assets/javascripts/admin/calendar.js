@@ -170,54 +170,59 @@ $(function () {
                 $('.tooltip-event').remove();
             },
             eventClick: function (calEvent) {
-                var form = $('<h3>确认删除吗?</h3>');
-                // var form = $("<form class='form-inline'><label>更改事件名称 &nbsp;</label></form>");
-                // form.append("<input class='middle' autocomplete=off type=text value='" + calEvent.title + "' /> ");
-                // form.append("<button type='submit' class='btn btn-sm btn-success'><i class='icon-ok'></i> 提交</button>");
+                console.log(calEvent.end);
+                console.log(date);
+                console.log(date > calEvent.end);
+                if (!calEvent.end || date < calEvent.end) {
+                    var form = $('<h3>确认删除 <span class="red">' + calEvent.title + '</span> 吗?</h3>');
+                    // var form = $("<form class='form-inline'><label>更改事件名称 &nbsp;</label></form>");
+                    // form.append("<input class='middle' autocomplete=off type=text value='" + calEvent.title + "' /> ");
+                    // form.append("<button type='submit' class='btn btn-sm btn-success'><i class='icon-ok'></i> 提交</button>");
 
-                var div = bootbox.dialog({
-                    message: form,
+                    var div = bootbox.dialog({
+                        message: form,
+                        onEscape: true,
+                        buttons: {
+                            "delete": {
+                                "label": "<i class='icon-trash'></i> 删除",
+                                "className": "btn-sm btn-danger",
+                                "callback": function () {
 
-                    buttons: {
-                        "delete": {
-                            "label": "<i class='icon-trash'></i> 删除",
-                            "className": "btn-sm btn-danger",
-                            "callback": function () {
-
-                                if (calEvent._id) {
-                                    $.ajax({
-                                        url: '/admin/groups/delete_schedule',
-                                        type: 'post',
-                                        data: {id: calEvent.id},
-                                        success: function (data) {
-                                            if (data[0]) {
-                                                calendar.fullCalendar('removeEvents', calEvent.id);
-                                            } else {
-                                                alert(data[1]);
+                                    if (calEvent._id) {
+                                        $.ajax({
+                                            url: '/admin/groups/delete_schedule',
+                                            type: 'post',
+                                            data: {id: calEvent.id},
+                                            success: function (data) {
+                                                admin_gritter_notice(data[1]);
+                                                if (data[0]) {
+                                                    calendar.fullCalendar('removeEvents', calEvent.id);
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
+                                    }
+
                                 }
-
+                            },
+                            "close": {
+                                "label": "<i class='icon-remove'></i> 取消",
+                                "className": "btn-sm"
                             }
-                        },
-                        "close": {
-                            "label": "<i class='icon-remove'></i> 取消",
-                            "className": "btn-sm"
                         }
-                    }
 
-                });
+                    });
 
-                form.on('submit', function () {
-                    calEvent.title = form.find("input[type=text]").val();
-                    calendar.fullCalendar('updateEvent', calEvent);
-                    if (calEvent._id) {
-                        update_event(calEvent);
-                    }
-                    div.modal("hide");
-                    return false;
-                });
+                    form.on('submit', function () {
+                        calEvent.title = form.find("input[type=text]").val();
+                        calendar.fullCalendar('updateEvent', calEvent);
+                        if (calEvent._id) {
+                            update_event(calEvent);
+                        }
+                        div.modal("hide");
+                        return false;
+                    });
+                }
+
             },
 
             eventDrop: function (event, revertFunc) {
