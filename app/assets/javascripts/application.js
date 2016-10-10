@@ -20,3 +20,4 @@
 //= require turbolinks
 //= require dhtmlxscheduler
 //= require discuss
+//= require community

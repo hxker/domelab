@@ -1,12 +1,12 @@
 module LikesHelper
 
-  def likeable_tag(likeable,type)
+  def likeable_tag(likeable,type=nil)
 
     return '' if likeable.blank?
 
     return unlogin_likeable_tag if current_user.blank?
 
-    label = "(#{likeable.likes_count})"
+    label = likeable.likes_count
     title, state, icon_name =
         if likeable.liked_by_user?(current_user)
           %w(取消赞 active heart)

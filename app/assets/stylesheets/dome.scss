@@ -195,8 +195,6 @@ hr.dome-courses:after {
     border-radius: 18px;
 }
 
-.stars {}
-
 .stars span {
     color: #E95E21;
 }
@@ -358,6 +356,7 @@ h7.lesson-name {
 .dhx_cal_navline .month-list a {
     color: #9B9B9B;
     font-size: 12px;
+    cursor: pointer;
 }
 
 .dhx_cal_navline .month-list .selected {
@@ -492,13 +491,14 @@ h7.lesson-name {
     background: #FFFFFF;
     border: 1px solid #979797;
     border-radius: 14px;
-    padding: 30px 40px 20px;
+    padding: 2% 3%;
     width:70%;
     margin: auto;
 
     textarea {
         border: none;
         height: 200px;
+        resize: none;
     }
     .bottom{
       margin: 20px 50px 0px;
@@ -510,6 +510,11 @@ h7.lesson-name {
         margin-right: 20px;
       }
 
+      label{
+        font-size: 12px;
+        color: #182A87;
+      }
+
       .form-group{
         display: inline;
       }
@@ -518,7 +523,6 @@ h7.lesson-name {
 
 .comment-item .comment{
   overflow: auto;
-  border-bottom:2px solid #D8D8D8;
 }
 .comments-wrapper{
   border-top:2px solid #D8D8D8;
@@ -534,6 +538,7 @@ h7.lesson-name {
   }
 
   .comment{
+    padding-bottom: 5px;
     padding-top: 30px;
 
     .img-wrapper{
@@ -593,6 +598,8 @@ h7.lesson-name {
 
 .comment-item{
   overflow: auto;
+  border-bottom: 1px solid #D8D8D8;
+  border-top: 1px solid #D8D8D8;
 }
 
 .sub-comments{
@@ -603,11 +610,127 @@ h7.lesson-name {
   opacity: 0.51;
   background: rgba(215,215,215,0.58);
 
+  .comment{
+    padding-top: 10px;
+  }
+
   .comment-post{
-    width: 100%;
+    margin: 15px auto 25px;
 
     textarea{
       height: 100px;
     }
   }
+}
+
+.opus-list{
+  width: 70%;
+  margin-top: 20px;
+  padding: 20px 50px;
+  background: #F3F3F3;
+
+  .img-wrapper{
+    padding:15px;
+    border-radius: 10px;
+    background: #FFF;
+
+    img{
+      width: 90%;
+    }
+  }
+
+  .author{
+    margin-top: 20px;
+    font-size: 14px;
+    color: #4A90E2;
+    letter-spacing: 0.45px;
+  }
+}
+
+.opus-item{
+  margin-bottom: 30px;
+
+  hr{
+    margin: 10px 0px;
+  }
+}
+
+.opus-wrapper{
+  margin-bottom: 100px;
+
+  .icon-heart::before{
+      text-shadow: 0px 0px 8px #F28787;
+  }
+
+  .likeable{
+    display: block;
+    height: 10px;
+    padding: 0px 10px;
+    font-size: 16px;
+    text-decoration: none;
+
+    i{
+      float: left;
+      color: #F19793;
+    }
+    span{
+      float: right;
+      font-size: 16px;
+      color: #9B9B9B;
+      letter-spacing: 0.92px;
+      line-height: normal;
+      vertical-align: baseline;
+    }
+  }
+
+
+}
+
+.opus-form{
+
+  .modal-dialog {
+    margin: 90px auto;
+  }
+
+  .modal-footer{
+    text-align: center;
+    border: none;
+  }
+
+  .preview{
+    width: 200px;
+    margin: 20px;
+  }
+
+  input[type="file"]{
+    width: 0.1px;
+  	height: 0.1px;
+  	opacity: 0;
+  	overflow: hidden;
+  	position: absolute;
+  	z-index: -1;
+  }
+
+  .img-wrapper{
+    height: 100px;
+    width: 100px;
+    border-radius: 100px;
+    background: white;
+    line-height: 100px;
+    margin: -60px auto 0;
+
+     img{
+       width: 80px;
+     }
+  }
+}
+
+.upload-path{
+  width: 250px;
+  background: rgba(57,105,119,0.39);
+  border: 2px solid #182A87;
+  border-radius: 28px;
+  text-align: left;
+  margin-right: 30px;
+  overflow: hidden;
 }
