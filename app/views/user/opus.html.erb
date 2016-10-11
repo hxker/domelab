@@ -11,13 +11,20 @@
 
               <div class="row">
                 <div class="col-sx-12">
-                  <div class="row text-center">
+                  <div class="row text-center myopus-list">
                     <% @opus.each do |opus| %>
                         <div class="col-xs-4">
-                          <%= image_tag(opus.content_url(:middle)) %>
-                          <div><i class="icon icon-heart"></i><%= opus.likes_count %></div>
-                          <div><%= opus.group_name %></div>
-                          <div><%= opus.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+                          <div class="opus-item">
+                            <div class="img-wrapper">
+                              <%= image_tag(opus.content_url(:middle)) %>
+                            </div>
+
+                            <div class="opus-info">
+                              <div><%= opus.group_name %></div>
+                              <div><%= opus.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+                            </div>
+                            <div class="like"><i class="icon icon-heart"></i><%= opus.likes_count %></div>
+                          </div>
                         </div>
                     <% end %>
                   </div>
@@ -37,5 +44,3 @@
     </div>
   </div>
 </div>
-
-

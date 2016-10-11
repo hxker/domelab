@@ -1,7 +1,9 @@
 <div class="container">
   <div class="community">
     <div class="header">
-        <h2><%= @group.name %></h1>
+        <div class=left>
+          <h2><%= @group.name %></h2>
+        </div>
         <div class="img-wrapper"><img src="<%= image_path('community-header.png') %>" alt=""/></div>
     </div>
 
@@ -52,7 +54,7 @@
                     <h4 class="blue bigger">上传我的作品</h4>
                 </div>
 
-                <%= simple_form_for(GroupOpu.new, url: courses_upload_opus_path, method: :post) do |f| %>
+                <%= simple_form_for(GroupOpu.new, url: courses_upload_opus_path, method: :post ) do |f| %>
                 <div class="modal-body overflow-visible">
                     <div class="row">
                         <div class="col-xs-12">

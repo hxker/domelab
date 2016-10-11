@@ -1,22 +1,29 @@
-<div class="container">
-  <div class="row">
+<div class="container master">
+    <hr class="dome-courses">
+
     <% if @courses.present? %>
+
+    <div class="courses-wrapper center-block">
         <div class="row">
-          <div class="col-xs-12 col-md-6 col-lg-12">
-            <div class="row">
-              <% @courses.each do |c| %>
-                  <div class="col-xs-4 text-center">
-                    <%= image_tag(c.cover_url(:middle)) %>
+            <% @courses.each do |c| %>
+            <div class="col-xs-4 text-center course-item">
+              <div class="img-wrapper">
+                <a href="/courses/<%= c.id %>">
+                  <%= image_tag(c.cover_url(:middle)) %>
+                </a>
+              </div>
+                <div class="author">
                     <p><%= c.name %></p>
                     <p>作者:<%= c.author %></p>
-                  </div>
-              <% end %>
+                </div>
             </div>
-            <nav>
-              <%= paginate @courses %>
-            </nav>
-          </div>
+            <% end %>
         </div>
+        <nav>
+            <%= paginate @courses %>
+        </nav>
+    </div>
+
     <% end %>
-  </div>
+
 </div>

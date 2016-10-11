@@ -140,8 +140,8 @@
 }
 
 .course-item {
-    width: 300px !important;
-    height: 310px !important;
+    width: 300px;
+    height: 310px;
     float: left;
     position: relative;
 }
@@ -200,10 +200,10 @@ hr.dome-courses:after {
 }
 
 .stars-wrapper {
+    padding: 10px 0px;
     border-top: 4px solid #182A87;
     border-bottom: 4px solid #182A87;
-    width: 70%;
-    margin: 10px auto;
+    width: 90%;
     overflow: hidden;
 }
 
@@ -236,18 +236,19 @@ hr.dome-courses:after {
 .btn-lesson-item {
     background-color: #182A87;
     border-radius: 40px;
+    color: #FFF;
 }
 
 .course-info {
     text-align: center;
-    margin: 200px auto;
+    margin: 20px auto;
 }
 
 #lesson-test-outer {
     border: 1px solid #B7DEE5;
     background-color: #B7DEE5;
     border-radius: 20px;
-    padding: 50px 60px;
+    padding: 30px 40px;
 }
 
 #lesson-test-inner {
@@ -463,7 +464,7 @@ h7.lesson-name {
         margin-bottom: 50px;
         overflow: auto;
 
-        h2 {
+        .left {
             float: left;
             width: 49%;
             text-align: center;
@@ -733,4 +734,119 @@ h7.lesson-name {
   text-align: left;
   margin-right: 30px;
   overflow: hidden;
+}
+
+.master {
+
+  .dome-courses{
+    border-top-color: #7FCAD2;
+  }
+
+  .dome-courses::after{
+    content: "名师课例";
+    color: #7FCAD2;
+  }
+
+  .courses-wrapper{
+    width: 70%;
+    padding: 20px 50px;
+    background: rgba(221,242,246,0.54);
+    margin-bottom: 100px;
+  }
+
+  .course-item{
+    height: auto;
+    width: 33.33333333%;
+    margin-bottom: 20px;
+    box-shadow: 0px 1px 4px 0px rgba(141,141,141,0.50);
+    border-radius: 3px;
+    padding: 0px;
+
+    .img-wrapper{
+      border-radius: 10px;
+      background: #FFF;
+    }
+  }
+
+  .author{
+    background: rgba(255,208,188,0.27);
+    border-radius: 4px;
+    font-size: 12px;
+    color: #9B9B9B;
+    letter-spacing: 1.38px;
+    padding: 10px;
+  }
+}
+
+
+
+.english-name{
+
+  font-size: 36px;
+  color: #F5A623;
+  letter-spacing: 1.2px;
+}
+
+.course-heading{
+
+font-size: 64px;
+color: #182A87;
+letter-spacing: 2.15px;
+}
+
+.course-author{
+
+  font-size: 40px;
+  color: #182A87;
+  letter-spacing: 1.34px;
+}
+
+
+.myopus-list{
+  border-radius: 4px;
+  width: 80%;
+  margin: auto;
+
+
+  .opus-item{
+      background: rgba(255,208,188,0.50);
+      margin-bottom: 40px;
+        border:1px solid rgba(255,208,188,0.50);
+  }
+
+  .like{
+    background: #FFF;
+    text-align: right;
+    padding-right: 20px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+  }
+
+    i{
+      color: #F19793;
+      padding-right: 20px;
+    }
+    span{
+
+      color: #9B9B9B;
+      letter-spacing: 0.92px;
+      line-height: normal;
+      vertical-align: baseline;
+    }
+
+  .opus-info{
+    padding-top: 10px;
+    padding-left:50px;
+    text-align: left;
+
+    div{
+      padding-bottom:10px;
+      font-size: 16px;
+      color: #9B9B9B;
+      letter-spacing: 0.51px;
+    }
+
+
+  }
 }

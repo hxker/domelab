@@ -14,10 +14,10 @@
           <div class="col-md-6 group_info_middle">
             <p class="text-gray">课程进度&nbsp&nbsp&nbsp&nbsp<a class="btn btn-course-link" role="button" href="<%= "/courses/schedule?id=#{@group_user.id}" %>">查看课程表</a></p>
               <div class="progress progress-course">
-                <div class="progress-bar" style="width:50%">
-                  6
+                <div class="progress-bar" style="width:<%= @progress[:progress] %>%">
+                  <%= @progress[:already_num] %>
                 </div>
-                13
+                <%= @progress[:all_num] %>
               </div>
 
           </div>
