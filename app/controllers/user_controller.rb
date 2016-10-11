@@ -83,16 +83,6 @@ class UserController < ApplicationController
 
   end
 
-  def get_schools
-    district_id = params[:district_id]
-    schools = School.where(status: 1, district_id: district_id).select(:id, :name, :teacher_role)
-    render json: schools
-  end
-
-  def get_districts
-    render json: District.select(:id, :name, :city)
-  end
-
   def notifications
     @notifications = current_user.notifications.order('created_at desc').page(params[:page]).per(params[:per])
     if params[:id].present?

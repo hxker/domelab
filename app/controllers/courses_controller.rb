@@ -216,7 +216,7 @@ class CoursesController < ApplicationController
     else
       @message = '参数不完整'
     end
-    render json: @message
+    render json: {message: @message}
   end
 
   private
