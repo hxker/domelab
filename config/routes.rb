@@ -36,6 +36,21 @@ Rails.application.routes.draw do
   end
 
   # -----------------------------------------------------------
+  # Api
+  # -----------------------------------------------------------
+
+  namespace :api do
+    namespace :v1 do
+      resources :users do
+        collection do
+          get :get_districts
+          get :get_schools
+        end
+      end
+    end
+  end
+
+  # -----------------------------------------------------------
   # Admin
   # -----------------------------------------------------------
 
