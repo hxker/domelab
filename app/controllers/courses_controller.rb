@@ -216,10 +216,7 @@ class CoursesController < ApplicationController
     else
       @message = '参数不完整'
     end
-    respond_to do |format|
-      format.html { redirect_to "/courses/community/#{group_id}", notice: @message }
-      format.js
-    end
+    render json: @message
   end
 
   private
