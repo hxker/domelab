@@ -4,97 +4,98 @@
           <p class="text-center">您已申请加入班级:<br> <label class="label label-info"><%= @group_user.name %></label>
             <br>请耐心等待审核,结果将消息推送告知您</p>
       <% else %>
-        <div class="row dome_courses_head center-block">
-          <div class="col-md-3 text-center group_info_left">
-            <%= image_tag("/uploads/dome_teacher_avatar/middle_#{@group_user.avatar}",class:"img-circle teacher_avatar") %>
-            <p>班级: <%= @group_user.name %></p>
-            <br>
-            <p>任课老师: <%= @group_user.teacher_name %></p>
-          </div>
-          <div class="col-md-6 group_info_middle">
-            <p class="text-gray">课程进度&nbsp&nbsp&nbsp&nbsp<a class="btn btn-course-link" role="button" href="<%= "/courses/schedule?id=#{@group_user.id}" %>">查看课程表</a></p>
+          <div class="row dome_courses_head center-block">
+            <div class="col-md-3 text-center group_info_left">
+              <%= image_tag("/uploads/dome_teacher_avatar/middle_#{@group_user.avatar}", class: "img-circle teacher_avatar") %>
+              <p>班级: <%= @group_user.name %></p>
+              <br>
+              <p>任课老师: <%= @group_user.teacher_name %></p>
+            </div>
+            <div class="col-md-6 group_info_middle">
+              <p class="text-gray">课程进度&nbsp&nbsp&nbsp&nbsp<a class="btn btn-course-link" role="button" href="<%= "/courses/schedule?id=#{@group_user.id}" %>">查看课程表</a>
+              </p>
               <div class="progress progress-course">
                 <div class="progress-bar" style="width:<%= @progress[:progress] %>%">
                   <%= @progress[:already_num] %>
                 </div>
                 <%= @progress[:all_num] %>
               </div>
+              签到记录:<span id="sign-in-count"><%= @sign_in.nil? ? 0 : @sign_in.sign_count %></span>
+              平均正确率:<span><%= @progress[:average_right].nil? ? 0 : @progress[:average_right] %>%</span>
+            </div>
+            <div class="col-md-3 group-info-right text-center">
 
-          </div>
-          <div class="col-md-3 group-info-right text-center">
-
-              <% if @has_sign_in %>
+              <% if @sign_in.present? && @sign_in.updated_at > Time.now.midnight %>
                   <label class="label label-default ">已签到</label>
               <% else %>
-
                   <%= link_to '/courses/sign_in', data: {method: :post, type: 'script', remote: true}, title: '签到', class: 'btn btn-check-in no-sign-in' do %>
                       签到
                   <% end %>
                   <label class="label label-default for-show-sign-in hide">已签到</label>
               <% end %>
-              <%= image_tag(@group_user.wx_code_url(:middle),class:"wx_code",alt:"班级群二维码") %>
+              <%= image_tag(@group_user.wx_code_url(:middle), class: "wx_code", alt: "班级群二维码") %>
               <p class="text-gray">扫描二维码进入班级群</p>
-            </p>
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="dome-course-list-wrapper">
-          <hr class="dome-courses">
-          <ul class="dome-course-list text-center">
+          <div class="dome-course-list-wrapper">
+            <hr class="dome-courses">
+            <ul class="dome-course-list text-center">
               <% if @group_courses.present? %>
                   <% @group_courses.each do |c| %>
-                    <li class="course-item">
-                      <a href="<%= "/courses/#{c.id}" %>">
-                        <div class="course-item-img-wrapper">
-                          <%= image_tag(c.cover_url(:middle)) %>
-                        </div>
-                        <h8 class="course-item-name btn"><%= c.name %></h8>
-                      </a>
-                    <li>
+                      <li class="course-item">
+                        <a href="<%= "/courses/#{c.id}" %>">
+                          <div class="course-item-img-wrapper">
+                            <%= image_tag(c.cover_url(:middle)) %>
+                          </div>
+                          <h8 class="course-item-name btn"><%= c.name %></h8>
+                        </a>
+                      <li>
                   <% end %>
               <% end %>
 
-          </ul>
+            </ul>
 
-        </div>
+          </div>
       <% end %>
 
   <% else %>
 
-          <div class="apply_group_head">
-            <h7>请先绑定班级</h7>
-            <img class="apply_group_icon" src="<%= image_path('apply-group-icon.png') %>" alt=""/>
-          </div>
-          <div class="apply_group_wrapper center-block">
-            <div class="row">
-              <div class="center-block">
-                <%= simple_form_for(current_user, url: '/courses/apply_group', method: :post, :html=> { class: 'apply_group_form center-block' }) do |f| %>
-                  <div class="form-group">
-                      <label for="group">班级</label>
-                      <div class="styled-select">
-                      <select name="user[select_group]" class="form-control">
-                        <option value="">请选择班级</option>
-                        <% if @groups.present? %>
-                            <% @groups.each do |g| %>
-                                <option value="<%= g.id %>"><%= g.name %></option>
-                            <% end %>
-                        <% end %>
-                      </select>
-                    </div>
+      <div class="apply_group_head">
+        <h7>请先绑定班级</h7>
+        <img class="apply_group_icon" src="<%= image_path('apply-group-icon.png') %>" alt=""/>
+      </div>
+      <div class="apply_group_wrapper center-block">
+        <div class="row">
+          <div class="center-block">
+            <%= simple_form_for(current_user, url: '/courses/apply_group', method: :post, :html => {class: 'apply_group_form center-block'}) do |f| %>
+                <div class="form-group">
+                  <label for="group">班级</label>
+                  <div class="styled-select">
+                    <select name="user[select_group]" class="form-control">
+                      <option value="">请选择班级</option>
+                      <% if @groups.present? %>
+                          <% @groups.each do |g| %>
+                              <option value="<%= g.id %>"><%= g.name %></option>
+                          <% end %>
+                      <% end %>
+                    </select>
                   </div>
-                    <%= f.input :fullname, value: current_user.fullname %>
-                    <%= f.input :student_code, value: current_user.student_code %>
-                    <br>
-                    <br>
-                    <br>
-                    <div class="form-actions text-center">
-                      <%= f.submit class: 'btn btn-dome', value: '确定', 'data-disable-with' => '正在提交' %>
-                    </div>
-                    <br>
-                    <p class="caution">班级一旦绑定无法修改</p>
-                <% end %>
-              </div>
-            </div>
+                </div>
+                <%= f.input :fullname, value: current_user.fullname %>
+                <%= f.input :student_code, value: current_user.student_code %>
+                <br>
+                <br>
+                <br>
+                <div class="form-actions text-center">
+                  <%= f.submit class: 'btn btn-dome', value: '确定', 'data-disable-with' => '正在提交' %>
+                </div>
+                <br>
+                <p class="caution">班级一旦绑定无法修改</p>
+            <% end %>
           </div>
+        </div>
+      </div>
 
   <% end %>
 

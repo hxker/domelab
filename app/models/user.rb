@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :user_lesson_tests
   has_many :group_communities
   has_many :group_opus
+  has_one :sign_in
   alias_attribute :username, :id
   attr_accessor :desc_family, :desc_certificate, :cover
   devise :cas_authenticatable

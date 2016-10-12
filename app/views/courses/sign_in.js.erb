@@ -1,5 +1,6 @@
 <% if @result[0] %>
 $('.no-sign-in').addClass('hide');
 $('.for-show-sign-in').removeClass('hide');
+$('#sign-in-count').text(parseInt(document.getElementById('sign-in-count').innerHTML) + 1);
 <% end %>
 $.notify('<%= @result[1] %>', '<%= @result[0] %>' == 'true' ? 'success' : 'error');

@@ -30,10 +30,11 @@ class CoursesController < ApplicationController
     current_user_id = current_user.id
     @group_user = Group.joins(:group_user_ships).left_joins(:teacher).where('group_user_ships.user_id = ?', current_user_id).where('groups.end_date > ?', Date.today).select('group_user_ships.status as ship_status', 'groups.*', 'admins.name as teacher_name', 'admins.avatar').take
     if @group_user.present?
-      @has_sign_in = SignIn.where(user_id: current_user_id).where('updated_at > ?', Time.now.midnight).exists?
+      @sign_in = current_user.sign_in
       @group_courses = @group_user.courses.select(:id, :name, :cover)
+      average_right = current_user.user_lesson_tests.where('created_at > ?', @group_user.start_date).average(:right_percent)
       progress = GroupSchedule.find_by_sql("select count(a.id) as all_num,(select count(a.id) from group_schedules a where a.start < '#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}') as already_num from group_schedules a where a.group_id = #{@group_user.id}").first
-      @progress = {already_num: progress.already_num, all_num: progress.all_num, progress: (progress.all_num > 0) ? ((Float(progress.already_num)/progress.all_num)*100).round(0) : 0}
+      @progress = {average_right: average_right, already_num: progress.already_num, all_num: progress.all_num, progress: (progress.all_num > 0) ? ((Float(progress.already_num)/progress.all_num)*100).round(0) : 0}
     else
       render_optional_error(403)
     end
