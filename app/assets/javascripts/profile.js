@@ -8,7 +8,7 @@ if ($("#form_change_profile .school-select").hasClass("hidden")) {
     var school_select = $("#form_change_profile .school-select");
     $('#form_change_profile .change-school').click(function() {
 
-        if (school_select.hasClass("hidden")) {
+        if (school_select.hasClass("hidden") && $("#district-select").val() === "0") {
             get_districts();
         }
         school_select.toggleClass("hidden");
