@@ -1,3 +1,38 @@
+.apply_group_wrapper{
+  textarea:focus,
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  input[type="datetime"]:focus,
+  input[type="datetime-local"]:focus,
+  input[type="date"]:focus,
+  input[type="month"]:focus,
+  input[type="time"]:focus,
+  input[type="week"]:focus,
+  input[type="number"]:focus,
+  input[type="email"]:focus,
+  input[type="url"]:focus,
+  input[type="search"]:focus,
+  input[type="tel"]:focus,
+  input[type="color"]:focus,
+  .form-control:focus {
+    border-color: #FFA178;
+    box-shadow: 0 1px 1px rgba(217,88,32,1) inset, 0 0 8px rgba(217,88,32,1);
+    outline: 0 none;
+  }
+
+  .form-group input[type="text"],.form-group select{
+    border:1px solid #FFA178;
+    border-radius:2px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .form-group select {
+    background: image-url('triangle.png') no-repeat 90% 50% #fefefe;
+  }
+}
+
 .apply_group_head {
     text-align: center;
 }
@@ -200,7 +235,7 @@ hr.dome-courses:after {
 }
 
 .stars-wrapper {
-    padding: 10px 0px;
+    padding: 10px 0;
     border-top: 4px solid #182A87;
     border-bottom: 4px solid #182A87;
     width: 90%;
@@ -313,6 +348,7 @@ h7.lesson-name {
     width: 975px;
 }
 // scheduler
+
 .container-fluid #scheduler_here {
     height: 760px;
     width: 700px;
@@ -455,9 +491,11 @@ h7.lesson-name {
     background-color: #f5a623;
 }
 // community and discussion
+
 .community {
     .header {
         margin: auto;
+        height: 234.5px;
         border: 8px solid #182A87;
         border-radius: 18px;
         width: 80%;
@@ -493,7 +531,7 @@ h7.lesson-name {
     border: 1px solid #979797;
     border-radius: 14px;
     padding: 2% 3%;
-    width:70%;
+    width: 70%;
     margin: auto;
 
     textarea {
@@ -501,352 +539,340 @@ h7.lesson-name {
         height: 200px;
         resize: none;
     }
-    .bottom{
-      margin: 20px 50px 0px;
-      text-align: right;
-      font-size: 14px;
 
-      .checkbox{
-        display: inline;
-        margin-right: 20px;
-      }
+    .bottom {
+        margin: 20px 50px 0;
+        text-align: right;
+        font-size: 14px;
 
-      label{
-        font-size: 12px;
-        color: #182A87;
-      }
+        .checkbox {
+            display: inline;
+            margin-right: 20px;
+        }
 
-      .form-group{
-        display: inline;
-      }
+        label {
+            font-size: 12px;
+            color: #182A87;
+        }
+
+        .form-group {
+            display: inline;
+        }
     }
 }
 
-.comment-item .comment{
-  overflow: auto;
-}
-.comments-wrapper{
-  border-top:2px solid #D8D8D8;
-  margin: 100px auto;
-  width: 60%;
-
-  .icon-heart::before{
-    content: "已赞";
-  }
-
-  .icon-heart-empty::before{
-    content: "赞";
-  }
-
-  .comment{
-    padding-bottom: 5px;
-    padding-top: 30px;
-
-    .img-wrapper{
-      float: left;
-      width: 20%;
-      text-align: right;
-      padding-right: 10px;
-    }
-
-    .poster{
-      font-size: 18px;
-      color: #4A4A4A;
-      letter-spacing: 2.08px;
-    }
-
-    .right{
-      float: left;
-      width:80%;
-
-      .content{
-        padding: 18px 0;
-        font-size: 12px;
-        color: #4A4A4A;
-        letter-spacing: 1.38px;
-      }
-    }
-
-    .middle{
-      float: left;
-      width:60%;
-
-      .content{
-        padding: 20px 0;
-        font-size: 18px;
-        color: #4A4A4A;
-        letter-spacing: 2.08px;
-      }
-    }
-
-    .buttons{
-      float: left;
-      width:20%;
-
-      .btn {
-        font-size: 12px;
-        color: #182A87;
-        letter-spacing: 2.08px;
-        border: 1px solid #182A87;
-        border-radius: 23px;
-        background: #FFF;
-      }
-    }
-  }
-
-
+.comment-item .comment {
+    overflow: auto;
 }
 
-.comment-item{
-  overflow: auto;
-  border-bottom: 1px solid #D8D8D8;
-  border-top: 1px solid #D8D8D8;
+.comments-wrapper {
+    border-top: 2px solid #D8D8D8;
+    margin: 100px auto;
+    width: 60%;
+
+    .icon-heart::before {
+        content: "已赞";
+    }
+
+    .icon-heart-empty::before {
+        content: "赞";
+    }
+
+    .comment {
+        padding-bottom: 5px;
+        padding-top: 30px;
+
+        .img-wrapper {
+            float: left;
+            width: 20%;
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        .poster {
+            font-size: 18px;
+            color: #4A4A4A;
+            letter-spacing: 2.08px;
+        }
+
+        .right {
+            float: left;
+            width: 80%;
+
+            .content {
+                padding: 18px 0;
+                font-size: 12px;
+                color: #4A4A4A;
+                letter-spacing: 1.38px;
+            }
+        }
+
+        .middle {
+            float: left;
+            width: 60%;
+
+            .content {
+                padding: 20px 0;
+                font-size: 18px;
+                color: #4A4A4A;
+                letter-spacing: 2.08px;
+            }
+        }
+
+        .buttons {
+            float: left;
+            width: 20%;
+
+            .btn {
+                font-size: 12px;
+                color: #182A87;
+                letter-spacing: 2.08px;
+                border: 1px solid #182A87;
+                border-radius: 23px;
+                background: #FFF;
+            }
+        }
+    }
 }
 
-.sub-comments{
-  margin: 10px 0 20px;
-  clear:both;
-  overflow: auto;
-  padding-left: 50px;
-  opacity: 0.51;
-  background: rgba(215,215,215,0.58);
-
-  .comment{
-    padding-top: 10px;
-  }
-
-  .comment-post{
-    margin: 15px auto 25px;
-
-    textarea{
-      height: 100px;
-    }
-  }
+.comment-item {
+    overflow: auto;
+    border-bottom: 1px solid #D8D8D8;
+    border-top: 1px solid #D8D8D8;
 }
 
-.opus-list{
-  width: 70%;
-  margin-top: 20px;
-  padding: 20px 50px;
-  background: #F3F3F3;
+.sub-comments {
+    margin: 10px 0 20px;
+    clear: both;
+    overflow: auto;
+    padding-left: 50px;
+    opacity: 0.51;
+    background: rgba(215,215,215,0.58);
 
-  .img-wrapper{
-    padding:15px;
-    border-radius: 10px;
-    background: #FFF;
-
-    img{
-      width: 90%;
+    .comment {
+        padding-top: 10px;
     }
-  }
 
-  .author{
+    .comment-post {
+        margin: 15px auto 25px;
+
+        textarea {
+            height: 100px;
+        }
+    }
+}
+
+.opus-list {
+    width: 70%;
     margin-top: 20px;
-    font-size: 14px;
-    color: #4A90E2;
-    letter-spacing: 0.45px;
-  }
-}
+    padding: 20px 50px;
+    background: #F3F3F3;
 
-.opus-item{
-  margin-bottom: 30px;
+    .img-wrapper {
+        padding: 15px;
+        border-radius: 10px;
+        background: #FFF;
 
-  hr{
-    margin: 10px 0px;
-  }
-}
-
-.opus-wrapper{
-  margin-bottom: 100px;
-
-  .icon-heart::before{
-      text-shadow: 0px 0px 8px #F28787;
-  }
-
-  .likeable{
-    display: block;
-    height: 10px;
-    padding: 0px 10px;
-    font-size: 16px;
-    text-decoration: none;
-
-    i{
-      float: left;
-      color: #F19793;
+        img {
+            width: 90%;
+        }
     }
-    span{
-      float: right;
-      font-size: 16px;
-      color: #9B9B9B;
-      letter-spacing: 0.92px;
-      line-height: normal;
-      vertical-align: baseline;
+
+    .author {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #4A90E2;
+        letter-spacing: 0.45px;
     }
-  }
-
-
 }
 
-.opus-form{
+.opus-item {
+    margin-bottom: 30px;
 
-  .modal-dialog {
-    margin: 90px auto;
-  }
-
-  .modal-footer{
-    text-align: center;
-    border: none;
-  }
-
-  .preview{
-    width: 200px;
-    margin: 20px;
-  }
-
-  input[type="file"]{
-    width: 0.1px;
-  	height: 0.1px;
-  	opacity: 0;
-  	overflow: hidden;
-  	position: absolute;
-  	z-index: -1;
-  }
-
-  .img-wrapper{
-    height: 100px;
-    width: 100px;
-    border-radius: 100px;
-    background: white;
-    line-height: 100px;
-    margin: -60px auto 0;
-
-     img{
-       width: 80px;
-     }
-  }
+    hr {
+        margin: 10px 0;
+    }
 }
 
-.upload-path{
-  width: 250px;
-  background: rgba(57,105,119,0.39);
-  border: 2px solid #182A87;
-  border-radius: 28px;
-  text-align: left;
-  margin-right: 30px;
-  overflow: hidden;
+.opus-wrapper {
+    margin-bottom: 100px;
+
+    .icon-heart::before {
+        text-shadow: 0 0 8px #F28787;
+    }
+
+    .likeable {
+        display: block;
+        height: 10px;
+        padding: 0 10px;
+        font-size: 16px;
+        text-decoration: none;
+
+        i {
+            float: left;
+            color: #F19793;
+        }
+
+        span {
+            float: right;
+            font-size: 16px;
+            color: #9B9B9B;
+            letter-spacing: 0.92px;
+            line-height: normal;
+            vertical-align: baseline;
+        }
+    }
+}
+
+.opus-form {
+    .modal-dialog {
+        margin: 90px auto;
+    }
+
+    .modal-footer {
+        text-align: center;
+        border: none;
+    }
+
+    .preview {
+        width: 200px;
+        margin: 20px;
+    }
+
+    input[type="file"] {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .img-wrapper {
+        height: 100px;
+        width: 100px;
+        border-radius: 100px;
+        background: white;
+        line-height: 100px;
+        margin: -60px auto 0;
+
+        img {
+            width: 80px;
+        }
+    }
+}
+
+.upload-path {
+    width: 250px;
+    background: rgba(57,105,119,0.39);
+    border: 2px solid #182A87;
+    border-radius: 28px;
+    text-align: left;
+    margin-right: 30px;
+    overflow: hidden;
 }
 
 .master {
-
-  .dome-courses{
-    border-top-color: #7FCAD2;
-  }
-
-  .dome-courses::after{
-    content: "名师课例";
-    color: #7FCAD2;
-  }
-
-  .courses-wrapper{
-    width: 70%;
-    padding: 20px 50px;
-    background: rgba(221,242,246,0.54);
-    margin-bottom: 100px;
-  }
-
-  .course-item{
-    height: auto;
-    width: 33.33333333%;
-    margin-bottom: 20px;
-    box-shadow: 0px 1px 4px 0px rgba(141,141,141,0.50);
-    border-radius: 3px;
-    padding: 0px;
-
-    .img-wrapper{
-      border-radius: 10px;
-      background: #FFF;
+    .dome-courses {
+        border-top-color: #7FCAD2;
     }
-  }
 
-  .author{
-    background: rgba(255,208,188,0.27);
+    .dome-courses::after {
+        content: "名师课例";
+        color: #7FCAD2;
+    }
+
+    .courses-wrapper {
+        width: 70%;
+        padding: 20px 50px;
+        background: rgba(221,242,246,0.54);
+        margin-bottom: 100px;
+    }
+
+    .course-item {
+        height: auto;
+        width: 33.33333333%;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 4px 0 rgba(141,141,141,0.50);
+        border-radius: 3px;
+        padding: 0;
+
+        .img-wrapper {
+            border-radius: 10px;
+            background: #FFF;
+        }
+    }
+
+    .author {
+        background: rgba(255,208,188,0.27);
+        border-radius: 4px;
+        font-size: 12px;
+        color: #9B9B9B;
+        letter-spacing: 1.38px;
+        padding: 10px;
+    }
+}
+
+.english-name {
+    font-size: 36px;
+    color: #F5A623;
+    letter-spacing: 1.2px;
+}
+
+.course-heading {
+    font-size: 64px;
+    color: #182A87;
+    letter-spacing: 2.15px;
+}
+
+.course-author {
+    font-size: 40px;
+    color: #182A87;
+    letter-spacing: 1.34px;
+}
+
+.myopus-list {
     border-radius: 4px;
-    font-size: 12px;
-    color: #9B9B9B;
-    letter-spacing: 1.38px;
-    padding: 10px;
-  }
-}
+    width: 80%;
+    margin: auto;
 
-
-
-.english-name{
-
-  font-size: 36px;
-  color: #F5A623;
-  letter-spacing: 1.2px;
-}
-
-.course-heading{
-
-font-size: 64px;
-color: #182A87;
-letter-spacing: 2.15px;
-}
-
-.course-author{
-
-  font-size: 40px;
-  color: #182A87;
-  letter-spacing: 1.34px;
-}
-
-
-.myopus-list{
-  border-radius: 4px;
-  width: 80%;
-  margin: auto;
-
-
-  .opus-item{
-      background: rgba(255,208,188,0.50);
-      margin-bottom: 40px;
-        border:1px solid rgba(255,208,188,0.50);
-  }
-
-  .like{
-    background: #FFF;
-    text-align: right;
-    padding-right: 20px;
-    height: 30px;
-    line-height: 30px;
-    font-size: 16px;
-  }
-
-    i{
-      color: #F19793;
-      padding-right: 20px;
-    }
-    span{
-
-      color: #9B9B9B;
-      letter-spacing: 0.92px;
-      line-height: normal;
-      vertical-align: baseline;
+    .opus-item {
+        background: rgba(255,208,188,0.50);
+        margin-bottom: 40px;
+        border: 1px solid rgba(255,208,188,0.50);
     }
 
-  .opus-info{
-    padding-top: 10px;
-    padding-left:50px;
-    text-align: left;
-
-    div{
-      padding-bottom:10px;
-      font-size: 16px;
-      color: #9B9B9B;
-      letter-spacing: 0.51px;
+    .like {
+        background: #FFF;
+        text-align: right;
+        padding-right: 20px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 16px;
     }
 
+    i {
+        color: #F19793;
+        padding-right: 20px;
+    }
 
-  }
+    span {
+        color: #9B9B9B;
+        letter-spacing: 0.92px;
+        line-height: normal;
+        vertical-align: baseline;
+    }
+
+    .opus-info {
+        padding-top: 10px;
+        padding-left: 50px;
+        text-align: left;
+
+        div {
+            padding-bottom: 10px;
+            font-size: 16px;
+            color: #9B9B9B;
+            letter-spacing: 0.51px;
+        }
+    }
 }

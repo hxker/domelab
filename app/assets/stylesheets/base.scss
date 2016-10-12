@@ -70,35 +70,6 @@ ul {
   border-right: 5px solid transparent !important;
 }
 
-textarea:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="time"]:focus,
-input[type="week"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="color"]:focus,
-.form-control:focus {
-  border-color: #FFA178;
-  box-shadow: 0 1px 1px rgba(217,88,32,1) inset, 0 0 8px rgba(217,88,32,1);
-  outline: 0 none;
-}
-
-.form-group input[type="text"],.form-group select{
-  border:1px solid #FFA178;
-  border-radius:2px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
 .btn-dome{
   background-color: #FFA178;
   border-color: #FFA178;
@@ -119,6 +90,7 @@ input[type="color"]:focus,
   padding: 0px 15px;
 }
 
+
 .btn-rect.active{
   background: #182A87;
   color: #FFFFFF;
@@ -130,8 +102,4 @@ input[type="color"]:focus,
 
 label{
   font-size: 20px;
-}
-
-.form-group select {
-  background: image-url('triangle.png') no-repeat 90% 50% #fefefe;
 }

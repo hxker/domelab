@@ -1,45 +1,69 @@
 .user-center {
   overflow: hidden;
   padding: 10px;
+  width: 66.66666667%;
+  margin:auto;
+
+  .profile-list{
+
+    li{
+      margin-right: 50px;
+      font-size: 18px;
+      color: #0E0E0E;
+      letter-spacing: 6px;
+    }
+  }
+
+  a {
+    color: #9B9B9B;
+  }
+
+  .active a{
+    color: #FFA178;
+  }
+
   .main-title {
-    padding: 10px 0;
-    font-size: 18px;
-    color: #e95e21;
-    border-bottom: 1px solid #d8d8d8;
+    font-size: 36px;
+    color: #FFA178;
+    letter-spacing: 7.4px;
   }
   .uc-avatar {
     padding: 20px 0;
     overflow: hidden;
+    position: relative;
+
     .avatar-box {
       width: 150px;
       height: 150px;
-      float: left;
+      float: right;
       background-color: #d8d8d8;
-      border: 1px solid #333;
-      border-radius: 5px;
-      margin-right: 20px;
+      border: 1px solid #979797;
     }
     .username-box {
       float: left;
-      font-size: 22px;
-      color: #444;
+      font-size: 28px;
+      color: #9B9B9B;
+      letter-spacing: 5.55px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+
     }
   }
   .ucm {
     padding:0 0 20px;
     width: 100%;
     min-width: 1180px;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 36px;
+    letter-spacing: 2.31px;
     .ucm-list {
       overflow: hidden;
 
       .ucm-item {
-        padding: 0 20px;
+        margin-right: 40px;
         cursor: pointer;
-        a {
-          color: #9B9B9B;
-        }
+
       }
     }
   }
@@ -50,5 +74,57 @@
     .sub-content {
 
     }
+  }
+}
+
+#form_change_profile{
+  font-weight: lighter;
+  font-size: 20px;
+  color: #0E0E0E;
+  letter-spacing: 6px;
+
+  .role-info{
+    margin-left: 40px;
+  }
+
+  .input-group{
+    display: inline;
+
+    label{
+      margin-right: 20px;
+      font-weight: lighter;
+    }
+  }
+
+  .control-label{
+    width:20%;
+    float: left;
+    font-weight: lighter;
+  }
+
+  .school_select{
+    margin-left: 20%;
+  }
+
+  .form-group {
+    clear: both;
+
+    input[type="text"],input[type="number"]{
+      width:60%;
+      display: inline;
+    }
+  }
+
+  input,select{
+    border: 1px solid #979797;
+  }
+
+  .btn-orange{
+    border: 2px solid #FFA178;
+    border-radius: 8px;
+    font-size: 20px;
+    color: #FFA178;
+    letter-spacing: 5.71px;
+    background: #FFF;
   }
 }

@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="user-center">
+  <div class="user-center center-block">
     <div class="main-title">
       个人中心
     </div>
@@ -9,10 +9,11 @@
       <%= render 'user/tab' %>
       <div class="sub-content">
         <%= simple_form_for(current_user, html: {id: 'form_change_profile', multipart: true}, url: user_profile_path, method: :post) do |f| %>
-            <div class="form-inputs">
-              <%= f.input :fullname %>
+
+              <%= f.input :fullname,label: '真实姓名'%>
+
               <div class="form-group">
-                <label for="user[gender]">性别</label>
+                <label for="user[gender]" class="control-label">性别</label>
 
                 <div class="input-group">
                   <label class="gender-label"><input type="radio" name="user[gender]" value="1" <%= 'checked="checked"' if @user_info.gender.to_i == 1 %>/>男</label>
@@ -22,56 +23,67 @@
 
               <div class="form-group string optional user_profile_roles">
                 <label class="string optional control-label" for="user_profile_roles">身份</label>
-
-                <div>
+                <div class="input-group">
                   <% @roles.each do |role| %>
                       <% if role.status.nil? %>
-                          <label class="fieldset-label">
-                            <%= check_box_tag 'user[roles][]', role.name %>
-                            <%= role.name %>
-                          </label>
+                      <label class="fieldset-label">
+                          <input name="user[roles][]" value="<%= role.name %>" type="checkbox">
+                          <%= role.name %>
+                        </label>
+
                       <% else %>
                           <%= label_tag role.name %> <%= "(待审核)" unless role.status==1 %>
                       <% end %>
                   <% end %>
                 </div>
               </div>
-              <fieldset class="teacher-part">
-                <legend>教师认证信息</legend>
-                <div class="form-group">
-                  <%= f.input :desc_certificate, label: '教师编号' %>
-                </div>
-                <div class="form-group">
-                  <label for="user_avatar">上传教师证</label>
-                  <%= f.file_field :cover %>
-                </div>
-              </fieldset>
-              <fieldset class="ck-part">
-                <legend>家庭创客认证信息</legend>
-                <div class="form-group">
-                  <label for="user_avatar">上传图片</label>
-                  <%= f.file_field :cover %>
-                </div>
-                <%= f.input :desc_family, as: :text, label: '简要介绍' %>
-              </fieldset>
-
+              <div class="role-info">
+                <fieldset class="teacher-part hidden">
+                  <legend>教师认证信息</legend>
+                  <div class="form-group">
+                    <%= f.input :desc_certificate, label: '教师编号' %>
+                  </div>
+                  <div class="form-group">
+                    <label for="user_avatar">上传教师证</label>
+                    <%= f.file_field :cover %>
+                  </div>
+                </fieldset>
+                <fieldset class="ck-part hidden">
+                  <legend>家庭创客认证信息</legend>
+                  <div class="form-group">
+                    <label for="user_avatar">上传图片</label>
+                    <%= f.file_field :cover %>
+                  </div>
+                  <%= f.input :desc_family, as: :text, label: '简要介绍' %>
+                </fieldset>
+              </div>
               <div class="form-group">
                 <label class="control-label" for="user_profile_school_id">学校</label>
 
                 <div class="school-field">
-                  <% if @user_info.school_id.present? && @user_info.school_id!=0 %>
+                  <% has_school = @user_info.school_id.present? && @user_info.school_id!=0 %>
+                  <% if has_school %>
                       <span class="change-school school-tag"><%= @user_info.school_name %> </span>
                   <% else %>
                       选择学校
                   <% end %>
-
                 </div>
-                <input id="school-id" class="school-hidden-input" type="text" placeholder="学校ID" name="user[school_id]" value="<%= @user_info.school_id %>"/>
-                <input id="district-id" type="text" placeholder="区县ID" name="user[district_id]" value="<%= @user_info.district_id %>"/>
               </div>
+            <div class="form-group">
+              <div class="control-label"></div>
+              <div class="school-select <%= 'hidden' if has_school %>" style="margin-left: 20%;">
+                  <select name="user[district_id]" id="district-select">
+                    <option value="0">请选择区县</option>
+                  </select>
+                  <select name="user[school_id]" id="school-select">
+                    <option value="0">请选择学校</option>
+                  </select>
+              </div>
+            </div>
+
               <div class="form-group">
                 <label class="control-label" for="user_profile_grade">年级</label>
-                <select name="user[grade]" id="user_profile_grade" class="string optional form-control">
+                <select name="user[grade]" id="user_profile_grade" class="">
                   <option value="0">请选择年级</option>
                   <% {一年级: 1, 二年级: 2, 三年级: 3, 四年级: 4, 五年级: 5, 六年级: 6, 七年级: 7, 八年级: 8, 九年级: 9, 高一: 10, 高二: 11, 高三: 12}.each do |k, v| %>
                       <option value="<%= v %>" <%= 'selected="selected"' if @user_info.grade == v %>><%= k %></option>
@@ -87,15 +99,11 @@
 
               <%= f.input :student_code %>
               <%= f.input :identity_card, class: 'idc-input' %>
-            </div>
             <div class="form-actions">
-              <%= f.submit class: 'btn btn-primary', value: '更新信息', 'data-disable-with' => '更新信息' %>
+              <%= f.submit class: 'btn btn-orange', value: '更新信息', 'data-disable-with' => '更新信息' %>
             </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
-
-
-

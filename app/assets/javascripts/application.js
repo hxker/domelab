@@ -21,3 +21,5 @@
 //= require dhtmlxscheduler
 //= require discuss
 //= require community
+//= require admin/bootstrap-datepicker.min
+//= require profile
