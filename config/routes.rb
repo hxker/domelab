@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'group_community/index'
 
-  get 'group_community/discuss'
 
   root to: 'home#index'
 
@@ -28,6 +26,9 @@ Rails.application.routes.draw do
 
   resources :likes
   post '/courses/upload_opus', to: 'courses#upload_opus'
+
+  get '/news', to: 'news#index'
+  get '/news/:id', to: 'news#show'
 
   mount RuCaptcha::Engine => '/rucaptcha'
   namespace :kindeditor do
@@ -102,6 +103,9 @@ Rails.application.routes.draw do
       end
     end
     resources :lesson_tests
+    resources :news do
+      resources :images, :only => [:create, :destroy, :new, :update]
+    end
   end
 
   # -----------------------------------------------------------
