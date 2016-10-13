@@ -70,11 +70,18 @@
 }
 
 .dome_courses_head {
-    width: 98%;
+    width: 80%;
     border: 2px solid #182A87;
     border-radius: 14px;
     height: 335px;
     background-color: #DDF2F6;
+
+    .big-num{
+      opacity: 0.83;
+      font-size: 32px;
+      color: rgba(35,52,140,0.79);
+      letter-spacing: 5.55px;
+    }
 }
 
 .dome_courses_head:after {
@@ -91,7 +98,7 @@
 }
 
 .group-info-right {
-    padding: 40px 20px 0 50px;
+    padding: 40px 0px 0px 40px;
 }
 
 .group_info_middle p {
@@ -102,7 +109,7 @@
     font-size: 18px;
     color: #24358C;
     text-align: left;
-    padding-left: 25%;
+    padding-left: 10%;
 }
 
 .group-info-right .label-default {
@@ -110,7 +117,7 @@
 }
 
 .group-info-right .wx_code {
-    width: 184px;
+    width: 80%;
     margin-top: 10px;
     margin-bottom: 20px;
 }
@@ -125,7 +132,6 @@
     font-size: 24px;
     line-height: 49px;
     border-radius: 24px;
-    width: 518px;
     margin-top: 10px;
     margin-bottom: 20px;
     text-align: right;
@@ -193,6 +199,7 @@
     padding: 10px;
     height: 250px;
     vertical-align: middle;
+    height: 100%;
 }
 
 .dome-course-list .course-item-name {
@@ -201,6 +208,8 @@
     background-color: #7EDAED;
     border-radius: 39px;
     font-size: 18px;
+    color: #FFFFFF;
+    letter-spacing: 2.08px;
 }
 
 hr.dome-courses {
@@ -256,6 +265,7 @@ hr.dome-courses:after {
 .lesson-list {
     margin: 30px auto;
     text-align: center;
+    width: 80%;
 }
 
 .lesson-list li {
@@ -265,7 +275,7 @@ hr.dome-courses:after {
 }
 
 .lesson-list li div {
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .btn-lesson-item {
@@ -277,6 +287,7 @@ hr.dome-courses:after {
 .course-info {
     text-align: center;
     margin: 20px auto;
+    width: 70%;
 }
 
 #lesson-test-outer {
@@ -493,26 +504,33 @@ h7.lesson-name {
 // community and discussion
 
 .community {
+
     .header {
-        margin: auto;
-        height: 234.5px;
+        margin: 0px auto 30px;
         border: 8px solid #182A87;
         border-radius: 18px;
-        width: 80%;
-        margin-bottom: 50px;
-        overflow: auto;
+        width: 65.35%;
+        min-height: 150px;
+        display: table;
 
         .left {
-            float: left;
-            width: 49%;
+            display: table-cell;
+            width: 49.9%;
             text-align: center;
-            font-size: 30px;
             color: #182A87;
             letter-spacing: 1.76px;
+            vertical-align: middle;
+
+            h2{
+              text-decoration: underline;
+              width: 80%;
+              margin: auto;
+            }
+
         }
 
         .img-wrapper {
-            float: right;
+            display: table-cell;
             width: 50%;
 
             img {
@@ -531,7 +549,7 @@ h7.lesson-name {
     border: 1px solid #979797;
     border-radius: 14px;
     padding: 2% 3%;
-    width: 70%;
+    width: 58.63%;
     margin: auto;
 
     textarea {
@@ -568,7 +586,7 @@ h7.lesson-name {
 .comments-wrapper {
     border-top: 2px solid #D8D8D8;
     margin: 100px auto;
-    width: 60%;
+    width: 54.49%;
 
     .icon-heart::before {
         content: "已赞";
@@ -581,6 +599,7 @@ h7.lesson-name {
     .comment {
         padding-bottom: 5px;
         padding-top: 30px;
+        border-bottom: 1px solid #D8D8D8;
 
         .img-wrapper {
             float: left;
@@ -637,24 +656,38 @@ h7.lesson-name {
 
 .comment-item {
     overflow: auto;
-    border-bottom: 1px solid #D8D8D8;
-    border-top: 1px solid #D8D8D8;
 }
 
 .sub-comments {
-    margin: 10px 0 20px;
+    border-bottom: 1px solid #D8D8D8;
     clear: both;
     overflow: auto;
     padding-left: 50px;
     opacity: 0.51;
-    background: rgba(215,215,215,0.58);
+
+    .wrapper:first-child{
+      margin-top: 20px;
+    }
+
+    .wrapper:last-child{
+      margin-bottom: 20px;
+      padding: 20px 0px;
+    }
+
+    .form-wrapper{
+      padding: 20px 0px;
+    }
+
+    .wrapper{
+      background: rgba(215, 215, 215, 0.58);
+    }
 
     .comment {
         padding-top: 10px;
     }
 
     .comment-post {
-        margin: 15px auto 25px;
+        margin: 0px auto;
 
         textarea {
             height: 100px;
@@ -663,7 +696,7 @@ h7.lesson-name {
 }
 
 .opus-list {
-    width: 70%;
+    width: 58.636%;
     margin-top: 20px;
     padding: 20px 50px;
     background: #F3F3F3;
@@ -820,7 +853,7 @@ h7.lesson-name {
 }
 
 .course-heading {
-    font-size: 64px;
+    font-size: 40px;
     color: #182A87;
     letter-spacing: 2.15px;
 }
@@ -833,7 +866,6 @@ h7.lesson-name {
 
 .myopus-list {
     border-radius: 4px;
-    width: 80%;
     margin: auto;
 
     .opus-item {

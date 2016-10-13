@@ -79,9 +79,14 @@
 
 #form_change_profile{
   font-weight: lighter;
-  font-size: 20px;
+  font-size: 16px;
   color: #0E0E0E;
   letter-spacing: 6px;
+  label{
+    margin-right: 20px;
+    font-weight: lighter;
+    font-size: 16px;
+  }
 
   .role-info{
     margin-left: 40px;
@@ -89,11 +94,6 @@
 
   .input-group{
     display: inline;
-
-    label{
-      margin-right: 20px;
-      font-weight: lighter;
-    }
   }
 
   .control-label{

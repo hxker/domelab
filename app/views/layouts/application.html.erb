@@ -36,23 +36,11 @@
         </li>
         <% if user_signed_in? %>
             <li class="has-menu">
-              <a href="<%= user_preview_path %>"><%= current_user.nickname %></a>
+              <a href="<%= user_profile_path %>"><%= current_user.nickname %></a>
               <span class="caret"></span>
               <ul class="hover-menu">
                 <li>
-                  <a href="<%= user_preview_path %>">个人中心</a>
-                </li>
-                <li>
-                  <a href="<%= user_preview_path %>">个人中心</a>
-                </li>
-                <li>
-                  <a href="<%= user_preview_path %>">个人中心</a>
-                </li>
-                <li>
-                  <a href="<%= user_preview_path %>">个人中心</a>
-                </li>
-                <li>
-                  <a href="<%= user_preview_path %>">个人中心</a>
+                  <a href="<%= user_profile_path %>">个人中心</a>
                 </li>
               </ul>
             </li>

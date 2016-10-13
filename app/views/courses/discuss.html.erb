@@ -2,7 +2,9 @@
 
     <div class="community">
         <div class="header">
-            <h2><%= @group.name %></h2>
+            <div class=left>
+              <h2><%= @group.name %></h2>
+            </div>
             <div class="img-wrapper"><img src="<%= image_path('community-header.png') %>" alt=""/></div>
         </div>
 
@@ -51,7 +53,7 @@
                 </div>
                 <div class="sub-comments">
                 <% if c.child_group_communities.present? %>
-                    <div>
+                    <div class="wrapper">
                         <% c.child_group_communities.each do |child_c| %>
 
                         <div class="comment">

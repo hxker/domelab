@@ -47,8 +47,7 @@
               <% if @lessons.present? %>
                 <% @lessons.each do |l| %>
                 <li>
-                    <div class="btn btn-lesson-item">
-                        <span class="gear">&#9881;</span>
+                    <div class="btn btn-lesson-item icon-gear">
                         <%= l.name %>
                     </div>
                     <% if l.content.present? %>

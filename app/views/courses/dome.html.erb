@@ -20,8 +20,14 @@
                 </div>
                 <%= @progress[:all_num] %>
               </div>
-              签到记录:<span id="sign-in-count"><%= @sign_in.nil? ? 0 : @sign_in.sign_count %></span>
-              平均正确率:<span><%= @progress[:average_right].nil? ? 0 : @progress[:average_right] %>%</span>
+              <div class="row text-gray text-center" style="width: 250px;">
+                <div class="col-md-6">
+                  签到记录<br><span id="sign-in-count" class="big-num"><%= @sign_in.nil? ? 0 : @sign_in.sign_count %></span>次
+                </div>
+                <div class="col-md-6">
+                  平均正确率<br><span class="big-num"><%= @progress[:average_right].nil? ? 0 : @progress[:average_right] %></span>%
+                </div>
+              </div>
             </div>
             <div class="col-md-3 group-info-right text-center">
 

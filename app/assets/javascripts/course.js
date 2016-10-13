@@ -22,7 +22,7 @@ $(function() {
                 }
             }
             if (answers && getJsonLength(answers) == test_ids.length) {
-                var ms = start_time - Date.now();
+                var ms = Date.now() - start_time;
                 min = (ms / 1000 / 60) << 0,
                     sec = (ms / 1000) % 60;
                 $.ajax({
@@ -35,15 +35,22 @@ $(function() {
                     success: function(data) {
                         console.log(data);
                         if (data[0] === true) {
+                            var right_per = data[1]["right_per"];
                             $('#lesson-test-container').addClass("hidden");
-                            $('#timepassed span').text(min + ':' + sec);
-                            $('#test-result span').text(data[1]["right_per"]);
-                            $('test-teacher-wrapper').aapend($('<img>', {
+                            $('#timepassed span').text(min + '分' + sec + '秒');
+                            $('#test-result span').text(right_per);
+                            $('test-teacher-wrapper').append($('<img>', {
                                 src: data[1]["teacher_avatar"]
                             }));
+                            if (right_per === 100) {
+                                $('.full-marks').removeClass('hidden');
+                            } else {
+                                $('.not-full-marks').removeClass('hidden');
+                            }
                             $('#test-result-container').removeClass("hidden");
                         } else {
-                            alert(data[1]);
+                            console.log(data[1]);
+                            $.notify("提交失败");
                         }
 
                     }
