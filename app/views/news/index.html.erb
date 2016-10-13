@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sx-12">
+      <div class="row">
+        <% @news.each do |news| %>
+            <div class="col-sm-4 text-center">
+              <p><%= news.name %></p>
+              <p><%= t("news_type.type#{news.news_type}") %></p>
+              <p><%= news.desc %></p>
+              <%= image_tag(news.cover_url(:middle)) %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

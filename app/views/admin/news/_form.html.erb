@@ -1,0 +1,84 @@
+<style type="text/css">
+  textarea, input[type="text"] {
+    padding: 0 4px;
+  }
+</style>
+<div class="panel panel-info">
+  <div class="panel-heading"><%= t('activerecord.models.news') %></div>
+  <div class="panel-body">
+    <%= simple_form_for([:admin, @new]) do |f| %>
+        <%= f.error_notification %>
+        <% if @new.errors.any? %>
+            <div class="alert alert-danger">
+              <% if @new.errors[:cover].present? %>
+                  <p>封面:<%= @new.errors[:cover].first %></p>
+              <% end %>
+              <% if @new.errors[:news_type].present? %>
+                  <p>类型:<%= @new.errors[:news_type].first %></p>
+              <% end %>
+              <% if @new.errors[:content].present? %>
+                  <p>内容:<%= @new.errors[:content].first %></p>
+              <% end %>
+            </div>
+        <% end %>
+        <div class="form-inputs">
+          <%= f.input :name, maxlength: '100' %>
+          <label class="control-label">类型</label>
+
+          <div class="well">
+            <%
+              News::TYPE.each do |k, v|
+            %>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="news[news_type]" value="<%= v %>" <%= v== @new.news_type ? 'checked' : '' %>> <%= k %>
+                  </label>
+                </div>
+            <%
+              end
+            %>
+          </div>
+          <%= f.input :desc, label: '描述' %>
+          <%= f.input :status, label: '显示' %>
+          <%= f.input :is_hot, label: '热门' %>
+
+          <% if @new.cover.present? %>
+              <%= image_tag(@new.cover_url(:middle)) %>
+          <% end %>
+          <div class="form-group">
+            <label class="text required control-label" for="news_cover">
+              <abbr title="必填字段">*</abbr>
+              封面
+            </label>
+            <%= f.file_field :cover %>
+            <p class="help-block">格式：jpg jpeg gif png</p>
+          </div>
+          <% if @new.images.present? %>
+              <% @new.images.each_with_index do |image, index| %>
+                  <%= image_tag(image.url(:middle)) %>
+              <% end %>
+          <% end %>
+
+
+
+          <div class="form-group">
+            <label class="text required control-label" for="news_cover">
+              <abbr title="必填字段"></abbr>
+              详情页图片
+            </label>
+            <%= f.file_field :images, multiple: true %>
+            <p class="help-block">格式：jpg jpeg gif png</p>
+          </div>
+
+
+          <label class="select required control-label" for="news_content"><abbr title="必填字段">*</abbr>内容:</label>
+          <%= f.kindeditor :content, :window_onload => true, :owner_id => @new.id, :items => ['formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'emoticons', 'baidumap', 'link', 'unlink', 'quickformat', 'preview', 'fullscreen'] %>
+          <%= f.hidden_field :admin_id, :value => @current_admin.id %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.submit class: 'btn btn-primary' %>
+        </div>
+    <% end %>
+  </div>
+</div>
