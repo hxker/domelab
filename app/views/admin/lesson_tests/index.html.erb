@@ -64,8 +64,8 @@
                             <% [test.option_1, test.option_2, test.option_3, test.option_4].each do |te| %>
                                 <div class="profile-activity clearfix" id="<%= "hide-player-#{}" %>">
                                   <div>
-                                    <% if te==test.answer %>
-                                    <icon class="icon-ok"></icon>
+                                    <% if te == test["option_#{test.answer}"] %>
+                                        <icon class="icon-ok"></icon>
                                     <% end %>
                                     <%= te %>
                                   </div>
