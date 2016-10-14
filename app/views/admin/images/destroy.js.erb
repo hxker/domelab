@@ -1,0 +1,6 @@
+admin_gritter_notice('<%= @result[1] %>');
+<% if @course_star.errors.present? %>
+bootbox.hideAll();
+<% else %>
+$("#<%= "hide-course-star-#{@result[2]}" %>").addClass('hide');
+<% end %>

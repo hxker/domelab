@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
 
-
   root to: 'home#index'
 
   devise_for :users, skip: [:sessions], controllers: {cas_sessions: 'our_cas_sessions'}
@@ -104,7 +103,11 @@ Rails.application.routes.draw do
     end
     resources :lesson_tests
     resources :news do
-      resources :images, :only => [:create, :destroy, :new, :update]
+      resources :images, :only => [:create, :destroy, :edit, :new] do
+        collection do
+          post :update_image
+        end
+      end
     end
   end
 

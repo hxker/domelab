@@ -72,27 +72,27 @@
         <div class="profile-info-name">列表图片</div>
 
         <div class="profile-info-value">
-          <div class="aa">
-            <!--<ul id="" class="ace-thumbnails">-->
-            <% 5.times do |d| %>
-                <% @new.images.each_with_index do |image, index| %>
-                    <!--<li>-->
+          <div class="row">
+            <%= link_to "/admin/news/#{@new.id}/images/new", title: '添加', remote: true, class: 'btn btn-primary' do %>
+                <i class="icon-plus"></i>
+            <% end %>
+            <ul class="ace-thumbnails">
+              <% @new.images.each_with_index do |image, index| %>
+                  <li>
                     <a href="<%= image.url %>" title="" data-rel="colorbox">
                       <%= image_tag(image.url(:middle)) %>
                     </a>
                     <div class="tools tools-bottom">
 
-                      <%= link_to "/admin/news/#{@new.id}/images/new", title: '编辑', remote: true, class: '' do %>
-                          <i class="icon-pencil"></i>
-                      <% end %>
                       <%= link_to admin_news_image_path(@new, index), method: :delete, data: {confirm: '确认删除吗?'}, title: '删除' do %>
                           <i class="icon-remove red"></i>
                       <% end %>
                     </div>
-                    <!--</li>-->
-                <% end %>
-                <!--</ul>-->
-            <% end %>
+                  </li>
+              <% end %>
+
+            </ul>
+
           </div>
         </div>
       </div>

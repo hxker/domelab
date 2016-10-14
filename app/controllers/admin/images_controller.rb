@@ -6,6 +6,10 @@ class Admin::ImagesController < AdminController
 
   end
 
+  def edit
+
+  end
+
   def create
     add_more_images(images_params[:images])
     flash[:error] = '上传失败' unless @news.save
@@ -13,8 +17,9 @@ class Admin::ImagesController < AdminController
   end
 
 
-  def update
-    update_images_at_index(1)
+  def update_image
+    update_images_at_index(params[:news][:index].to_i, params[:news][:sss])
+    redirect_back(fallback_location: '/admin/news')
   end
 
   def destroy
@@ -36,7 +41,18 @@ class Admin::ImagesController < AdminController
     @news.images = images
   end
 
-  def update_images_at_index(index)
+  def update_images_at_index(index, new_images)
+    remain_images = @news.images
+    if remain_images.length == 1
+      @news.remove_images!
+    else
+      deleted_image = remain_images.delete_at(index)
+      deleted_image.try(:remove!)
+      remain_images.insert(index, new_images)
+      @news.images = remain_images
+    end
+
+
 
   end
 
