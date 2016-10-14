@@ -34,7 +34,7 @@ class UserController < ApplicationController
         message = ''
         if roles.present?
           if roles.include?('教师')
-            unless desc_certificate.present? && cover.present? && school_id.present? && district_id.present? && username.present? && [1, 2].include?(gender.to_i)
+            unless desc_certificate.present? && cover.present? && school_id.to_i != 0 && district_id.to_i != 0 && username.present? && [1, 2].include?(gender.to_i)
               flash[:error] = '选择教师身份时，请填写姓名、性别、学校(区县)、教师编号、和上传教师证件'
               return false
             end
@@ -48,7 +48,7 @@ class UserController < ApplicationController
             end
           end
           if roles.include?('家庭创客')
-            unless desc_family.present? && cover.present? && school_id.present? && district_id.present? && username.present? && [1, 2].include?(gender.to_i)
+            unless desc_family.present? && cover.present? && school_id.to_i != 0 && district_id.to_i != 0 && username.present? && [1, 2].include?(gender.to_i)
               flash[:error] = '选择家庭创客身份时，请填写姓名、性别、学校(区县)、简要描述和图片'
               return false
             end
