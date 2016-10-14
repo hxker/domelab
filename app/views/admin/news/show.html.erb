@@ -1,0 +1,108 @@
+<h1 class="page-header">
+  显示<%= t('activerecord.models.news') %>
+  <small class="pull-right">
+    <a href="<%= edit_admin_news_path(@new) %>" title="编辑" class="btn btn-default">
+      <i class="icon-edit icon-only"></i></a>
+    <a href="<%= admin_news_index_path %>" title="列表" class="btn btn-default">
+      <i class="icon-list icon-only"></i></a>
+  </small>
+</h1>
+
+<% if notice %>
+    <div class="alert alert-success"><%= notice %>
+      <button class="close" data-dismiss="alert">
+        <i class="icon-remove"></i>
+      </button>
+    </div>
+<% end %>
+
+
+<div class="profile-user-info profile-user-info-striped">
+
+  <div class="profile-info-row">
+    <div class="profile-info-name"> <%= t('simple_form.labels.defaults.name') %> </div>
+
+    <div class="profile-info-value">
+      <span><%= @new.name %></span>
+    </div>
+  </div>
+
+  <div class="profile-info-row">
+    <div class="profile-info-name">类型</div>
+
+    <div class="profile-info-value">
+      <span><%= t('news_type.type'+@new.news_type.to_s) %></span>
+    </div>
+  </div>
+
+  <div class="profile-info-row">
+    <div class="profile-info-name">发布人</div>
+
+    <div class="profile-info-value">
+      <span><%= @new.admin.name %></span>
+    </div>
+  </div>
+  <div class="profile-info-row">
+    <div class="profile-info-name">创建时间</div>
+
+    <div class="profile-info-value">
+      <span><%= @new.created_at.strftime('%Y-%m-%d %H:%M:%S') %></span>
+    </div>
+  </div>
+  <div class="profile-info-row">
+    <div class="profile-info-name">更新时间</div>
+
+    <div class="profile-info-value">
+      <span><%= @new.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></span>
+    </div>
+  </div>
+
+
+  <% if @new.cover.present? %>
+      <div class="profile-info-row">
+        <div class="profile-info-name">封面</div>
+        <div class="show-row-margin">
+          <span><%= image_tag(@new.cover_url(:middle)) %></span>
+        </div>
+      </div>
+  <% end %>
+
+  <% if @new.images.present? %>
+      <div class="profile-info-row">
+        <div class="profile-info-name">列表图片</div>
+
+        <div class="profile-info-value">
+          <div class="row">
+            <%= link_to "/admin/news/#{@new.id}/images/new", title: '添加', remote: true, class: 'btn btn-primary' do %>
+                <i class="icon-plus"></i>
+            <% end %>
+            <ul class="ace-thumbnails">
+              <% @new.images.each_with_index do |image, index| %>
+                  <li>
+                    <a href="<%= image.url %>" title="" data-rel="colorbox">
+                      <%= image_tag(image.url(:middle)) %>
+                    </a>
+                    <div class="tools tools-bottom">
+
+                      <%= link_to admin_news_image_path(@new, index), method: :delete, data: {confirm: '确认删除吗?'}, title: '删除' do %>
+                          <i class="icon-remove red"></i>
+                      <% end %>
+                    </div>
+                  </li>
+              <% end %>
+
+            </ul>
+
+          </div>
+        </div>
+      </div>
+  <% end %>
+
+  <div class="profile-info-row">
+    <div class="profile-info-name">内容</div>
+
+    <div class="profile-info-value">
+      <span><%= raw(@new.content) %></span>
+    </div>
+  </div>
+</div>

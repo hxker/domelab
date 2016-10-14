@@ -7,6 +7,15 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
+  remote: git://github.com/carrierwaveuploader/carrierwave.git
+  revision: ec850831eeaf0f2f45c002bcec9b90698b78d0d8
+  specs:
+    carrierwave (1.0.0.beta)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
+
+GIT
   remote: git://github.com/javyliu/rails_kindeditor.git
   revision: 611d26652a734e290bf8fe71be4ebd7d61246a2d
   specs:
@@ -84,12 +93,6 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (9.0.5)
-    carrierwave (0.11.2)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      json (>= 1.7)
-      mime-types (>= 1.16)
-      mimemagic (>= 0.3.0)
     coderay (1.1.1)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
@@ -120,7 +123,6 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    json (2.0.2)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -132,7 +134,6 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mimemagic (0.3.2)
     mini_magick (4.5.1)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
@@ -256,7 +257,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   byebug
-  carrierwave
+  carrierwave!
   coffee-rails (~> 4.2)
   devise
   devise_cas_authenticatable!

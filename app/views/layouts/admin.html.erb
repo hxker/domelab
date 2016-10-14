@@ -156,7 +156,7 @@
       </div>
       <!-- #sidebar-shortcuts -->
       <ul class="nav nav-list">
-        <% if authenticate_permissions_show(['super_admin']) %>
+        <% if authenticate_permissions_show(['admin']) %>
             <li class="<%= params[:controller] == 'admin/admins' ? 'active' : '' %>">
               <a href="<%= admin_admins_path %>">
                 <i class="icon-gear"></i>
@@ -197,6 +197,12 @@
               <a href="<%= admin_lesson_tests_path %>">
                 <i class="icon-level-up"></i>
                 <span class="menu-text"> 课时测验 </span>
+              </a>
+            </li>
+            <li class="<%= params[:controller] == 'admin/news' ? 'active' : '' %>">
+              <a href="<%= admin_news_index_path %>">
+                <i class="icon-comment-alt"></i>
+                <span class="menu-text"> 新闻 </span>
               </a>
             </li>
 
