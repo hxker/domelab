@@ -67,24 +67,24 @@
       </div>
   <% end %>
 
-  <% if @new.images.present? %>
-      <div class="profile-info-row">
-        <div class="profile-info-name">列表图片</div>
+  <div class="profile-info-row">
+    <div class="profile-info-name">列表图片</div>
 
-        <div class="profile-info-value">
-          <div class="row">
-            <%= link_to "/admin/news/#{@new.id}/images/new", title: '添加', remote: true, class: 'btn btn-info btn-xs' do %>
-                <i class="icon-plus"></i>
-            <% end %>
+    <div class="profile-info-value">
+      <div class="row">
+        <%= link_to "/admin/news/#{@new.id}/images/new", title: '添加', remote: true, class: 'btn btn-info btn-xs' do %>
+            <i class="icon-plus"></i>
+        <% end %>
+        <% if @new.images.present? %>
             <ul class="ace-thumbnails">
               <% @new.images.each_with_index do |image, index| %>
-                  <li>
+                  <li id="news-image-<%= index %>">
                     <a href="<%= image.url %>" title="" data-rel="colorbox">
                       <%= image_tag(image.url(:middle)) %>
                     </a>
                     <div class="tools tools-bottom">
 
-                      <%= link_to admin_news_image_path(@new, index), method: :delete, data: {confirm: '确认删除吗?'}, title: '删除' do %>
+                      <%= link_to admin_news_image_path(@new, index), method: :delete, data: {confirm: '确认删除吗?', remote: true}, title: '删除' do %>
                           <i class="icon-remove red"></i>
                       <% end %>
                     </div>
@@ -92,11 +92,11 @@
               <% end %>
 
             </ul>
+        <% end %>
 
-          </div>
-        </div>
       </div>
-  <% end %>
+    </div>
+  </div>
 
   <div class="profile-info-row">
     <div class="profile-info-name">内容</div>

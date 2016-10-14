@@ -25,7 +25,16 @@ class Admin::ImagesController < AdminController
   def destroy
     remove_image_at_index(params[:id].to_i)
     flash[:error] = '删除失败' unless @news.save
-    redirect_back(fallback_location: '/admin/news')
+    if @news.save
+      @result = [true, '删除成功', params[:id]]
+    else
+      @result = [false, '删除失败']
+    end
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: '/admin/news') }
+      format.json
+      format.js
+    end
   end
 
 
@@ -51,7 +60,6 @@ class Admin::ImagesController < AdminController
       remain_images.insert(index, new_images)
       @news.images = remain_images
     end
-
 
 
   end

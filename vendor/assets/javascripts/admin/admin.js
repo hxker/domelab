@@ -46,17 +46,9 @@ $(function () {
         check_img_ts.bind('change', function () {
             var this_file = this.files[0];
             var file_name = this_file.name;
-            var file_type = file_name.substring(file_name.lastIndexOf(".") + 1);
-
-            if ($.inArray(file_type, ['jpg', 'jpeg', 'png', 'gif']) == -1) {
-                alert('文件格式不规范,请上传 jpg、jpeg、png、gif 格式的文件');
-                this.value = '';
-                return false;
-            }
-            var file_size = this_file.size / 1024 / 1024;
-            if (file_size > 1) {
-                alert("文件大小不能大于1MB，请重新选择图片");
-                this.value = '';
+            var file_type = get_file_type(file_name);
+            var has_error = (check_file_size(this_file.size, 1, this) && check_image_type(file_type, this));
+            if (!has_error) {
                 return false;
             }
             var windowURL = window.URL || window.webkitURL;
@@ -291,6 +283,30 @@ $(function () {
         });
     });
 
+
+    //  add news images validate
+    $(document).on('click', '.add-news-images-submit', function () {
+        var news_images = $('#news_images');
+        if (news_images.val()) {
+            var has_error = false;
+            $.each(news_images[0].files, function (k, v) {
+                var file_name = v.name;
+                var file_type = get_file_type(file_name);
+                has_error = (check_file_size(v.size, 0.5, news_images) && check_image_type(file_type, news_images));
+                if (!has_error) {
+                    return false;
+                }
+            });
+            if (!has_error) {
+                return false;
+            }
+        } else {
+            alert('请至少选择一个文件!');
+            return false;
+        }
+    });
+
+
 });
 function delete_group_course(group_course_id, group_id) {
     if (confirm('确认删除?')) {
@@ -338,5 +354,30 @@ function get_course_lessons(course_id) {
                 }
             }
         });
+    }
+}
+
+function get_file_type(file_name) {
+    return file_name.substring(file_name.lastIndexOf(".") + 1);
+}
+
+function check_image_type(file_type, obj) {
+    if ($.inArray(file_type, ['jpg', 'jpeg', 'png', 'gif']) == -1) {
+        alert('文件格式不规范,请上传 jpg、jpeg、png、gif 格式的文件');
+        obj.value = '';
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function check_file_size(file_size, limit_size, obj) {
+    var size = file_size / 1024 / 1024;
+    if (size > limit_size) {
+        alert("文件大小不能大于" + limit_size + "M，请重新选择");
+        obj.value = '';
+        return false;
+    } else {
+        return true;
     }
 }

@@ -1,7 +1,6 @@
-<%= simple_form_for(@news, url: "/admin/news/#{params[:news_id]}/images?index=#{params[:id]}", method: :post) do |f| %>
+<%= simple_form_for(@news, url: "/admin/news/#{params[:news_id]}/images?index=#{params[:id]}", method: :post, remote: true) do |f| %>
     <%= f.error_notification %>
     <div class="row">
-
       <div class="col-xs-6">
         <div class="form-inputs">
           <%= f.file_field :images, multiple: true %>
