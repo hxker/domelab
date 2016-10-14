@@ -175,6 +175,12 @@
                 <span class="menu-text"> 区县 </span>
               </a>
             </li>
+            <li class="<%= params[:controller] == 'admin/schools' ? 'active' : '' %>">
+              <a href="<%= admin_schools_path %>">
+                <i class="icon-reorder"></i>
+                <span class="menu-text"> 学校 </span>
+              </a>
+            </li>
             <li class="<%= params[:controller] == 'admin/groups' ? 'active' : '' %>">
               <a href="<%= admin_groups_path %>">
                 <i class="icon-group"></i>

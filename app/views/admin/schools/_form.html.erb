@@ -1,0 +1,19 @@
+<div class="panel panel-info">
+  <div class="panel-heading"><%= t('activerecord.models.school') %></div>
+  <div class="panel-body">
+    <%= simple_form_for([:admin, @school]) do |f| %>
+        <%= f.error_notification %>
+
+        <div class="form-inputs">
+          <%= f.input :name, autofocus: true %>
+          <%= f.input :district_id, collection: District.select(:id, :name) %>
+          <%= f.input :status, label: '是否显示' %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, class: 'btn btn-primary' %>
+        </div>
+    <% end %>
+  </div>
+</div>
+

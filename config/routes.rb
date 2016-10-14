@@ -76,6 +76,7 @@ Rails.application.routes.draw do
     post '/checks/review_opus', to: 'checks#review_opus'
     resources :admins
     resources :districts
+    resources :schools
     resources :roles
     resources :courses do
       collection do
