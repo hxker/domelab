@@ -36,7 +36,7 @@ class CoursesController < ApplicationController
       progress = GroupSchedule.find_by_sql("select count(a.id) as all_num,(select count(a.id) from group_schedules a where a.start < '#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}') as already_num from group_schedules a where a.group_id = #{@group_user.id}").first
       @progress = {average_right: average_right, already_num: progress.already_num, all_num: progress.all_num, progress: (progress.all_num > 0) ? ((Float(progress.already_num)/progress.all_num)*100).round(0) : 0}
     else
-      render_optional_error(403)
+      @groups = Group.where(status: 1).select(:id, :name)
     end
   end
 
