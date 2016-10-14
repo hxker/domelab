@@ -24,6 +24,15 @@ $(function() {
         var district_id = $(this).val();
         if (district_id !== "0") {
             get_schools(district_id);
+            $("#district_id").val(district_id);
+        }
+    });
+
+
+    $("#school-select").change(function() {
+        var school_id = $(this).val();
+        if (school_id !== "0") {
+            $("#school_id").val(school_id);
         }
     });
 

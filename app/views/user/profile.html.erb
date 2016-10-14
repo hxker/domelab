@@ -61,6 +61,8 @@
                 <label class="control-label" for="user_profile_school_id">学校</label>
 
                 <div class="school-field">
+                  <input id="school-id" type="hidden" name="user[school_id]" value="<%= @user_info.school_id %>"/>
+                  <input id="district-id" type="hidden" name="user[district_id]" value="<%= @user_info.district_id %>"/>
                   <% has_school = @user_info.school_id.present? && @user_info.school_id!=0 %>
                   <% if has_school %>
                       <span class="change-school school-tag"><%= @user_info.school_name %> </span>
@@ -72,10 +74,10 @@
             <div class="form-group">
               <div class="control-label"></div>
               <div class="school-select <%= 'hidden' if has_school %>" style="margin-left: 20%;">
-                  <select name="user[district_id]" id="district-select">
+                  <select id="district-select">
                     <option value="0">请选择区县</option>
                   </select>
-                  <select name="user[school_id]" id="school-select">
+                  <select id="school-select">
                     <option value="0">请选择学校</option>
                   </select>
               </div>

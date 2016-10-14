@@ -241,3 +241,17 @@ li.dropdown {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+.datepicker-dropdown .day:hover{
+  color: red;
+  background: bisque;
+}
+
+.datepicker-months .month{
+  margin-right: 10px;
+}
+
+.datepicker-months .month:hover{
+  color: red;
+  background: bisque;
+}
