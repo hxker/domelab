@@ -1,2 +1,33 @@
-<h1>News#show</h1>
-<p>Find me in app/views/news/show.html.erb</p>
+
+
+<div class="container center-block show-news">
+  <div class="head">
+    <h1><%= @news.name %></h1>
+    <p class="published_at"><%= @news.updated_at.strftime('%Y年%m月%d日') %></p>
+  </div>
+  <div class="row article" >
+    <div class="col-md-5 left">
+        <div id="carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <% @news.images.each.with_index do |image,index| %>
+                <div class="item <%= "active" if index == 0 %> ">
+                  <%= image_tag(image.url) %>
+                </div>
+              <% end %>
+            </div>
+        </div>
+        <div class="control">
+          <a href="#carousel" class="icon-caret-left" data-slide="prev">
+          </a>
+          <span class="index">1</span>/<span class="total"><%= @news.images.length %></span>
+          <a href="#carousel" class="icon-caret-right" data-slide="next">
+          </a>
+        </div>
+      </div>
+    <div class="col-md-7 right">
+      <div class="content">
+        <%= raw(@news.content) %>
+      </div>
+    </div>
+  </div>
+</div>
