@@ -33,11 +33,14 @@
     position: relative;
 
     .avatar-box {
-      width: 150px;
-      height: 150px;
       float: right;
       background-color: #d8d8d8;
       border: 1px solid #979797;
+
+      img{
+        width: 150px;
+        height: 150px;
+      }
     }
     .username-box {
       float: left;

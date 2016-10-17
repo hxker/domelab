@@ -26,7 +26,7 @@
         </div>
         <div class="item-c">
           <ul>
-            <li>
+            <!-- <li>
               <div class="col-sec">
                 <div class="sec-img">
                   <a href="">
@@ -44,192 +44,88 @@
                   </a>
                 </div>
               </div>
-            </li>
-            <li>
-              <div class="col-sec">
-                <div class="sec-img">
-                  <a href="">
-                    <img src="<%= image_path('thumb001.png') %>" alt=""/>
-                  </a>
-                </div>
-                <div class="sec-text">
-                  <div class="sec-t">
-                    小标题
-                  </div>
-                  <a href="">
-                    <div class="sec-c">
-                      描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="col-sec">
-                <div class="sec-img">
-                  <a href="">
-                    <img src="<%= image_path('thumb001.png') %>" alt=""/>
-                  </a>
-                </div>
-                <div class="sec-text">
-                  <div class="sec-t">
-                    小标题
-                  </div>
-                  <a href="">
-                    <div class="sec-c">
-                      描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </li>
+            </li> -->
           </ul>
         </div>
         <div class="item-b">
-          <button class="btn-col">查看更多</button>
+          <!-- <button class="btn-col">查看更多</button> -->
+          <h4>暂无内容</h4>
         </div>
       </div>
       <div class="col-item orange">
         <div class="item-t">
-          科普知识
+          豆姆课例
         </div>
         <div class="item-c">
           <ul>
+            <% @dome_courses.each do |course| %>
             <li>
               <div class="col-sec">
                 <div class="sec-img">
-                  <a href="">
+                  <a href="/courses/<%= course.id %>">
                     <img src="<%= image_path('thumb001.png') %>" alt=""/>
                   </a>
                 </div>
                 <div class="sec-text">
                   <div class="sec-t">
-                    小标题
+                    <%= course.name %>
                   </div>
-                  <a href="">
+                  <a href="/courses/<%= course.id %>">
                     <div class="sec-c">
-                      描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
+                      <%= raw(course.course_info) %>
                     </div>
                   </a>
                 </div>
               </div>
             </li>
-            <li>
-              <div class="col-sec">
-                <div class="sec-img">
-                  <a href="">
-                    <img src="<%= image_path('thumb001.png') %>" alt=""/>
-                  </a>
-                </div>
-                <div class="sec-text">
-                  <div class="sec-t">
-                    小标题
-                  </div>
-                  <a href="">
-                    <div class="sec-c">
-                      描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="col-sec">
-                <div class="sec-img">
-                  <a href="">
-                    <img src="<%= image_path('thumb001.png') %>" alt=""/>
-                  </a>
-                </div>
-                <div class="sec-text">
-                  <div class="sec-t">
-                    小标题
-                  </div>
-                  <a href="">
-                    <div class="sec-c">
-                      描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </li>
+            <% end %>
+
           </ul>
         </div>
         <div class="item-b">
-          <button class="btn-col">查看更多</button>
+          <a href="/courses/dome">
+            <button class="btn-col">查看更多</button>
+          </a>
         </div>
       </div>
       <div class="col-item green last">
         <div class="item-t">
-          科普知识
+          名师课例
         </div>
         <div class="item-c">
           <ul>
+            <% @expert_courses.each do |course| %>
             <li>
               <div class="col-sec">
                 <div class="sec-img">
-                  <a href="">
+                  <a href="/courses/<%= course.id %>">
                     <img src="<%= image_path('thumb001.png') %>" alt=""/>
                   </a>
                 </div>
                 <div class="sec-text">
                   <div class="sec-t">
-                    小标题
+                  <%= course.name %>
                   </div>
-                  <a href="">
+                  <a href="/courses/<%= course.id %>">
                     <div class="sec-c">
-                      描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
+                      <%= raw(course.course_info) %>
                     </div>
                   </a>
                 </div>
               </div>
             </li>
-            <li>
-              <div class="col-sec">
-                <div class="sec-img">
-                  <a href="">
-                    <img src="<%= image_path('thumb001.png') %>" alt=""/>
-                  </a>
-                </div>
-                <div class="sec-text">
-                  <div class="sec-t">
-                    小标题
-                  </div>
-                  <a href="">
-                    <div class="sec-c">
-                      描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="col-sec">
-                <div class="sec-img">
-                  <a href="">
-                    <img src="<%= image_path('thumb001.png') %>" alt=""/>
-                  </a>
-                </div>
-                <div class="sec-text">
-                  <div class="sec-t">
-                    小标题
-                  </div>
-                  <a href="">
-                    <div class="sec-c">
-                      描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </li>
+            <% end %>
           </ul>
         </div>
         <div class="item-b">
+          <a href="/courses">
           <button class="btn-col">查看更多</button>
+          </a>
         </div>
       </div>
     </div>
   </div>
-  <div id="news">
+  <!-- <div id="news">
     <div class="container">
       <div class="left">
         <div class="sec-t">
@@ -280,5 +176,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

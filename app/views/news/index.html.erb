@@ -16,11 +16,11 @@
         <% end %>
       </div>
       <div class="text-center" style="margin-top:50px;">
-        <button class="btn" onclick="$('.news-gallery').hide();$('.news-list-wrapper').removeClass('hidden');">查看全部</button>
+        <a class="btn" onclick="$('.news-gallery').hide();$('.news-list-wrapper').removeClass('hidden');">查看全部</a>
       </div>
     </div>
 
-    <div class="news-list-wrapper hidden">
+    <div id="news-list-wrapper" class="news-list-wrapper hidden">
       <div class="head">全部新闻</div>
       <% if @news.present? %>
         <ol class="news-list">
