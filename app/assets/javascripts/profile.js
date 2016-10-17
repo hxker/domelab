@@ -1,4 +1,51 @@
 $(function() {
+
+    $("#user_avatar").change(function() {
+        readURL(this, 0.5);
+    });
+
+    $('#avatar-modal input[type="submit"]').click(function(event) {
+        event.preventDefault();
+        var form = $("#avatar-form");
+        if (typeof FormData === 'undefined') {
+            form.submit();
+        } else {
+            if (!$("#user_avatar").val()) {
+                alert('未选择图片');
+            } else {
+                $.ajax({
+                    data: new FormData(form[0]),
+                    type: "POST",
+                    dataType: "XML",
+                    url: form.attr('action'),
+                    contentType: false,
+                    processData: false,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
+                    success: function(d) {
+                        $("#avatar-modal").modal('hide');
+                        $("#user_avatar").val("");
+                        $(".upload-path").text('请选择图片');
+                        $(".preview").attr("src", "");
+                        $("#myavatar").attr("src", $("#myavatar").attr('src') + "?" + new Date().getTime());
+                    },
+                    error: function(d) {
+                        console.log(d);
+                        $("#avatar-modal").modal('hide');
+                        if (d.status === 413) {
+                            alert('文件过大,上传失败');
+                        } else {
+                            alert($(d).find("error").text());
+                        }
+                    }
+                });
+            }
+        }
+
+    });
+
     $("#form_change_profile .user_profile_roles input").each(function(i, el) {
         show_info(el);
     }).change(function() {
