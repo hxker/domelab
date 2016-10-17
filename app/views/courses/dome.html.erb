@@ -12,7 +12,9 @@
               <p>任课老师: <%= @group_user.teacher_name %></p>
             </div>
             <div class="col-md-6 group_info_middle">
-              <p class="text-gray">课程进度&nbsp&nbsp&nbsp&nbsp<a class="btn btn-course-link" role="button" href="<%= "/courses/schedule?id=#{@group_user.id}" %>">查看课程表</a>
+              <p class="text-gray">课程进度&nbsp&nbsp&nbsp&nbsp
+              <a class="btn btn-course-link" role="button" href="<%= "/courses/schedule?id=#{@group_user.id}" %>">查看课程表</a>
+              <a class="btn btn-course-link" href="/courses/community/">班级圈</a>
               </p>
               <div class="progress progress-course">
                 <div class="progress-bar" style="width:<%= @progress[:progress] %>%">

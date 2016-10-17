@@ -23,3 +23,4 @@
 //= require community
 //= require admin/bootstrap-datepicker.min
 //= require profile
+//= require news
