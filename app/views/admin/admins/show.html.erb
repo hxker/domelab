@@ -27,6 +27,23 @@
         </div>
       </div>
   <% end %>
+  <% if @admin.permissions.in?(%w(teacher)) %>
+      <div class="profile-info-row">
+        <div class="profile-info-name">老师形象</div>
+        <div class="profile-info-value">
+          <div class="row">
+            <% if @admin.teacher_avatar.present? %>
+                <% @admin.teacher_avatar.each do |t| %>
+                    <%= image_tag(t.url(:middle)) %>
+                <% end %>
+            <% else %>
+                暂无
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+  <% end %>
   <div class="profile-info-row">
     <div class="profile-info-name"> <%= t('simple_form.labels.defaults.job_number') %></div>
 

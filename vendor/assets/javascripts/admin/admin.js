@@ -80,6 +80,18 @@ $(function () {
         });
     }
 
+    // validate dome teacher appearance
+    var teacher_avatar_info = $('#check-teacher-avatar-info');
+    if (teacher_avatar_info.length > 0) {
+        teacher_avatar_info.bind('change', function () {
+            if (teacher_avatar_info[0].files.length != 2) {
+                alert('只能选择两张图片');
+                return false;
+            }
+            multiple_check_type_size(teacher_avatar_info, 1);
+        });
+    }
+
 
     // review group students
     $('.open-review-student').on('click', function () {
@@ -288,16 +300,7 @@ $(function () {
     $(document).on('click', '.add-news-images-submit', function () {
         var news_images = $('#news_images');
         if (news_images.val()) {
-            var has_error = false;
-            $.each(news_images[0].files, function (k, v) {
-                var file_name = v.name;
-                var file_type = get_file_type(file_name);
-                has_error = (check_file_size(v.size, 0.5, news_images) && check_image_type(file_type, news_images));
-                if (!has_error) {
-                    return false;
-                }
-            });
-            if (!has_error) {
+            if (!multiple_check_type_size(news_images, 0.5)) {
                 return false;
             }
         } else {
@@ -379,5 +382,20 @@ function check_file_size(file_size, limit_size, obj) {
         return false;
     } else {
         return true;
+    }
+}
+
+function multiple_check_type_size(obj, limit_size) {
+    var has_error = false;
+    $.each(obj[0].files, function (k, v) {
+        var file_name = v.name;
+        var file_type = get_file_type(file_name);
+        has_error = (check_file_size(v.size, limit_size, obj) && check_image_type(file_type, obj));
+        if (!has_error) {
+            return false;
+        }
+    });
+    if (!has_error) {
+        return false;
     }
 }

@@ -44,6 +44,7 @@
           </div>
           <% if @admin.avatar.present? %>
               <%= image_tag(@admin.avatar_url(:middle)) %>
+              <br><br>
           <% end %>
           <div class="form-group">
             <label class="text control-label" for="admin_avatar">
@@ -53,6 +54,23 @@
             <%= f.hidden_field :avatar_cache %>
             <p class="help-block">格式：jpg jpeg gif png (图片大小在 1M 以内)</p>
           </div>
+
+          <% if @admin.teacher_avatar.present? %>
+              <% @admin.teacher_avatar.each do |t| %>
+                  <%= image_tag(t.url(:middle)) %>
+              <% end %>
+              <br><br>
+          <% end %>
+
+          <div class="form-group">
+            <label class="text control-label" for="admin_avatar">
+              老师形象(2个,第一个为满分形象)
+            </label>
+            <%= f.file_field :teacher_avatar, multiple: true, id: 'check-teacher-avatar-info' %>
+            <%= f.hidden_field :teacher_avatar_cache %>
+            <p class="help-block">格式：jpg jpeg gif png (图片大小在 1M 以内)</p>
+          </div>
+
           <%= f.input :address %>
         </div>
 

@@ -3,6 +3,8 @@ class Admin < ApplicationRecord
   include AccountConcern
   has_many :groups, foreign_key: :teacher_id
   mount_uploader :avatar, AvatarUploader
+  mount_uploaders :teacher_avatar, CoverUploader
+
 
   validates :job_number, presence: true, length: {minimum: 3, maximum: 5}, uniqueness: true
   validates :password, length: {minimum: 6, maximum: 20}, allow_blank: true

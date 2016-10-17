@@ -145,16 +145,23 @@ class CoursesController < ApplicationController
           answers_keys = answers.keys
           if (test_keys & answers_keys).count == test_keys.length
             right_per = []
+            answer_result = {}
             tests.each do |test|
-              right_per << true if test["option_#{test.answer}"] == answers["#{test.id}"]
+              status = test["option_#{test.answer}"] == answers["#{test.id}"] ? 1 : 0
+              right_per << true if status == 1
+              answer_result[test.id] = status
             end
-            right_percent = (((Float(right_per.length)/tests.length).round(2))*100).to_i
-            teacher_avatar = Admin.joins(:groups).where('groups.id = ?', check_ability.group_id).select(:id, :avatar).map { |a| {
+            right_percent = (((Float(right_per.length)/tests.length))*100).round(2)
+            teacher_avatar = Admin.joins(:groups).where('groups.id = ?', check_ability.group_id).select(:id, :teacher_avatar).map { |a| {
                 id: a.id,
-                avatar: a.avatar.present? ? ActionController::Base.helpers.asset_path(a.avatar_url(:middle)) : nil
+                avatar: a.teacher_avatar.present? ? ActionController::Base.helpers.asset_path(a.teacher_avatar[right_percent == 100.0 ? 0 : 1].url(:middle)) : nil
             } }
-            result = [true, {right_per: right_percent, teacher_avatar: teacher_avatar[0][:avatar]}]
-            current_user.user_lesson_tests.create(lesson_id: lesson_id, right_percent: right_percent)
+            user_lesson_test = current_user.user_lesson_tests.create(lesson_id: lesson_id, right_percent: right_percent, answer_result: answer_result, group_id: check_ability.group_id)
+            if user_lesson_test.save
+              result = [true, {right_per: right_percent, teacher_avatar: teacher_avatar[0][:avatar]}]
+            else
+              result = [false, '答题失败']
+            end
           else
             result = [false, '答案不完整']
           end

@@ -1,5 +1,5 @@
 class Admin::GroupsController <AdminController
-  before_action :set_group, only: [:show, :edit, :update, :destroy, :students]
+  before_action :set_group, only: [:show, :edit, :update, :destroy, :students, :lesson_test_result]
   before_action do
     authenticate_permissions(['super_admin', 'admin'])
   end
@@ -126,6 +126,10 @@ class Admin::GroupsController <AdminController
 
   def students
     @users = @group.group_user_ships.joins(:user).where(status: 1).select(:id, 'users.fullname', 'users.id as user_id', 'users.student_code', 'users.mobile', 'users.email').page(params[:page]).per(params[:per])
+  end
+
+  def lesson_test_result
+    @group_lessons = Lesson.joins(:course).joins('left join group_course_ships g_u on g_u.course_id = courses.id').where('g_u.group_id=?', 1).select(:id, "CONCAT(courses.name,'--',lessons.name) as name")
   end
 
   # GET /admin/groups/new

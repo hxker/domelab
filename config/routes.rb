@@ -95,6 +95,7 @@ Rails.application.routes.draw do
         post :delete_schedule
         post :update_schedule
         get :students
+        get :lesson_test_result
       end
     end
     resources :lessons do

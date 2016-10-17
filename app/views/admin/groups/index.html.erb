@@ -55,6 +55,9 @@
         <td><%= t('status.status'+c.status.to_s) %></td>
         <td><%= c.start_date %><%= " -- #{c.end_date}" if c.start_date != c.end_date %></td>
         <td>
+          <%= link_to "/admin/groups/lesson_test_result?id=#{c.id}", title: '查看课件正确率', class: 'btn btn-xs btn-warning' do %>
+              <i class="icon-eye-open bigger-120"></i>
+          <% end %>
           <%= link_to "/admin/groups/add_schedule?id=#{c.id}", title: '添加课程表', class: 'btn btn-xs btn-primary' do %>
               <i class="icon-plus bigger-120"></i>
           <% end %>
