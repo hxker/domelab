@@ -1,8 +1,6 @@
 .news-gallery{
 
-  .gallery-item{
-    position: relative;
-    padding: 0px;
+  .gallery-item:hover{
     background: #000;
 
     .img-wrapper{
@@ -11,6 +9,18 @@
       -ms-filter: blur(10px);
       filter: blur(2px);
       opacity: 0.5;
+    }
+
+    .title{
+      display: block;
+    }
+  }
+
+  .gallery-item{
+    position: relative;
+    padding: 0px;
+
+    .img-wrapper{
 
       img{
         width: 100%;
@@ -18,6 +28,7 @@
     }
 
     .title{
+      display: none;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -85,11 +96,15 @@
   .right{
     height: 100%;
 
-    .content{
+    .content-wrapper{
       border-radius: 10px;
       padding-left: 10px;
       background: #f8d0bf;
       height: 100%;
+
+      .content{
+        padding: 20px;
+      }
     }
 
   }
@@ -99,7 +114,11 @@
 
     .carousel-inner{
       .item{
-        min-height: 100px;
+        img{
+          min-height: 100px;
+          max-height: 300px;          
+        }
+
 
         img{
           margin: 20px auto;
