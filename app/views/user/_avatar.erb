@@ -22,7 +22,7 @@
                 <h4 class="blue bigger">上传头像</h4>
             </div>
 
-            <form id="avatar-form" enctype="multipart/form-data" action="<%= Devise.cas_base_url %>/profile.xml" accept-charset="UTF-8" method="post"><input name="utf8" value="✓" type="hidden"><input name="_method" value="patch" type="hidden">
+            <form id="avatar-form" enctype="multipart/form-data" action="<%= iframe_src('/profile.xml')%>" accept-charset="UTF-8" method="post"><input name="utf8" value="✓" type="hidden"><input name="_method" value="patch" type="hidden">
 
               <div class="modal-body overflow-visible">
                   <div class="row">
@@ -36,7 +36,7 @@
               </div>
 
               <div class="modal-footer">
-                <input name="submit" value="上传我的头像" class="btn btn-default btn btn-rect" type="submit">              </div>
+                <input id="avatar-submit" name="avatar-submit" value="上传我的头像" class="btn btn-default btn btn-rect" type="submit">              </div>
             </form>
         </div>
     </div>

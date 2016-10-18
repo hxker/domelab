@@ -8,7 +8,16 @@ $(function() {
         event.preventDefault();
         var form = $("#avatar-form");
         if (typeof FormData === 'undefined') {
+            var iframe = $('<iframe name="postiframe" id="postiframe" style="display: none"></iframe>');
+            $("body").append(iframe);
+            form.attr("target", "postiframe");
+            form.attr("file", $("#user_avatar").val());
             form.submit();
+
+            $("#postiframe").load(function() {
+                $("#avatar-modal").modal('hide');
+                $("#myavatar").attr("src", $("#myavatar").attr('src') + "?" + new Date().getTime());
+            });
         } else {
             if (!$("#user_avatar").val()) {
                 alert('未选择图片');
