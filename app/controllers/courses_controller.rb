@@ -149,7 +149,7 @@ class CoursesController < ApplicationController
             tests.each do |test|
               status = test["option_#{test.answer}"] == answers["#{test.id}"] ? 1 : 0
               right_per << true if status == 1
-              answer_result[test.id] = status
+              answer_result[test.name] = status
             end
             right_percent = (((Float(right_per.length)/tests.length))*100).round(2)
             teacher_avatar = Admin.joins(:groups).where('groups.id = ?', check_ability.group_id).select(:id, :teacher_avatar).map { |a| {

@@ -1,0 +1,50 @@
+<h1 class="page-header">
+  <%= @group.name %>  课时测验结果
+</h1>
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <div id="accordion">
+      <% if @group_lessons.present? %>
+          <% @group_lessons.each do |l| %>
+              <div class="group">
+                <h3 class="accordion-header"><%= l.name %></h3>
+                <% right_per = 0 %>
+                <% if @lesson_tests.present? %>
+                    <div>
+                      <% @lesson_tests.each do |lesson| %>
+                          <% if l.id == lesson.lesson_id %>
+                              <p><%= lesson.answer_num %>
+                                位学生参加测试,平均正确率: <%= (lesson.all_right_per/lesson.answer_num).round(2) %>%
+                              </p>
+                              <% if lesson.results.present? %>
+                                  <ul>
+                                    <% lesson.results[0].each do |result| %>
+                                        <li>
+
+                                          <%= result[0][0..60] %>
+                                          <% lesson.results.each do |results| %>
+                                              <% right_per += 1 if results["#{result[0]}"]==1 %>
+                                          <% end %>
+                                          <div class="pull-left col-sm-1">
+                                            <%= ((Float(right_per)/lesson.answer_num)*100).round(0) %>%
+                                          </div>
+                                        </li>
+                                        <% right_per = 0 %>
+                                    <% end %>
+                              <% end %>
+                              </ul>
+                          <% end %>
+                      <% end %>
+                    </div>
+                <% end %>
+              </div>
+          <% end %>
+
+      <% end %>
+    </div><!-- #accordion -->
+  </div><!-- ./span -->
+</div><!-- /.row -->
+
+

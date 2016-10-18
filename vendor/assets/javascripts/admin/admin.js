@@ -86,6 +86,7 @@ $(function () {
         teacher_avatar_info.bind('change', function () {
             if (teacher_avatar_info[0].files.length != 2) {
                 alert('只能选择两张图片');
+                teacher_avatar_info[0].value = '';
                 return false;
             }
             multiple_check_type_size(teacher_avatar_info, 1);
@@ -300,7 +301,8 @@ $(function () {
     $(document).on('click', '.add-news-images-submit', function () {
         var news_images = $('#news_images');
         if (news_images.val()) {
-            if (!multiple_check_type_size(news_images, 0.5)) {
+            var has_error = multiple_check_type_size(news_images, 0.5);
+            if (has_error) {
                 return false;
             }
         } else {
@@ -309,6 +311,23 @@ $(function () {
         }
     });
 
+    var accordion = $('#accordion');
+    if (accordion.length > 0) {
+        accordion.accordion({
+            collapsible: true,
+            heightStyle: "content",
+            animate: 250,
+            header: ".accordion-header"
+        }).sortable({
+            axis: "y",
+            handle: ".accordion-header",
+            stop: function (event, ui) {
+                // IE doesn't register the blur when sorting
+                // so trigger focusout handlers to remove .ui-state-focus
+                ui.item.children(".accordion-header").triggerHandler("focusout");
+            }
+        });
+    }
 
 });
 function delete_group_course(group_course_id, group_id) {
@@ -367,7 +386,7 @@ function get_file_type(file_name) {
 function check_image_type(file_type, obj) {
     if ($.inArray(file_type, ['jpg', 'jpeg', 'png', 'gif']) == -1) {
         alert('文件格式不规范,请上传 jpg、jpeg、png、gif 格式的文件');
-        obj.value = '';
+        obj[0].value = '';
         return false;
     } else {
         return true;
@@ -378,7 +397,7 @@ function check_file_size(file_size, limit_size, obj) {
     var size = file_size / 1024 / 1024;
     if (size > limit_size) {
         alert("文件大小不能大于" + limit_size + "M，请重新选择");
-        obj.value = '';
+        obj[0].value = '';
         return false;
     } else {
         return true;
@@ -386,16 +405,14 @@ function check_file_size(file_size, limit_size, obj) {
 }
 
 function multiple_check_type_size(obj, limit_size) {
-    var has_error = false;
+    var has_no_error = false;
     $.each(obj[0].files, function (k, v) {
         var file_name = v.name;
         var file_type = get_file_type(file_name);
-        has_error = (check_file_size(v.size, limit_size, obj) && check_image_type(file_type, obj));
-        if (!has_error) {
+        has_no_error = (check_file_size(v.size, limit_size, obj) && check_image_type(file_type, obj));
+        if (!has_no_error) {
             return false;
         }
     });
-    if (!has_error) {
-        return false;
-    }
+    return !has_no_error;
 }

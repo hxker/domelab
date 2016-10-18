@@ -6,11 +6,11 @@ class Admin::LessonTestsController < AdminController
   # GET /admin/lesson_tests
   # GET /admin/lesson_tests.json
   def index
-    lesson_tests = LessonTest.all
+    lesson_tests = LessonTest.joins(:lesson).joins('left join courses c on c.id = lessons.course_id')
     if params[:field].present? && params[:keyword].present?
-      lesson_tests = lesson_tests.where(["#{params[:field]} like ?", "%#{params[:keyword]}%"])
+      lesson_tests = lesson_tests.where(["lesson_tests.#{params[:field]} like ?", "%#{params[:keyword]}%"])
     end
-    @lesson_tests = lesson_tests.page(params[:page]).per(params[:per])
+    @lesson_tests = lesson_tests.select(:id, :name, :option_1, :option_2, :option_3, :option_4, :answer, 'lessons.name as lesson_name', 'c.name as course_name').order('lesson_tests.lesson_id').page(params[:page]).per(params[:per])
   end
 
   # GET /admin/lesson_tests/1

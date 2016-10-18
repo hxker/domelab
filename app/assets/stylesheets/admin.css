@@ -1,6 +1,7 @@
 /*
 *= require bootstrap.min
 *= require font-awesome.min
+*= require admin/jquery-ui-1.10.3.full.min
 *= require admin/fullcalendar
 *= require admin/jquery.gritter
 *= require admin/chosen

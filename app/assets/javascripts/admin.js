@@ -2,7 +2,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap.min
-//= require admin/jquery-ui-1.10.3.custom.min
+//= require admin/jquery-ui-1.10.3.full.min
 //= require admin/fullcalendar.min
 //= require admin/bootbox.min
 //= require admin/ace-elements.min
