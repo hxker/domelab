@@ -47,8 +47,8 @@
                       <h5><%= test.course_name %>--<%= test.lesson_name %></h5>
                       <div class="widget-header widget-header-small">
 
-                        <h4 class="">
-                          <%= test.name[0..12] %>
+                        <h4 title="<%= test.name %>">
+                        <%= test.name[0..12] %>
                         </h4>
                         <div class="widget-toolbar action-buttons">
                           <%= link_to edit_admin_lesson_test_path(test.id), title: '编辑' do %>

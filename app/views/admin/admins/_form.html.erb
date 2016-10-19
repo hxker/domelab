@@ -10,6 +10,9 @@
             <% @admin.errors[:avatar].each do |msg| %>
                 <div class="alert alert-danger"> 头像：<%= msg %></div>
             <% end %>
+            <% @admin.errors[:teacher_avatar].each do |msg| %>
+                <div class="alert alert-danger"> 老师形象：<%= msg %></div>
+            <% end %>
         <% end %>
 
         <div class="form-inputs">
