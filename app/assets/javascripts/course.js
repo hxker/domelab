@@ -39,7 +39,7 @@ $(function() {
                             $('#lesson-test-container').addClass("hidden");
                             $('#timepassed span').text(min + '分' + sec + '秒');
                             $('#test-result span').text(right_per);
-                            $('test-teacher-wrapper').append($('<img>', {
+                            $('#test-teacher-wrapper').append($('<img>', {
                                 src: data[1]["teacher_avatar"]
                             }));
                             if (right_per === 100) {
