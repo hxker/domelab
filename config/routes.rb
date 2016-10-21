@@ -104,6 +104,7 @@ Rails.application.routes.draw do
       end
     end
     resources :lesson_tests
+    resources :photos
     resources :news do
       resources :images, :only => [:create, :destroy, :edit, :new] do
         collection do

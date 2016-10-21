@@ -18,5 +18,7 @@
 //= require admin/jquery.nestable.min
 //= require admin/jquery.colorbox-min
 //= require bootstrap-dialog
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require kindeditor
 //= require admin/calendar
