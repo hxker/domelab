@@ -64,6 +64,13 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
+  # Disable That whiny crap
+  # or To allow console to a specific address or addresses => config.web_console.whitelisted_ips = '0.0.0.0/0'
+  config.web_console.whiny_requests = false
+
+  # Set Action Cable server url for consumer connection
+  config.action_cable.url = '/cable'
+  config.action_cable.allowed_request_origins = ['http://dev.domelab.com', 'http://localhost:3001']
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
