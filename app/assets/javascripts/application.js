@@ -19,6 +19,7 @@
 //= require like
 //= require turbolinks
 //= require dhtmlxscheduler
+//= require default
 //= require discuss
 //= require community
 //= require admin/bootstrap-datepicker.min
