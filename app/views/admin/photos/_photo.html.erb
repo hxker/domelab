@@ -1,13 +1,14 @@
 <li>
   <a class="cboxElement" href="<%= @photo.image_url %>" title="<%= URI.decode(@photo.image.to_s.split("/#{@photo.id}/")[1].to_s) %>" data-rel="colorbox">
     <%= image_tag(@photo.image_url(:middle), size: '200x200') %>
-    <% unless @photo.status %>
-        <div class="tags" style="top:-2px">
-                    <span class="label-holder">
-                        <span class="label label-warning arrowed-in">不显示</span>
-                    </span>
-        </div>
-    <% end %>
+    <div class="tags" style="top:-2px">
+        <span class="label-holder">
+            <span class="label label-warning arrowed-out"><%= @photo.sort %></span>
+          <% unless @photo.status %>
+            <span class="label label-info arrowed-in">不显示</span>
+          <% end %>
+        </span>
+    </div>
   </a>
 
   <div class="tools tools-bottom">

@@ -18,8 +18,8 @@
     <li class="ucm-item">
       <a href="">我的积分</a>
     </li>
-    <li class="ucm-item">
-      <a href="">调戏小豆</a>
+    <li class="ucm-item <%= 'active' if action_name == 'consult' %>">
+      <a href="<%= user_consult_path %>">调戏小豆</a>
     </li>
   </ul>
 </div>

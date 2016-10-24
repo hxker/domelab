@@ -113,6 +113,7 @@ Rails.application.routes.draw do
         end
       end
     end
+    resources :consults
   end
   mount ActionCable.server => '/cable'
 
@@ -128,6 +129,7 @@ Rails.application.routes.draw do
   match 'user/email' => 'user#email', as: 'user_email', via: [:get, :post]
   match 'user/reset_mobile' => 'user#reset_mobile', as: 'user_reset_mobile', via: [:get, :post]
   match 'user/reset_email' => 'user#reset_email', as: 'user_reset_email', via: [:get, :post]
+  match 'user/consult' => 'user#consult', as: 'user_consult', via: [:get, :post]
   get '/user/get_schools' => 'user#get_schools', as: 'user_get_schools'
   get '/user/get_districts' => 'user#get_districts', as: 'user_get_districts'
   match 'user/notifications' => 'user#notifications', as: 'user_notifications', via: [:get]

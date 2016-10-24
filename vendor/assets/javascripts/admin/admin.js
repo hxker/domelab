@@ -93,6 +93,17 @@ $(function () {
         });
     }
 
+    // validate lesson_ware ppt image
+    var lesson_ware_ppt = $('#check-lesson-ware');
+    if (lesson_ware_ppt.length > 0) {
+        lesson_ware_ppt.bind('change', function () {
+            var has_error = multiple_check_type_size(lesson_ware_ppt, 1);
+            if (has_error) {
+                return false;
+            }
+        });
+    }
+
 
     // review group students
     $('.open-review-student').on('click', function () {

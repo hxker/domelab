@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :group_communities
   has_many :group_opus
   has_one :sign_in
+  has_many :consults
   alias_attribute :username, :id
   attr_accessor :desc_family, :desc_certificate, :cover
   devise :cas_authenticatable

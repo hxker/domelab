@@ -55,11 +55,15 @@ class Admin::PhotosController < AdminController
   def update
     respond_to do |format|
       if @photo.update(photo_params)
+        @result = {status: true, message: '更新成功', photo: @photo}
         format.html { redirect_to "#{admin_photo_url(@photo)}", notice: '更新成功' }
         format.json { head :no_content }
+        format.js
       else
+        @result = {status: false, message: '更新失败'}
         format.html { render action: 'edit' }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
