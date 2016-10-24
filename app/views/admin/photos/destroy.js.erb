@@ -1,0 +1,4 @@
+admin_gritter_notice('<%= @result[:message] %>');
+<% if @result[:status] %>
+$('#photo-identifier-<%= @result[:photo_id] %>').addClass('hide');
+<% end %>

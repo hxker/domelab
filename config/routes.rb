@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/courses/community/:id', to: 'courses#community'
   get '/courses/discuss/:id', to: 'courses#discuss'
   post '/courses/discuss_post', to: 'courses#discuss_post'
+  get '/courses/lesson_ware/:id', to: 'courses#lesson_ware'
   get 'test' => 'test#index'
 
   resources :likes

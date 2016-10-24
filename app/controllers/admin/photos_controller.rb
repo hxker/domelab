@@ -1,6 +1,5 @@
 class Admin::PhotosController < AdminController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
-  # before_action :set_video, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/demeanor
   # GET /admin/demeanor.json
@@ -68,10 +67,15 @@ class Admin::PhotosController < AdminController
   # DELETE /admin/demeanor/1
   # DELETE /admin/demeanor/1.json
   def destroy
-    @photo.destroy
+    if @photo.destroy
+      @result = {status: true, message: '删除成功', photo_id: @photo.id}
+    else
+      @result = {status: false, message: '删除失败'}
+    end
     respond_to do |format|
       format.html { redirect_to "#{admin_photos_url}?td=#{@photo.type_id}&type=#{@photo.photo_type}", notice: '删除成功' }
       format.json { head :no_content }
+      format.js
     end
   end
 

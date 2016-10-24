@@ -57,6 +57,7 @@ zh-CN:
         english_name: '英文名'
         author: '作者'
         district_id: '所属区县'
+        sort: '排序'
 
 
     "yes": '是'

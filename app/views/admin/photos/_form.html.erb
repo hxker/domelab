@@ -13,6 +13,7 @@
 
         <div class="form-inputs">
           <%= f.hidden_field :type_id, value: params[:td].present? ? params[:td] : @photo.type_id %>
+          <%= f.input :sort %>
           <% if params[:action]=='edit' %>
               <%= f.input :status, label: '是否显示' %>
               <%= image_tag(@photo.image_url(:middle)) %>

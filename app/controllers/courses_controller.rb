@@ -227,6 +227,15 @@ class CoursesController < ApplicationController
     render json: {message: @message}
   end
 
+  def lesson_ware
+    lesson_id = params[:id]
+    if check_group_user(lesson_id)
+      @lesson_wares = Photo.where(photo_type: 1, type_id: lesson_id).order('sort asc')
+    else
+      render_optional_error(403)
+    end
+  end
+
   private
 
   def check_group_user(lesson_id)

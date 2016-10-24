@@ -37,10 +37,10 @@
   <div class="col-xs-12">
     <!-- PAGE CONTENT BEGINS -->
     <div class="row-fluid">
-      <ul id="photos" class="ace-thumbnails">
+      <ul class="ace-thumbnails">
         <% @photos.each do |p| %>
 
-            <li>
+            <li id="photo-identifier-<%= p.id %>">
               <a href="<%= p.image_url %>" title="" data-rel="colorbox">
                 <%= image_tag(p.image_url(:middle), size: '200x200') %>
                 <% unless p.status %>
@@ -57,7 +57,7 @@
                 <%= link_to "/admin/photos/#{p.id}/edit", title: '编辑' do %>
                     <i class="icon-pencil"></i>
                 <% end %>
-                <%= link_to "/admin/photos/#{p.id}", method: :delete, data: {confirm: '确认删除吗?'}, title: '删除' do %>
+                <%= link_to "/admin/photos/#{p.id}", method: :delete, data: {confirm: '确认删除吗?', remote: true}, title: '删除' do %>
                     <i class="icon-remove red"></i>
                 <% end %>
               </div>
@@ -76,6 +76,7 @@
 
     <div class="form-inputs">
       <%= f.input :status, label: '是否显示' %>
+      <%= f.input :sort %>
       <%= f.hidden_field :photo_type, value: params[:type].present? ? params[:type].to_i : @photo.photo_type %>
       <%= f.hidden_field :type_id, value: params[:td].present? ? params[:td] : @photo.type_id %>
 
@@ -89,6 +90,15 @@
   {%=o.name%}
   <div class="progress"><div class="bar" style="width: 0%"></div></div>
 </div>
+
+
+
+
+
+
+
+
+
 
 
 

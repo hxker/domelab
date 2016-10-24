@@ -1,0 +1,7 @@
+<div class="container">
+  <% if @lesson_wares.present? %>
+      <% @lesson_wares.each do |ware| %>
+          <%= image_tag(ware.image_url(:middle)) %>
+      <% end %>
+  <% end %>
+</div>
