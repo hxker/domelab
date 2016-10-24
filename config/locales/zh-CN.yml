@@ -247,6 +247,7 @@ zh-CN:
       group: '班级'
       lesson: '课时'
       lesson_test: '课时测验'
+      consult: '用户反馈'
 
   views:
     pagination:

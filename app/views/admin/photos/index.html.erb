@@ -43,18 +43,19 @@
             <li id="photo-identifier-<%= p.id %>">
               <a href="<%= p.image_url %>" title="" data-rel="colorbox">
                 <%= image_tag(p.image_url(:middle), size: '200x200') %>
-                <% unless p.status %>
-                    <div class="tags" style="top:-2px">
-                    <span class="label-holder">
-                        <span class="label label-warning arrowed-in">不显示</span>
-                    </span>
-                    </div>
-                <% end %>
+                <div class="tags" style="top:-2px">
+                      <span class="label-holder">
+                          <span class="label label-warning arrowed-out"><%= p.sort %></span>
+                        <% unless p.status %>
+                              <span class="label label-info arrowed-in">不显示</span>
+                          <% end %>
+                      </span>
+                </div>
               </a>
 
               <div class="tools tools-bottom">
 
-                <%= link_to "/admin/photos/#{p.id}/edit", title: '编辑' do %>
+                <%= link_to "/admin/photos/#{p.id}/edit", remote: true, title: '编辑' do %>
                     <i class="icon-pencil"></i>
                 <% end %>
                 <%= link_to "/admin/photos/#{p.id}", method: :delete, data: {confirm: '确认删除吗?', remote: true}, title: '删除' do %>
@@ -76,12 +77,11 @@
 
     <div class="form-inputs">
       <%= f.input :status, label: '是否显示' %>
-      <%= f.input :sort %>
-      <%= f.hidden_field :photo_type, value: params[:type].present? ? params[:type].to_i : @photo.photo_type %>
+      <%= f.hidden_field :photo_type, value: params[:type].present? ? params[:type] : @photo.photo_type %>
       <%= f.hidden_field :type_id, value: params[:td].present? ? params[:td] : @photo.type_id %>
 
-      <%= f.file_field :image, multiple: true, name: "photo[image]" %>
-      <p class="help-block">格式: jpg jpeg gif png</p>
+      <%= f.file_field :image, multiple: true, name: "photo[image]", id: 'check-lesson-ware' %>
+      <p class="help-block">格式: jpg jpeg gif png, 大小不超过1M</p>
       <%= f.hidden_field :image_cache %>
     </div>
 <% end %>
@@ -90,27 +90,6 @@
   {%=o.name%}
   <div class="progress"><div class="bar" style="width: 0%"></div></div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

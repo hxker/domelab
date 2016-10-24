@@ -15,20 +15,31 @@
       </button>
     </div>
 <% end %>
-<div class="panel panel-info">
-  <div class="panel-heading">
-    课件
+
+<div class="profile-user-info profile-user-info-striped">
+
+  <div class="profile-info-row">
+    <div class="profile-info-name"> 显示 </div>
+
+    <div class="profile-info-value">
+      <span><%= @photo.status ? '是' : '否' %></span>
+    </div>
   </div>
-  <ul class="list-group">
-    <li class="list-group-item">
-      <h4>图片:</h4>
+  <div class="profile-info-row">
+    <div class="profile-info-name"> 排序 </div>
 
-      <%= image_tag(@photo.image_url(:large)) %>
-    </li>
-    <li class="list-group-item">
-      <h4> 显示:</h4>
+    <div class="profile-info-value">
+      <span><%= @photo.sort %></span>
+    </div>
+  </div>
 
-      <%= @photo.status ? '是' : '否' %>
-    </li>
-  </ul>
+  <% if @photo.image.present? %>
+      <div class="profile-info-row">
+        <div class="profile-info-name">图片</div>
+        <div class="show-row-margin">
+          <span><%= image_tag(@photo.image_url(:large)) %></span>
+        </div>
+      </div>
+  <% end %>
+
 </div>

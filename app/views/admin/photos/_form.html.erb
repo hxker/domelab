@@ -1,7 +1,7 @@
 <div class="panel panel-info">
   <div class="panel-heading">课件</div>
   <div class="panel-body">
-    <%= simple_form_for([:admin, @photo]) do |f| %>
+    <%= simple_form_for([:admin, @photo], remote: true) do |f| %>
         <%= f.error_notification %>
         <% if @photo.errors.any? %>
             <div id="error_explanation">
@@ -17,6 +17,7 @@
           <% if params[:action]=='edit' %>
               <%= f.input :status, label: '是否显示' %>
               <%= image_tag(@photo.image_url(:middle)) %>
+              <br><br>
               <div class="form-group">
                 <%= f.file_field :image %>
 

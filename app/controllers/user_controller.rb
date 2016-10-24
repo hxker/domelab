@@ -98,4 +98,27 @@ class UserController < ApplicationController
     @opus = current_user.group_opus.joins(:group).select('group_opus.*', 'groups.name as group_name').page(params[:page]).per(params[:per])
   end
 
+  def consult
+    current_user_id = current_user.id
+    if request.method == 'POST'
+      content = params[:consult][:content]
+      if content.present? && content.length < 501 && content.length > 5
+        consult = Consult.create(user_id: current_user_id, content: content)
+        if consult.save
+          flash[:success]='反馈成功'
+          redirect_to user_consult_path
+        else
+          flash[:error]='提交失败'
+        end
+      else
+        @consult = Consult.new(content: content)
+        flash[:error]='请填写6-500位字符的反馈内容'
+      end
+    end
+    unless @consult.present?
+      @consult = current_user.consults.build
+    end
+    @consults = Consult.where(user_id: current_user_id).all.order('id asc')
+  end
+
 end
