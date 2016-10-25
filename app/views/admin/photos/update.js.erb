@@ -1,0 +1,5 @@
+admin_gritter_notice('<%= @result[:message] %>');
+<% if @result[:status] %>
+bootbox.hideAll();
+$('#photo-identifier-<%= @result[:photo].id %> .label-holder').find("span:first").text('<%= @result[:photo].sort %>');
+<% end %>
