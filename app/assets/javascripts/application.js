@@ -17,7 +17,6 @@
 //= require notify
 //= require course
 //= require like
-//= require turbolinks
 //= require dhtmlxscheduler
 //= require default
 //= require discuss

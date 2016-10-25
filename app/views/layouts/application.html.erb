@@ -9,7 +9,7 @@
   <%= csrf_meta_tags %>
   <%= action_cable_meta_tag %>
 
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
 
 </head>
 <body>
@@ -131,7 +131,7 @@
     </div>
   </div>
 </div>
-<%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
+<%= javascript_include_tag 'application' %>
 <% if flash.present? %>
     <script type="text/javascript">
       <% flash.each do |f| %>
