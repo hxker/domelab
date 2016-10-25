@@ -908,3 +908,73 @@ h7.lesson-name {
         }
     }
 }
+
+// lesson_ware
+
+#lesson_ware{
+  .header{
+    margin-left: 10%;
+    font-size: 24px;
+    color: #000;
+  }
+  .header:before{
+    color: #192e86;
+  }
+
+  .control{
+    text-align: center;
+    font-size: 20px;
+
+    a{
+      color: #e65f2e;
+    }
+  }
+
+  #carousel{
+
+    .carousel-indicators{
+      background: #e95e21;
+      bottom: -50px;
+      border-radius: 10px;
+      width: auto;
+      margin: auto;
+      transform: translate(-50%, -50%);
+      padding: 2px 10px;
+
+      li{
+        text-indent: 0px;
+        width: 20px;
+        height: 20px;
+        border: none;
+
+        .active{
+          width: 22px;
+          height: 22px;
+        }
+      }
+    }
+
+    .carousel-control {
+      background: none;
+
+      .icon-chevron-left,.icon-chevron-right{
+        position: absolute;
+        top: 50%;
+        z-index: 5;
+        color: #e95e21;
+        font-size: 50px;
+      }
+    }
+
+    .carousel-inner{
+      .item{
+        width:100%;
+        height: 550px;
+
+        img{
+          margin: auto;
+        }
+      }
+    }
+  }
+}
