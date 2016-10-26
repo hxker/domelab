@@ -47,7 +47,7 @@ $(function () {
             var this_file = this.files[0];
             var file_name = this_file.name;
             var file_type = get_file_type(file_name);
-            var has_error = (check_file_size(this_file.size, 1, this) && check_image_type(file_type, this));
+            var has_error = (check_file_type(this, ['jpg', 'jpeg', 'png', 'gif'], file_type) && check_file_size(this, 1, this_file.size));
             if (!has_error) {
                 return false;
             }
@@ -89,7 +89,7 @@ $(function () {
                 teacher_avatar_info[0].value = '';
                 return false;
             }
-            multiple_check_type_size(teacher_avatar_info, 1);
+            multiple_check_type_size(teacher_avatar_info, ['jpg', 'jpeg', 'png', 'gif'], 1);
         });
     }
 
@@ -97,7 +97,7 @@ $(function () {
     var lesson_ware_ppt = $('#check-lesson-ware');
     if (lesson_ware_ppt.length > 0) {
         lesson_ware_ppt.bind('change', function () {
-            var has_error = multiple_check_type_size(lesson_ware_ppt, 1);
+            var has_error = multiple_check_type_size(lesson_ware_ppt, ['jpg', 'jpeg', 'png', 'gif'], 1);
             if (has_error) {
                 return false;
             }
@@ -312,7 +312,7 @@ $(function () {
     $(document).on('click', '.add-news-images-submit', function () {
         var news_images = $('#news_images');
         if (news_images.val()) {
-            var has_error = multiple_check_type_size(news_images, 0.5);
+            var has_error = multiple_check_type_size(news_images, ['jpg', 'jpeg', 'png', 'gif'], 0.5);
             if (has_error) {
                 return false;
             }
@@ -422,9 +422,9 @@ function get_file_type(file_name) {
     return file_name.substring(file_name.lastIndexOf(".") + 1);
 }
 
-function check_image_type(file_type, obj) {
-    if ($.inArray(file_type, ['jpg', 'jpeg', 'png', 'gif']) == -1) {
-        alert('文件格式不规范,请上传 jpg、jpeg、png、gif 格式的文件');
+function check_file_type(obj, limit_type, file_type) {
+    if ($.inArray(file_type, limit_type) == -1) {
+        alert('文件格式不规范,请上传 ' + limit_type.join('、') + ' 格式的文件');
         obj[0].value = '';
         return false;
     } else {
@@ -432,7 +432,7 @@ function check_image_type(file_type, obj) {
     }
 }
 
-function check_file_size(file_size, limit_size, obj) {
+function check_file_size(obj, limit_size, file_size) {
     var size = file_size / 1024 / 1024;
     if (size > limit_size) {
         alert("文件大小不能大于" + limit_size + "M，请重新选择");
@@ -443,12 +443,10 @@ function check_file_size(file_size, limit_size, obj) {
     }
 }
 
-function multiple_check_type_size(obj, limit_size) {
+function multiple_check_type_size(obj, limit_type, limit_size) {
     var has_no_error = false;
     $.each(obj[0].files, function (k, v) {
-        var file_name = v.name;
-        var file_type = get_file_type(file_name);
-        has_no_error = (check_file_size(v.size, limit_size, obj) && check_image_type(file_type, obj));
+        has_no_error = (check_file_type(obj, limit_type, get_file_type(v.name)) && check_file_size(obj, limit_size, v.size));
         if (!has_no_error) {
             return false;
         }
