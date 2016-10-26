@@ -230,6 +230,7 @@ class CoursesController < ApplicationController
   def lesson_ware
     lesson_id = params[:id]
     if check_group_user(lesson_id)
+      @name = Lesson.joins(:course).where(id: lesson_id).select(:name, 'courses.name as course_name').take!
       @lesson_wares = Photo.where(photo_type: 1, type_id: lesson_id).order('sort asc')
     else
       render_optional_error(403)
