@@ -63,7 +63,7 @@
               <div class="col-sec">
                 <div class="sec-img">
                   <a href="/courses/<%= course.id %>">
-                    <img src="<%= image_path('thumb001.png') %>" alt=""/>
+                    <%= image_tag(course.cover_url(:middle)) %>
                   </a>
                 </div>
                 <div class="sec-text">
@@ -99,7 +99,7 @@
               <div class="col-sec">
                 <div class="sec-img">
                   <a href="/courses/<%= course.id %>">
-                    <img src="<%= image_path('thumb001.png') %>" alt=""/>
+                    <%= image_tag(course.cover_url(:middle)) %>
                   </a>
                 </div>
                 <div class="sec-text">
