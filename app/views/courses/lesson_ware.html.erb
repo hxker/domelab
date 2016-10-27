@@ -1,33 +1,33 @@
 <div class="container" id="lesson_ware">
   <% if @lesson_wares.present? %>
-  <div class="center-block">
-      <h1 class="icon-play header">第一课时：简易四足机器人</h1>
-      <div id="carousel" class="carousel slide" style="margin-top: 30px;" data-ride="carousel" data-interval="false">
+      <div class="center-block">
+        <h1 class="icon-play header"><%= "#{@name.course_name}:#{@name.name}" %></h1>
+        <div id="carousel" class="carousel slide" style="margin-top: 30px;" data-ride="carousel" data-interval="false">
 
-        <div class="carousel-inner">
-          <% @lesson_wares.each.with_index do |ware,index| %>
-            <div class="item <%= "active" if index == 0 %> ">
-              <%= image_tag(ware.image_url) %>
-            </div>
-          <% end %>
+          <div class="carousel-inner">
+            <% @lesson_wares.each.with_index do |ware, index| %>
+                <div class="item <%= "active" if index == 0 %> ">
+                  <%= image_tag(ware.image_url) %>
+                </div>
+            <% end %>
+          </div>
+
+          <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+            <span class="icon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+            <span class="icon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
-
-        <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
-          <span class="icon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
-          <span class="icon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
+        <div class="control">
+          <a href="#carousel" class="icon-caret-left" id="carousel-left" data-slide="prev">
+          </a>
+          <span class="index">1</span>/<span class="total"><%= @lesson_wares.length %></span>
+          <a href="#carousel" class="icon-caret-right right" id="carousel-right" data-slide="next">
+          </a>
+        </div>
       </div>
-      <div class="control">
-        <a href="#carousel" class="icon-caret-left" id="carousel-left" data-slide="prev">
-        </a>
-        <span class="index">1</span>/<span class="total"><%= @lesson_wares.length %></span>
-        <a href="#carousel" class="icon-caret-right right" id="carousel-right" data-slide="next">
-        </a>
-      </div>
-    </div>
   <% end %>
 </div>
