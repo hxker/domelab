@@ -104,6 +104,8 @@
 
       .content{
         padding: 20px;
+        height: 100%;
+        overflow-y: scroll;
       }
     }
 
@@ -116,7 +118,7 @@
       .item{
         img{
           min-height: 100px;
-          max-height: 300px;          
+          max-height: 300px;
         }
 
 
