@@ -7,6 +7,9 @@
             <% if @lesson_test.errors[:answer].present? %>
                 <div class="alert-danger alert"><%= @lesson_test.errors[:answer].first %></div>
             <% end %>
+            <% if @lesson_test.errors[:cover].present? %>
+                <div class="alert-danger alert">题目图片:<%= @lesson_test.errors[:cover].first %></div>
+            <% end %>
             <% if @lesson_test.errors[:lesson_id].present? %>
                 <div class="alert-danger alert">所属课时:<%= @lesson_test.errors[:lesson_id].first %></div>
             <% end %>
@@ -41,6 +44,17 @@
         <div class="form-inputs">
 
           <%= f.input :name, autofocus: true %>
+          <% if @lesson_test.cover.present? %>
+              <%= image_tag(@lesson_test.cover.first.url(:middle)) %>
+          <% end %>
+          <div class="form-group">
+            <label class="text control-label">
+              题目图片:
+            </label>
+            <%= f.file_field :cover, multiple: true, id: 'check-lesson-test-cover' %>
+            <%= f.hidden_field :cover_cache %>
+            <p class="help-block">格式：jpg jpeg gif png (图片大小在 1M 以内)</p>
+          </div>
           <% [1, 2, 3, 4].each do |option| %>
               <%= f.input "option_#{option}", label: "选项#{option}" %>
           <% end %>

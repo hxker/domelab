@@ -80,6 +80,19 @@ $(function () {
         });
     }
 
+    // validate lesson_test name cover
+    var lesson_test_cover = $('#check-lesson-test-cover');
+    if (lesson_test_cover.length > 0) {
+        lesson_test_cover.bind('change', function () {
+            if (lesson_test_cover[0].files.length != 1) {
+                alert('只能选择1张图片');
+                lesson_test_cover[0].value = '';
+                return false;
+            }
+            multiple_check_type_size(lesson_test_cover, ['jpg', 'jpeg', 'png', 'gif'], 0.0091);
+        });
+    }
+
     // validate dome teacher appearance
     var teacher_avatar_info = $('#check-teacher-avatar-info');
     if (teacher_avatar_info.length > 0) {
