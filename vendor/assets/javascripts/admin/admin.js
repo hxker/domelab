@@ -89,7 +89,7 @@ $(function () {
                 lesson_test_cover[0].value = '';
                 return false;
             }
-            multiple_check_type_size(lesson_test_cover, ['jpg', 'jpeg', 'png', 'gif'], 0.0091);
+            multiple_check_type_size(lesson_test_cover, ['jpg', 'jpeg', 'png', 'gif'], 1);
         });
     }
 
