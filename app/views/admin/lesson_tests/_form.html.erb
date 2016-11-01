@@ -5,7 +5,7 @@
         <%= f.error_notification %>
         <% if @lesson_test.errors.any? %>
             <% if @lesson_test.errors[:answer].present? %>
-                <div class="alert-danger alert"><%= @lesson_test.errors[:answer].first %></div>
+                <div class="alert-danger alert">答案:<%= @lesson_test.errors[:answer].first %></div>
             <% end %>
             <% if @lesson_test.errors[:cover].present? %>
                 <div class="alert-danger alert">题目图片:<%= @lesson_test.errors[:cover].first %></div>
@@ -58,7 +58,16 @@
           <% [1, 2, 3, 4].each do |option| %>
               <%= f.input "option_#{option}", label: "选项#{option}" %>
           <% end %>
-          <%= f.input :answer, collection: 1..4, hint: '对应选项' %>
+          <label class="control-label"><abbr title="必填字段">*</abbr> 答案(对应选项):</label>
+          <div class="well">
+            <% [1, 2, 3, 4].each do |n| %>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="lesson_test[answer][]" value="<%= n %>" <%= @lesson_test.answer.try(:include?, n.to_s) ? 'checked' : '' %>> <%= n %>
+                  </label>
+                </div>
+            <% end %>
+          </div>
 
         </div>
         <div class="form-actions">

@@ -1,7 +1,6 @@
 class LessonTest < ApplicationRecord
   belongs_to :lesson
   validates :lesson_id, :name, :option_1, :option_2, :option_3, :option_4, :answer, presence: true
-  validates :answer, inclusion: ['1', '2', '3', '4']
   after_validation :check_option
   validate :cover_size_validation, if: 'cover?'
   mount_uploaders :cover, CoverUploader

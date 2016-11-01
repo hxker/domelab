@@ -48,7 +48,7 @@
                       <div class="widget-header widget-header-small">
 
                         <h4 title="<%= test.name %>">
-                        <%= test.name[0..12] %>
+                          <%= test.name[0..12] %>
                         </h4>
                         <div class="widget-toolbar action-buttons">
                           <%= link_to edit_admin_lesson_test_path(test.id), title: '编辑' do %>
@@ -63,13 +63,10 @@
                       <div class="widget-body">
                         <div class="widget-main padding-8">
                           <div class="event-team profile-feed">
-                            <% [test.option_1, test.option_2, test.option_3, test.option_4].each do |te| %>
+                            <% ['1', '2', '3', '4'].each do |te| %>
                                 <div class="profile-activity clearfix" id="<%= "hide-player-#{}" %>">
-                                  <div>
-                                    <% if te == test["option_#{test.answer}"] %>
-                                        <icon class="icon-ok"></icon>
-                                    <% end %>
-                                    <%= te %>
+                                  <div class="<%= 'pink' if test.answer.try(:include?, te) %>">
+                                    <%= test["option_#{te}"] %>
                                   </div>
                                 </div>
                             <% end %>

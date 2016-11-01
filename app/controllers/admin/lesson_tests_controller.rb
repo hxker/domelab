@@ -81,7 +81,7 @@ class Admin::LessonTestsController < AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def lesson_test_params
-    params.require(:lesson_test).permit(:lesson_id, :name, :option_1, :option_2, :option_3, :option_4, :answer, {cover: []})
+    params.require(:lesson_test).permit(:lesson_id, :name, :option_1, :option_2, :option_3, :option_4, {answer: []}, {cover: []})
   end
 
   # def get_course_lesson

@@ -41,7 +41,7 @@
       <div class="profile-info-row">
         <div class="profile-info-name"> 选项<%= no %></div>
         <div class="profile-info-value">
-          <span class="<%= 'pink' if no == @lesson_test.answer %>"><%= @lesson_test["option_#{no}"] %></span>
+          <span class="<%= 'pink' if @lesson_test.answer.include?(no) %>"><%= @lesson_test["option_#{no}"] %></span>
         </div>
       </div>
   <% end %>

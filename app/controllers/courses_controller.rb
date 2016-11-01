@@ -16,7 +16,7 @@ class CoursesController < ApplicationController
           @lessons = Lesson.where(course_id: course_id).includes(:photos)
           @stars = course.course_stars.select(:name, :stars)
         else
-          render_optional_error(403)
+          redirect_to '/courses/dome'
         end
       else
         @course = course
@@ -133,10 +133,10 @@ class CoursesController < ApplicationController
     lesson_id = params[:lesson_id]
     answers = params[:answers]
 
-    if lesson_id && answers
+
+    if lesson_id && answers.is_a?(Hash)
       check_ability = check_group_user(lesson_id)
       if check_ability.present?
-        answers = answers.to_unsafe_h
         if current_user.user_lesson_tests.where(lesson_id: lesson_id).exists?
           result = [false, '您已做过该测试']
         else
@@ -147,7 +147,8 @@ class CoursesController < ApplicationController
             right_per = []
             answer_result = {}
             tests.each do |test|
-              status = test["option_#{test.answer}"] == answers["#{test.id}"] ? 1 : 0
+              the_answer = answers["#{test.id}"].to_a
+              status = (test.answer & the_answer).count == the_answer.length ? 1 : 0
               right_per << true if status == 1
               answer_result[test.name] = status
             end
