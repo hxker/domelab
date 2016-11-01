@@ -121,7 +121,7 @@ class CoursesController < ApplicationController
     lesson_id = params[:id]
     check_ability = check_group_user(lesson_id)
     if lesson_id.present? && check_ability.present?
-      @tests = LessonTest.where(lesson_id: lesson_id)
+      @tests = LessonTest.where(lesson_id: lesson_id).order(:id)
       @has_test = current_user.user_lesson_tests.find_by(lesson_id: lesson_id)
       @belong_name = Lesson.joins(:course).where(id: lesson_id).select(:name, 'courses.name as course_name').take
     else
