@@ -6,6 +6,11 @@
       <div id="lesson-test-inner">
       <% @tests.each_with_index do |test, index| %>
           <h7 class="question"><%= index+1 %>. <%= test.name %></h7>
+          <% if test.cover.present? %>
+            <div class="img-wrapper">
+              <%= image_tag(test.cover[0].url) %>
+            </div>
+          <% end %>
           <% [1, 2, 3, 4].each do |no| %>
               <p>
                 <label><input type="radio" value="<%= test["option_#{no}"] %>" name="lesson-answer[<%= test.id %>]"/> <%= test["option_#{no}"] %>
