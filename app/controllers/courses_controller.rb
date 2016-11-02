@@ -134,7 +134,7 @@ class CoursesController < ApplicationController
     answers = params[:answers]
 
 
-    if lesson_id && answers.is_a?(Hash)
+    if lesson_id && answers.to_unsafe_h.is_a?(Hash)
       check_ability = check_group_user(lesson_id)
       if check_ability.present?
         if current_user.user_lesson_tests.where(lesson_id: lesson_id).exists?
