@@ -11,12 +11,15 @@
               <%= image_tag(test.cover[0].url) %>
             </div>
           <% end %>
+          <% type = test.answer.length > 1 ? "checkbox" : "radio" %>
+          <div class='options'>
           <% [1, 2, 3, 4].each do |no| %>
               <p>
-                <label><input type="radio" value="<%= test["option_#{no}"] %>" name="lesson-answer[<%= test.id %>]"/> <%= test["option_#{no}"] %>
+                <label><input type=<%= type %> value="<%= test["option_#{no}"] %>" name="lesson-answer[<%= test.id %>]"/> <%= test["option_#{no}"] %>
                 </label>
               </p>
           <% end %>
+          </div>
           <hr>
       <% end %>
       </div>

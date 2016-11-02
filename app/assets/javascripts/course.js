@@ -9,11 +9,17 @@ $(function() {
         user_lesson_test.on('click', function() {
             var lesson_id = $('#course-lesson-id').val();
             var test_ids = $('#lesson-test-ids').val().split(',');
+            console.log("test_ids:" + test_ids)
             var answers = {};
             if (test_ids.length > 0) {
                 for (var i = 0; i < test_ids.length; i++) {
-                    var answer = $('input[name="lesson-answer[' + test_ids[i] + ']"]:checked').val();
-                    if (answer) {
+                    var answer = [];
+                    $('input[name="lesson-answer[' + test_ids[i] + ']"]:checked').each(
+                        function() {
+                            var index = $(this).parent().parent().index() + 1;
+                            answer.push(index);
+                        });
+                    if (answer.length) {
                         answers[test_ids[i]] = answer;
                     } else {
                         alert('请做完测验再提交!');
@@ -29,7 +35,7 @@ $(function() {
                     url: '/courses/check_lesson_test',
                     type: 'post',
                     data: {
-                        answers: answers,
+                        answers: answers, // {"1":["1"],"2":[1,2]}
                         lesson_id: lesson_id
                     },
                     success: function(data) {
