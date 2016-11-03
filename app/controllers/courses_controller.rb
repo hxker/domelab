@@ -9,12 +9,16 @@ class CoursesController < ApplicationController
   def show
     course_id = params[:id]
     course = Course.find(course_id)
-    if course
+    if course && course.status != 0
       if course.course_type == 0
-        @course = Course.joins(:group_course_ships).joins('left join group_user_ships g_u on g_u.group_id = group_course_ships.group_id').where(id: course_id).where('g_u.user_id=?', current_user.id).select(:id, :name, :cover, :course_type, :course_info, 'group_course_ships.group_id').take
+        @course = Course.joins(:group_course_ships).joins('left join group_user_ships g_u on g_u.group_id = group_course_ships.group_id').where(id: course_id).where('g_u.user_id=?', current_user.id).select(:id, :name, :cover, :course_type, :course_info, 'group_course_ships.group_id', 'g_u.status as apply_status').take
         if @course
-          @lessons = Lesson.where(course_id: course_id).includes(:photos)
-          @stars = course.course_stars.select(:name, :stars)
+          if @course.apply_status == 1
+            @lessons = Lesson.where(course_id: course_id).includes(:photos)
+            @stars = course.course_stars.select(:name, :stars)
+          else
+            @course.status = -1 # 还未审核
+          end
         else
           redirect_to '/courses/dome'
         end
@@ -53,7 +57,7 @@ class CoursesController < ApplicationController
           flash[:error] = '您已是该班级学生,无需再次申请'
         else
           if current_user.update(fullname: username, student_code: student_code)
-            g_u = GroupUserShip.create(user_id: current_user_id, group_id: group_id, status: false)
+            g_u = GroupUserShip.create(user_id: current_user_id, group_id: group_id, status: 0)
             if g_u.save
               flash[:success] = '申请成功,审核结果将通过消息推送告知您!'
             else
