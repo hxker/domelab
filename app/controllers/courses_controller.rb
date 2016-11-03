@@ -11,7 +11,7 @@ class CoursesController < ApplicationController
     course = Course.find(course_id)
     if course && course.status != 0
       if course.course_type == 0
-        @course = Course.joins(:group_course_ships).joins('left join group_user_ships g_u on g_u.group_id = group_course_ships.group_id').where(id: course_id).where('g_u.user_id=?', current_user.id).select(:id, :name, :cover, :course_type, :course_info, 'group_course_ships.group_id', 'g_u.status as apply_status').take
+        @course = Course.joins(:group_course_ships).joins('left join group_user_ships g_u on g_u.group_id = group_course_ships.group_id').where(id: course_id).where('g_u.user_id=?', current_user.id).select(:id, :name, :cover, :status, :course_type, :course_info, 'group_course_ships.group_id', 'g_u.status as apply_status').take
         if @course
           if @course.apply_status == 1
             @lessons = Lesson.where(course_id: course_id).includes(:photos)
