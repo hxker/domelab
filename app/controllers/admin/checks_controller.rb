@@ -189,11 +189,11 @@ class Admin::ChecksController < AdminController
       group_opus = GroupOpu.find_by_id(group_opus_id)
       if group_opus
         status = status.to_i == 0 ? -1 : 1
-        group_opus.status = status
+        group_opus.status = status.to_i
         if group_opus.save
           result = [true, '审核成功']
         else
-          result = [true, '审核失败']
+          result = [false, '审核失败']
         end
         Notification.create(user_id: group_opus.user_id, message_type: 0, content: '您上传的作品审核'+"#{status == 1 ? '通过' : '未通过'}")
       else

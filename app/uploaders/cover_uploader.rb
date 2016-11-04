@@ -51,7 +51,11 @@ class CoverUploader < CarrierWave::Uploader::Base
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
-    "#{cache_id}.#{file.extension}" if original_filename
+    if model.class.to_s.underscore =='group_opu'
+      'cover.jpg' if original_filename
+    else
+      "#{cache_id}.#{file.extension}" if original_filename
+    end
   end
 
 end
