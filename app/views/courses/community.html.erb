@@ -28,7 +28,7 @@
                     <hr>
                     <%= likeable_tag(opus) %>
                   </div>
-                  <div class="author">作者：<%= opus.user.fullname %></div>
+                  <div class="author">作者：<%= opus.user.try(:fullname) %></div>
                 </div>
 
             <% end %>
