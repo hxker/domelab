@@ -1,86 +1,86 @@
 <div class="container discuss">
 
-    <div class="community">
-        <div class="header">
-            <div class=left>
-              <h2><%= @group.name %></h2>
-            </div>
-            <div class="img-wrapper"><img src="<%= image_path('community-header.png') %>" alt=""/></div>
-        </div>
-
-        <nav class="text-center">
-            <a href="/courses/community/<%= @group.id %>" class="btn btn-rect" style="margin-right: 50px;">作品展示</a>
-            <a  class="btn btn-rect active">讨论区</a>
-        </nav>
+  <div class="community">
+    <div class="header">
+      <div class=left>
+        <h2><%= @group.name %></h2>
+      </div>
+      <div class="img-wrapper"><img src="<%= image_path('community-header.png') %>" alt=""/></div>
     </div>
 
-    <%= simple_form_for(GroupCommunity.new, url: '/courses/discuss_post', method: :post,html: { class: "comment-post"}) do |f| %>
-    <textarea id="group_community_content" class="text form-control" name="group_community[content]" placeholder="快加入讨论吧～"></textarea>
-    <%= f.hidden_field :group_id, value: @group.id %>
-    <div class="bottom">
-        <%= f.input :anonymous, label: '匿名提交'%>
-        <%= f.button :submit, "发送", class: "btn-rect btn-sm submit", data: { disable_with: "正在发送。。。"} %>
-    </div>
-    <% end %>
+    <nav class="text-center">
+      <a href="/courses/community/<%= @group.id %>" class="btn btn-rect" style="margin-right: 50px;">作品展示</a>
+      <a class="btn btn-rect active">讨论区</a>
+    </nav>
+  </div>
 
-    <div class="comments-wrapper">
-        <% if @comments %>
+  <%= simple_form_for(GroupCommunity.new, url: '/courses/discuss_post', method: :post, html: {class: "comment-post"}) do |f| %>
+      <textarea id="group_community_content" class="text form-control" name="group_community[content]" placeholder="快加入讨论吧～"></textarea>
+      <%= f.hidden_field :group_id, value: @group.id %>
+      <div class="bottom">
+        <%= f.input :anonymous, label: '匿名提交' %>
+        <%= f.button :submit, "发送", class: "btn-rect btn-sm submit", data: {disable_with: "正在发送。。。"} %>
+      </div>
+  <% end %>
+
+  <div class="comments-wrapper">
+    <% if @comments %>
         <ul class="comments">
-            <% @comments.each do |c| %>
-            <li class="comment-item" data-id="<%= c.id %>">
+          <% @comments.each do |c| %>
+              <li class="comment-item" data-id="<%= c.id %>">
                 <div class="comment">
-                    <div class="img-wrapper">
-                        <%= image_tag('avatar/thumb.png',class:"img-circle") %>
+                  <div class="img-wrapper">
+                    <%= image_tag('avatar/thumb.png', class: "img-circle") %>
+                  </div>
+                  <div class="middle">
+                    <div class="poster">
+                      <%= c.anonymous ? '匿名评论' : c.user.try(:fullname) %>
                     </div>
-                    <div class="middle">
-                        <div class="poster">
-                            <%= c.anonymous ? '匿名评论' : c.user.fullname %>
-                        </div>
-                        <p class="content">
-                            <%= c.content %>
-                        </p>
-                        <div class="date">
-                            <%= c.created_at.strftime('%Y-%m-%d %H:%M') %>
-                        </div>
+                    <p class="content">
+                      <%= c.content %>
+                    </p>
+                    <div class="date">
+                      <%= c.created_at.strftime('%Y-%m-%d %H:%M') %>
                     </div>
-                    <div class="buttons">
-                        <%= likeable_tag(c,'button') %>
-                        <button type="button" class="btn reply">
-                            评论
-                        </button>
-                    </div>
+                  </div>
+                  <div class="buttons">
+                    <%= likeable_tag(c, 'button') %>
+                    <button type="button" class="btn reply">
+                      评论
+                    </button>
+                  </div>
 
                 </div>
                 <div class="sub-comments">
-                <% if c.child_group_communities.present? %>
-                    <div class="wrapper">
+                  <% if c.child_group_communities.present? %>
+                      <div class="wrapper">
                         <% c.child_group_communities.each do |child_c| %>
 
-                        <div class="comment">
-                            <div class="img-wrapper">
-                                <%= image_tag('avatar/thumb.png',class:"img-circle") %>
-                            </div>
-                            <div class="right">
+                            <div class="comment">
+                              <div class="img-wrapper">
+                                <%= image_tag('avatar/thumb.png', class: "img-circle") %>
+                              </div>
+                              <div class="right">
                                 <div class="poster">
-                                    <%= child_c.anonymous ? '匿名评论' : child_c.user.fullname %>
+                                  <%= child_c.anonymous ? '匿名评论' : child_c.user.try(:fullname) %>
                                 </div>
                                 <p class="content">
-                                    <%= child_c.content %>
+                                  <%= child_c.content %>
                                 </p>
                                 <div class="date">
-                                    <%= child_c.created_at.strftime('%Y-%m-%d %H:%M') %>
+                                  <%= child_c.created_at.strftime('%Y-%m-%d %H:%M') %>
                                 </div>
+                              </div>
                             </div>
-                        </div>
                         <% end %>
-                    </div>
+                      </div>
 
-                <% end %>
+                  <% end %>
                 </div>
-            </li>
-            <% end %>
+              </li>
+          <% end %>
         </ul>
-        <% end %>
-    </div>
+    <% end %>
+  </div>
 
 </div>
