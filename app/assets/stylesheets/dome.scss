@@ -287,6 +287,10 @@ hr.dome-courses:after {
 .course-info {
     margin: 20px auto;
     width: 70%;
+
+    img{
+      max-width: 100%;
+    }
 }
 
 #lesson-test-outer {
