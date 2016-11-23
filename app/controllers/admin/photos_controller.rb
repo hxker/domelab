@@ -13,7 +13,7 @@ class Admin::PhotosController < AdminController
         else
           render_optional_error(404)
       end
-      @photos = Photo.where(type_id: type_id).page(params[:page]).per(params[:per])
+      @photos = Photo.where(type_id: type_id).order('sort asc').page(params[:page]).per(params[:per])
     else
       render_optional_error(404)
     end
