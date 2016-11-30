@@ -1,4 +1,8 @@
 $(function() {
+    $(".sign_in_link,.sign_up_link").click(function() {
+        $(".loading").removeClass('hidden');
+    });
+
     var lesson_test = $("#lesson-test-link");
     var length = $('.carousel-inner .item').length;
     $('#carousel a.left,#carousel-left').on('click', function() {
