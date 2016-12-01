@@ -163,6 +163,12 @@
                 <span class="menu-text"> 管理员 </span>
               </a>
             </li>
+            <li class="<%= params[:controller] == 'admin/users' ? 'active' : '' %>">
+              <a href="<%= admin_users_path %>">
+                <i class="icon-user"></i>
+                <span class="menu-text"> 用户 </span>
+              </a>
+            </li>
             <li class="<%= params[:controller] == 'admin/roles' ? 'active' : '' %>">
               <a href="<%= admin_roles_path %>">
                 <i class="icon-leaf"></i>

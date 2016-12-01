@@ -18,7 +18,10 @@ class User < ApplicationRecord
   validates :gender, inclusion: [1, 2], allow_blank: true
   validates :school_id, numericality: {only_integer: true}, allow_blank: true
   validates :grade, numericality: {only_integer: true}, allow_blank: true
+  validates :bj, numericality: {only_integer: true}, allow_blank: true
   validates :district_id, numericality: {only_integer: true}, allow_blank: true
+  validates :nickname, presence: true, uniqueness: true, length: {in: 2..20}, format: {with: /\A[\u4e00-\u9fa5_a-zA-Z0-9]+\Z/i, message: '昵称只能包含中文、数字、字母、下划线'}
+  validates :student_code, allow_blank: true, uniqueness: true, length: {is: 19}, numericality: {only_integer: true}
 
   include Likeable
 
@@ -31,6 +34,7 @@ class User < ApplicationRecord
           self.mobile = value
         when :email
           self.email = value
+        else
       end
     end
   end
