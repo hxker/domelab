@@ -35,7 +35,7 @@
           </div>
 
           <label class="select required control-label" for="courses_course_info"><abbr title="必填字段">*</abbr>介绍/目的/要求:</label>
-          <%= f.kindeditor :course_info, :window_onload => true, :owner_id => @course.id, :items => ['formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'emoticons', 'image', 'baidumap', 'link', 'unlink', 'quickformat', 'preview', 'fullscreen'] %>
+          <%= f.kindeditor :course_info, :window_onload => true, :owner_id => @course.id, :items => ['formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', 'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'emoticons', 'image', 'baidumap', 'link', 'unlink', 'quickformat', 'preview', 'fullscreen'] %>
 
 
         </div>

@@ -76,6 +76,7 @@ Rails.application.routes.draw do
     get '/checks/opus', to: 'checks#opus'
     post '/checks/review_opus', to: 'checks#review_opus'
     resources :admins
+    resources :users
     resources :districts
     resources :schools
     resources :roles
