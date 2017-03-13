@@ -1,3 +1,8 @@
+<style>
+  .row:after, .row:before {
+    display: table-row;
+  }
+</style>
 <div class="panel panel-info">
   <div class="panel-heading"><%= t('activerecord.models.lesson_test') %></div>
   <div class="panel-body">
@@ -14,34 +19,35 @@
                 <div class="alert-danger alert">所属课时:<%= @lesson_test.errors[:lesson_id].first %></div>
             <% end %>
         <% end %>
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="row">
-              <div class="col-xs-4">
-                <label>所属课程:</label>
-                <select id="select-course-list" class="form-control">
-                  <option value="">请选择课程</option>
-                  <% Course.select(:id, :name).each do |course| %>
-                      <option value="<%= course.id %>"><%= course.name %></option>
-                  <% end %>
-                </select>
-              </div>
-              <div class="col-xs-4">
-                <% if @lessons.present? %>
-                    <%= f.input :lesson_id, collection: @lessons %>
-                <% else %>
-                    <label>所属课程:</label>
-                    <select id="lesson_test_lesson_id" name="lesson_test[lesson_id]" class="form-control">
-                      <option value="">请选择课时</option>
-                    </select>
-                <% end %>
 
+        <div class="form-inputs">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="row">
+                <div class="col-xs-4">
+                  <label>所属课程:</label>
+                  <select id="select-course-list" class="form-control">
+                    <option value="">请选择课程</option>
+                    <% Course.select(:id, :name).each do |course| %>
+                        <option value="<%= course.id %>"><%= course.name %></option>
+                    <% end %>
+                  </select>
+                </div>
+                <div class="col-xs-4">
+                  <% if @lessons.present? %>
+                      <%= f.input :lesson_id, collection: @lessons %>
+                  <% else %>
+                      <label>所属课时:</label>
+                      <select id="lesson_test_lesson_id" name="lesson_test[lesson_id]" class="form-control">
+                        <option value="">请选择课时</option>
+                      </select>
+                  <% end %>
+
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="form-inputs">
+          <br><br><br><br>
 
           <%= f.input :name, autofocus: true %>
           <% if @lesson_test.cover.present? %>

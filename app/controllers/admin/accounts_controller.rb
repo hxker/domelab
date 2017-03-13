@@ -32,7 +32,11 @@ class Admin::AccountsController < AdminController
         if status
           flash[:notice] = message
           sing_in(emp)
-          redirect_to '/admin/'
+          if cookies[:after_sign_in_return_to]
+            redirect_to cookies[:after_sign_in_return_to]
+          else
+            redirect_to '/admin/'
+          end
           cookies.delete :job_number
         else
           flash[:error] = message

@@ -130,7 +130,9 @@ class Admin::GroupsController <AdminController
 
   def lesson_test_result
     @group_lessons = Lesson.joins(:course).joins('left join group_course_ships g_u on g_u.course_id = courses.id').where('g_u.group_id=?', @group.id).select(:id, "CONCAT(courses.name,'--',lessons.name) as name").order('id asc')
-    @lesson_tests = UserLessonTest.find_by_sql("select a.lesson_id,sum(a.right_percent) as all_right_per,count(a.id) as answer_num,array(select b.answer_result from user_lesson_tests b where b.group_id = a.group_id and b.lesson_id = a.lesson_id) as results from user_lesson_tests a where a.lesson_id in (#{@group_lessons.pluck(:id).join(',')}) and a.group_id = #{@group.id} GROUP BY a.lesson_id,a.group_id")
+    if @group_lessons.present?
+      @lesson_tests = UserLessonTest.find_by_sql("select a.lesson_id,sum(a.right_percent) as all_right_per,count(a.id) as answer_num,array(select b.answer_result from user_lesson_tests b where b.group_id = a.group_id and b.lesson_id = a.lesson_id) as results from user_lesson_tests a where a.lesson_id in (#{@group_lessons.pluck(:id).join(',')}) and a.group_id = #{@group.id} GROUP BY a.lesson_id,a.group_id")
+    end
   end
 
   # GET /admin/groups/new
